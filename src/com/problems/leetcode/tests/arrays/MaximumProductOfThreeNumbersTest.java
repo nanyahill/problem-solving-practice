@@ -1,7 +1,16 @@
 package com.problems.leetcode.tests.arrays;
 
-/**
- * Created by Nanya on 12/26/17.
- */
+import com.problems.leetcode.arrays.MaximumProductOfThreeNumbers;
+import org.junit.Assert;
+import org.junit.Test;
+
 public class MaximumProductOfThreeNumbersTest {
+
+    @Test
+    public void findMaximumProductOfThreeNumbersTest() {
+        int[] input = {-4, -3, -2, -1, 60};
+        int expected = 720;
+        int actual = MaximumProductOfThreeNumbers.findMaximumProductOfThreeNumbers(input);
+        Assert.assertEquals(expected, actual);
+    }
 }
