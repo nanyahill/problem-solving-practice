@@ -1,7 +1,25 @@
 package com.problems.epi.test.strings;
 
-/**
- * Created by Nanya on 1/4/18.
- */
+import com.problems.epi.code.strings.InterConvertStringsAndArrays;
+import org.junit.Assert;
+import org.junit.Test;
+
 public class InterConvertStringsAndArraysTest {
+
+    @Test
+    public void parseIntTest() {
+        String input = "-123";
+        int expected = -123;
+        int actual = InterConvertStringsAndArrays.parseIntBruteForce(input);
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void toStringTest() {
+        int input = 123;
+        String expected = "123";
+        String actual = InterConvertStringsAndArrays.toString(input);
+        Assert.assertEquals(expected, actual);
+    }
 }
+
