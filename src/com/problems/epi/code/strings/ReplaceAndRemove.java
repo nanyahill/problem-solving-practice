@@ -9,6 +9,8 @@ public class ReplaceAndRemove {
      * Key Insights:
      * 1) The total number of elements in the resulting array = length given - number of b's + number of a's.
      * 2) Begin inserting from the back of the array if charcater is equal to 'a'
+     * Insert from the back because the question mentions that the array has sufficient space
+     * to take the extra characters that are to be added.
      * Time Complexity: O(n)
      * Space Complexity: O(1)
      */
