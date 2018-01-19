@@ -1,6 +1,6 @@
 package com.problems.epi.code.linked_lists;
 
-import com.problems.util.ListNode;
+import com.util.ListNode;
 
 
 public class MergeSortedLists {

@@ -2,11 +2,9 @@ package com.problems.epi.test.linked_lists;
 
 
 import com.problems.epi.code.linked_lists.TestCyclicity;
-import com.problems.util.ListNode;
+import com.util.ListNode;
 import org.junit.Assert;
 import org.junit.Test;
-
-import java.util.List;
 
 public class TestCyclicityTest {
 

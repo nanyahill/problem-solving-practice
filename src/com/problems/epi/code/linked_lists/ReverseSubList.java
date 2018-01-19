@@ -1,6 +1,6 @@
 package com.problems.epi.code.linked_lists;
 
-import com.problems.util.ListNode;
+import com.util.ListNode;
 
 /**
  * Created by Nanya on 1/12/18.

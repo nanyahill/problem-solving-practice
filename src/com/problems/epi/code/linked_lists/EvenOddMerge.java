@@ -1,6 +1,6 @@
 package com.problems.epi.code.linked_lists;
 
-import com.problems.util.ListNode;
+import com.util.ListNode;
 
 /**
  * The key insight: create two separate lists one for odds and one for even. Then merge the two lists together.
@@ -26,5 +26,14 @@ public class EvenOddMerge {
         }
         even.next = oddHead;
         return head;
+    }
+
+    /**
+     *
+     * @param n
+     * @return
+     */
+    public static int foo(int n) {
+        return -1;
     }
 }

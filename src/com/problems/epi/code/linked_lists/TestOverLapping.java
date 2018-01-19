@@ -1,6 +1,6 @@
 package com.problems.epi.code.linked_lists;
 
-import com.problems.util.ListNode;
+import com.util.ListNode;
 
 /**
  *The main insight of the problem is that for L1 and L2 to be overlapping,

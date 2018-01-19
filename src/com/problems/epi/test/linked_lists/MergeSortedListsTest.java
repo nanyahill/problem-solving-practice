@@ -1,7 +1,7 @@
 package com.problems.epi.test.linked_lists;
 
 import com.problems.epi.code.linked_lists.MergeSortedLists;
-import com.problems.util.ListNode;
+import com.util.ListNode;
 import org.junit.Test;
 
 public class MergeSortedListsTest {
