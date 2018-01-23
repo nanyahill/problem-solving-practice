@@ -12,7 +12,7 @@ import java.util.NoSuchElementException;
 
 public class MaxStackSolution1 {
 
-        class NodeWithMax {
+        static class NodeWithMax {
             public int value;
             public int max;
             public NodeWithMax(int value, int max) {
@@ -25,22 +25,22 @@ public class MaxStackSolution1 {
      * Solution 1: Create an inner class that would store the value to be added and the current max seen so far.
      * However,this solution would result in a lot of wasted space if the number of elements to be added is large
      */
-    Deque<NodeWithMax> elements = new ArrayDeque<>();
+    public static Deque<NodeWithMax> elements = new ArrayDeque<>();
 
-        public void push(int value) {
+        public static void push(int value) {
             if(elements.isEmpty()) {
                 elements.addFirst(new NodeWithMax(value, value));
                 return;
             }
-            elements.addFirst(new NodeWithMax(value, max()));
+            elements.addFirst(new NodeWithMax(value, Math.max(value,max())));
         }
 
-        public int max() {
+        public static int max() {
             if(elements.isEmpty()) throw new NoSuchElementException();
             return elements.peek().max;
         }
 
-        public int pop() {
+        public static int pop() {
             if(elements.isEmpty()) throw new NoSuchElementException();
             return elements.removeFirst().value;
         }

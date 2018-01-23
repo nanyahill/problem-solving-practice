@@ -6,7 +6,7 @@ import java.util.NoSuchElementException;
 /**
  * A class that implements the LinkedList data structure
  */
-public class MyLinkedList {
+public class MyLinkedList<T> {
 
     public ListNode head = null;
     public ListNode tail = null;

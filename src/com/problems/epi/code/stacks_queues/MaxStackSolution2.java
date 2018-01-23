@@ -17,10 +17,10 @@ public class MaxStackSolution2 {
      * Hence, ONLY values that are greater than or equal to current max would be updated in the maxElements list/stack.
      * Implementation Notes: All max seen is stored i n a stack such that the lastest max is always ta the top.
      */
-        Deque<Integer> elements = new ArrayDeque<>();
-        Deque<Integer> maxElements = new ArrayDeque<>();
+    static Deque<Integer> elements = new ArrayDeque<>();
+    static Deque<Integer> maxElements = new ArrayDeque<>();
 
-        public void push(int value) {
+        public static void push(int value) {
             if(elements.isEmpty()) {
                 elements.push(value);
                 maxElements.push(value);
@@ -30,14 +30,14 @@ public class MaxStackSolution2 {
             elements.push(value);
         }
 
-        public int pop() {
+        public static int pop() {
             if(elements.isEmpty()) throw new NoSuchElementException();
             int toRemove = elements.removeFirst();
             if(toRemove == max()) maxElements.removeFirst();
             return toRemove;
         }
 
-        public int max() {
+        public static int max() {
             if(maxElements.isEmpty()) throw new NoSuchElementException();
             return maxElements.peek();
         }
