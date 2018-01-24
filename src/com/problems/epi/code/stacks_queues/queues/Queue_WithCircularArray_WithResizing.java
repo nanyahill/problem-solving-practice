@@ -1,4 +1,4 @@
-package com.problems.epi.code.stacks_queues;
+package com.problems.epi.code.stacks_queues.queues;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -26,14 +26,20 @@ public class Queue_WithCircularArray_WithResizing<T> {
         this.capacity = capacity;
     }
 
-    public int size() { return size; }
+    public int size() {
+        return size;
+    }
 
-    public boolean isEmpty() { return size == 0; }
+    public boolean isEmpty() {
+        return size == 0;
+    }
 
-    public boolean isFull() { return rear + 1 == capacity; }
+    public boolean isFull() {
+        return rear + 1 == capacity;
+    }
 
     public void enqueue(T val) {
-        if(isFull()) {
+        if (isFull()) {
             // Rotate array so the elements appear consecutively
             // This is need when front is no longer 0
             // If this isn't done, enqueue will overwrite elements
@@ -43,11 +49,9 @@ public class Queue_WithCircularArray_WithResizing<T> {
             rear = size;
             elements = Arrays.copyOf(elements, capacity * 2);
             capacity = elements.length;
-        }
-        else if(isEmpty()) {
+        } else if (isEmpty()) {
             front = rear = 0;
-        }
-        else {
+        } else {
             rear = (rear + 1) % capacity;
         }
         elements[rear] = val;
@@ -55,9 +59,9 @@ public class Queue_WithCircularArray_WithResizing<T> {
     }
 
     public T dequeue() {
-        if(isEmpty()) throw new NoSuchElementException();
+        if (isEmpty()) throw new NoSuchElementException();
         Object val = elements[front];
-        if(front == rear) { // Last element in the queue
+        if (front == rear) { // Last element in the queue
             front = -1;
             rear = -1;
         }

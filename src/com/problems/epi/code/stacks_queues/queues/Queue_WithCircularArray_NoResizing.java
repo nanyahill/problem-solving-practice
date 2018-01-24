@@ -1,4 +1,4 @@
-package com.problems.epi.code.stacks_queues;
+package com.problems.epi.code.stacks_queues.queues;
 
 import java.util.NoSuchElementException;
 
@@ -24,22 +24,31 @@ public class Queue_WithCircularArray_NoResizing<T> {
     }
 
     // front() and rear() return just the index
-    public int front() { return front;}
+    public int front() {
+        return front;
+    }
 
-    public int rear() { return rear;}
+    public int rear() {
+        return rear;
+    }
 
-    public int size() { return size;}
+    public int size() {
+        return size;
+    }
 
-    public boolean isEmpty() { return front == -1 && rear == -1; }
+    public boolean isEmpty() {
+        return front == -1 && rear == -1;
+    }
 
-    public boolean isFull() { return rear + 1 == capacity && front == 0; } //if front == 0, no dequeue has happened
+    public boolean isFull() {
+        return rear + 1 == capacity && front == 0;
+    } //if front == 0, no dequeue has happened
 
     public void enqueue(T val) {
-        if(isFull()) throw new IllegalStateException("Queue is full");
-        else if(isEmpty()) {
+        if (isFull()) throw new IllegalStateException("Queue is full");
+        else if (isEmpty()) {
             front = rear = 0;
-        }
-        else {
+        } else {
             rear = (rear + 1) % capacity;
         }
         elements[rear] = val;
@@ -47,9 +56,9 @@ public class Queue_WithCircularArray_NoResizing<T> {
     }
 
     public T dequeue() {
-        if(isEmpty()) throw new NoSuchElementException();
+        if (isEmpty()) throw new NoSuchElementException();
         Object val = elements[front];
-        if(front == rear) {
+        if (front == rear) {
             front = -1;
             rear = -1;
         }

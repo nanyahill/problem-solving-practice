@@ -1,7 +1,7 @@
-package com.problems.epi.test.stacks_queues;
+package com.problems.epi.test.stacks_queues.queues;
 
-import com.problems.epi.code.stacks_queues.Queue_WithCircularArray_NoResizing;
-import com.problems.epi.code.stacks_queues.Queue_WithCircularArray_WithResizing;
+import com.problems.epi.code.stacks_queues.queues.Queue_WithCircularArray_NoResizing;
+import com.problems.epi.code.stacks_queues.queues.Queue_WithCircularArray_WithResizing;
 import org.junit.Test;
 
 public class Queue_WithCircularArrayImplentationTest {

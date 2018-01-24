@@ -1,8 +1,6 @@
 package com.problems.epi.code.arrays;
 
-/**
- * Created by Nanya on 9/28/17.
- */
+
 public class BuyAndSellStock_I {
 
     public static int computeProfit2(int[] prices) {

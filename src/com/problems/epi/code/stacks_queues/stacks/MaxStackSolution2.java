@@ -1,4 +1,4 @@
-package com.problems.epi.code.stacks_queues;
+package com.problems.epi.code.stacks_queues.stacks;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -20,25 +20,24 @@ public class MaxStackSolution2 {
     static Deque<Integer> elements = new ArrayDeque<>();
     static Deque<Integer> maxElements = new ArrayDeque<>();
 
-        public static void push(int value) {
-            if(elements.isEmpty()) {
-                elements.push(value);
-                maxElements.push(value);
-                return;
-            }
-            else if(value >= max()) maxElements.push(value);
+    public static void push(int value) {
+        if (elements.isEmpty()) {
             elements.push(value);
-        }
+            maxElements.push(value);
+            return;
+        } else if (value >= max()) maxElements.push(value);
+        elements.push(value);
+    }
 
-        public static int pop() {
-            if(elements.isEmpty()) throw new NoSuchElementException();
-            int toRemove = elements.removeFirst();
-            if(toRemove == max()) maxElements.removeFirst();
-            return toRemove;
-        }
+    public static int pop() {
+        if (elements.isEmpty()) throw new NoSuchElementException();
+        int toRemove = elements.removeFirst();
+        if (toRemove == max()) maxElements.removeFirst();
+        return toRemove;
+    }
 
-        public static int max() {
-            if(maxElements.isEmpty()) throw new NoSuchElementException();
-            return maxElements.peek();
-        }
+    public static int max() {
+        if (maxElements.isEmpty()) throw new NoSuchElementException();
+        return maxElements.peek();
+    }
 }

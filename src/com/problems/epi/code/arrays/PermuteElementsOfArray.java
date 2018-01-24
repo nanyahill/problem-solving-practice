@@ -1,15 +1,12 @@
 package com.problems.epi.code.arrays;
 
-/**
- * Created by Nanya on 12/8/17.
- */
 public class PermuteElementsOfArray {
 
     public static char[] applyPermutation(char[] A, int[] P) {
-        if(A == null || P == null || A.length == 0 || P.length == 0)
+        if (A == null || P == null || A.length == 0 || P.length == 0)
             return null;
-        for(int i = 0; i < A.length; i++) {
-            while(P[i] != i) {
+        for (int i = 0; i < A.length; i++) {
+            while (P[i] != i) {
                 // Store tmp variables
                 int p_tmp = P[P[i]];
                 char a_tmp = A[P[i]];

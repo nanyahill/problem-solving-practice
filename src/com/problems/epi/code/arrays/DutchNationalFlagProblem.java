@@ -2,9 +2,6 @@ package com.problems.epi.code.arrays;
 
 import java.util.*;
 
-/**
- * Created by Nanya on 11/29/17.
- */
 public class DutchNationalFlagProblem {
 
     enum Color { RED, WHITE, BLUE };

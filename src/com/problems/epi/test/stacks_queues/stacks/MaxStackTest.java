@@ -1,7 +1,7 @@
-package com.problems.epi.test.stacks_queues;
+package com.problems.epi.test.stacks_queues.stacks;
 
-import com.problems.epi.code.stacks_queues.MaxStackSolution1;
-import com.problems.epi.code.stacks_queues.MaxStackSolution2;
+import com.problems.epi.code.stacks_queues.stacks.MaxStackSolution1;
+import com.problems.epi.code.stacks_queues.stacks.MaxStackSolution2;
 import org.junit.Assert;
 import org.junit.Test;
 

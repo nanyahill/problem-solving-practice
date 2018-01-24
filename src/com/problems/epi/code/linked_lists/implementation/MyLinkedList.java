@@ -1,4 +1,4 @@
-package com.data_structures_impl;
+package com.problems.epi.code.linked_lists.implementation;
 
 import com.util.ListNode;
 import java.util.NoSuchElementException;

@@ -1,6 +1,6 @@
-package com.problems.epi.test.stacks_queues;
+package com.problems.epi.test.stacks_queues.stacks;
 
-import com.problems.epi.code.stacks_queues.EvaluateRPN;
+import com.problems.epi.code.stacks_queues.stacks.EvaluateRPN;
 import org.junit.Assert;
 import org.junit.Test;
 

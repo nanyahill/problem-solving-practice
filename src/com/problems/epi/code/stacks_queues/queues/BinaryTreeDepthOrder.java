@@ -1,4 +1,4 @@
-package com.problems.epi.code.stacks_queues;
+package com.problems.epi.code.stacks_queues.queues;
 
 import com.util.TreeNode;
 
@@ -16,18 +16,18 @@ public class BinaryTreeDepthOrder {
      * and process all nodes at that level using the for loop
      */
     public List<List<Integer>> binaryTreeDepthOrder(TreeNode root) {
-        if(root == null) return null;
+        if (root == null) return null;
         Deque<TreeNode> queue = new ArrayDeque<>();
         List<List<Integer>> result = new ArrayList<>();
         queue.offerLast(root);
-        while(!queue.isEmpty()) {
+        while (!queue.isEmpty()) {
             List<Integer> list = new ArrayList<>();
             int size = queue.size();
-            for(int i = 0; i < size; i++) {
+            for (int i = 0; i < size; i++) {
                 TreeNode n = queue.pollFirst();
-                list.add((Integer)n.data);
-                if(n.left != null) queue.offerLast(n.left);
-                if(n.right != null) queue.offerLast(n.right);
+                list.add((Integer) n.data);
+                if (n.left != null) queue.offerLast(n.left);
+                if (n.right != null) queue.offerLast(n.right);
             }
             result.add(list);
         }

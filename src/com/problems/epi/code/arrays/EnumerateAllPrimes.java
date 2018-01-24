@@ -5,9 +5,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Created by Nanya on 12/8/17.
- */
 public class EnumerateAllPrimes {
 
     /**
@@ -97,8 +94,8 @@ public class EnumerateAllPrimes {
 
         System.out.print(generateAllPrimes(100000).size());
         System.out.println();
-        for (int i = 0 ; i < 10 ; i++) {
-            System.out.println((int)(1000* Math.random()));
+        for (int i = 0; i < 10; i++) {
+            System.out.println((int) (1000 * Math.random()));
         }
     }
 }
