@@ -6,16 +6,22 @@ package com.util;
 public class TreeNode<T> {
 
     public T data;
+    public TreeNode<T> parent = null;
     public TreeNode<T> left = null;
     public TreeNode<T> right = null;
 
-    public TreeNode (T data) {
+    public TreeNode(T data) {
         this.data = data;
     }
 
-    public TreeNode (T data, TreeNode<T> left, TreeNode<T> right) {
+    public TreeNode(T data, TreeNode<T> left, TreeNode<T> right) {
         this.data = data;
         this.left = left;
         this.right = right;
+    }
+
+    public TreeNode(T data, TreeNode<T> parent) {
+        this.data = data;
+        this.parent = parent;
     }
 }

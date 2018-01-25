@@ -12,7 +12,7 @@ import java.util.NoSuchElementException;
 
 public class MaxStackSolution2 {
     /**
-     * Solution 2: Key Insight: Any current number that is being pushed can NEVER be the maximum;
+     * TreeTraversal 2: Key Insight: Any current number that is being pushed can NEVER be the maximum;
      * iff it is less than the current max seen so far.
      * Hence, ONLY values that are greater than or equal to current max would be updated in the maxElements list/stack.
      * Implementation Notes: All max seen is stored i n a stack such that the lastest max is always ta the top.

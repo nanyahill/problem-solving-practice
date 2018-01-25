@@ -9,7 +9,7 @@ import com.util.ListNode;
 public class RemoveKthLastElement {
 
     /**
-     * Efficient Solution: Two pointers (slow and fast) where the two pointers are always k distance apart.
+     * Efficient TreeTraversal: Two pointers (slow and fast) where the two pointers are always k distance apart.
      * Be careful about null pointer errors and off-by-one errors.
      * Also since you are transforming the input (deleting) use a dummy node.
      * Time complexity: O(n)

@@ -10,7 +10,7 @@ public class FindLargestNumberGreaterThanTwiceOthers {
      * Key Insight: How do you test if a number is larger than twice another number?
      * Be careful if division is your method- largerNo / AnotherNo;
      * you may run into the arithmetic exception for divide by 0
-     * Solution: The maximum number in array needs to be greater than
+     * TreeTraversal: The maximum number in array needs to be greater than
      * twice every other number in the array
      * Time Complexity: O(n)
      * Space Complexity: O(1)
