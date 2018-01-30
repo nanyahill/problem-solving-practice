@@ -11,7 +11,7 @@ import com.util.ListNode;
 public class TestOverLapping {
 
     /**
-     * TreeTraversal 1's Key Idea:
+     * TreeTraversal_Recursive 1's Key Idea:
      * 1) If L1 has a length of a + c; then L2 must have a length of b + c.
      * Hence, if we can find the difference of the two lengths, then we can move the longer list (a - b) steps.
      * 2) Then we advance the two lists in tandem to get the intersection node.
@@ -33,7 +33,7 @@ public class TestOverLapping {
     }
 
     /**
-     * TreeTraversal 2's key idea:
+     * TreeTraversal_Recursive 2's key idea:
      * 1) If each list travels a distance of a + b + c; i.e. List A travels a + c (end of its list)
      * then begins travelling list B (b + c) they will eventually converge at after a + b + c steps
      * and meet at the starting point of length c.

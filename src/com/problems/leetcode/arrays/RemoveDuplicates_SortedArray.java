@@ -5,7 +5,7 @@ package com.problems.leetcode.arrays;
  */
 public class RemoveDuplicates_SortedArray {
 
-    //public class TreeTraversal {
+    //public class TreeTraversal_Recursive {
     public static int removeDups(int[] nums) {
         if (nums == null || nums.length == 0) {
             return 0;

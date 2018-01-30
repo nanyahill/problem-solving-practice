@@ -23,7 +23,7 @@ public class MaxStackSolution1 {
     }
 
     /**
-     * TreeTraversal 1: Create an inner class that would store the value to be added and the current max seen so far.
+     * TreeTraversal_Recursive 1: Create an inner class that would store the value to be added and the current max seen so far.
      * However,this solution would result in a lot of wasted space if the number of elements to be added is large
      */
     public static Deque<NodeWithMax> elements = new ArrayDeque<>();
