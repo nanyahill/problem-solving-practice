@@ -16,10 +16,10 @@ public class TreeTraversal_Iterative_WithStack {
 
     public static List<Integer> preOrder(TreeNode<Integer> root) {
         List<Integer> res = new ArrayList<>();
-        if(root == null) return res;
+        if (root == null) return res;
         Deque<TreeNode> stack = new ArrayDeque<>();
-        while(!stack.isEmpty() || root != null) {
-            while(root != null) {
+        while (!stack.isEmpty() || root != null) {
+            while (root != null) {
                 res.add(root.data);
                 stack.offerFirst(root);
                 root = root.left;
@@ -32,10 +32,10 @@ public class TreeTraversal_Iterative_WithStack {
 
     public static List<Integer> inOrder(TreeNode<Integer> root) {
         List<Integer> res = new ArrayList<>();
-        if(root == null) return res;
+        if (root == null) return res;
         Deque<TreeNode> stack = new ArrayDeque<>();
-        while(!stack.isEmpty() || root != null) {
-            while(root != null) {
+        while (!stack.isEmpty() || root != null) {
+            while (root != null) {
                 stack.offerFirst(root);
                 root = root.left;
             }
@@ -48,15 +48,15 @@ public class TreeTraversal_Iterative_WithStack {
 
     public static List<Integer> postOrder(TreeNode<Integer> root) {
         List<Integer> res = new ArrayList<>();
-        if(root == null) return res;
+        if (root == null) return res;
         Deque<TreeNode> stack = new ArrayDeque<>();
-        while(!stack.isEmpty() || root != null) {
-            while(root != null) {
+        while (!stack.isEmpty() || root != null) {
+            while (root != null) {
                 stack.offerFirst(root);
                 root = root.left;
             }
             root = stack.peekFirst().right;
-            if(root == null) {
+            if (root == null) {
                 TreeNode<Integer> node = stack.removeFirst();
                 res.add(node.data);
                 while (!stack.isEmpty() && node == stack.peekFirst().right) {

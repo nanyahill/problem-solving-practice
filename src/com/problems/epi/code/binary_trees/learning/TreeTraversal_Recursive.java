@@ -1,6 +1,7 @@
 package com.problems.epi.code.binary_trees.learning;
 
 import com.util.TreeNode;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +17,7 @@ public class TreeTraversal_Recursive {
     public static List<Integer> listPostOrder = new ArrayList<>();
 
     public static void preOrder(TreeNode<Integer> root) {
-        if(root != null) {
+        if (root != null) {
             listPreOrder.add(root.data);
             preOrder(root.left);
             preOrder(root.right);
@@ -24,7 +25,7 @@ public class TreeTraversal_Recursive {
     }
 
     public static void inOrder(TreeNode<Integer> root) {
-        if(root != null) {
+        if (root != null) {
             inOrder(root.left);
             listInOrder.add(root.data);
             inOrder(root.right);
@@ -32,12 +33,13 @@ public class TreeTraversal_Recursive {
     }
 
     public static void postOrder(TreeNode<Integer> root) {
-        if(root != null) {
+        if (root != null) {
             postOrder(root.left);
             postOrder(root.right);
             listPostOrder.add(root.data);
         }
     }
+
     public static void main(String[] args) {
         TreeNode<Integer> root = new TreeNode<>(5);
         root.left = new TreeNode<>(7);
