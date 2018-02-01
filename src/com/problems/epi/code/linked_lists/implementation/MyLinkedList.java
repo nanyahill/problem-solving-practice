@@ -4,7 +4,7 @@ import com.util.ListNode;
 import java.util.NoSuchElementException;
 
 /**
- * A class that implements the LinkedList data structure
+ * A class that implements the LinkedList heap structure
  */
 public class MyLinkedList<T> {
 

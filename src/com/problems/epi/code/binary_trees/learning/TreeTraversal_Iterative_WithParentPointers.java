@@ -65,18 +65,18 @@ public class TreeTraversal_Iterative_WithParentPointers {
                 if(next == null) { // done with left side
                     next = (curr.right != null) ? curr.right : curr.parent;
 //                    if(next == curr.parent) { // done with right side
-//                        res.add(curr.data);
+//                        res.add(curr.heap);
 //                    }
                 }
             }
             else if(curr.left == prev) { // moving to right side
                 next = (curr.right != null) ? curr.right : curr.parent;
 //                if(next == curr.parent) { // done with right side
-//                    res.add(curr.data);
+//                    res.add(curr.heap);
 //                }
             }
             else {
-                //res.add(curr.data);
+                //res.add(curr.heap);
                 next = curr.parent;
             }
             // This can also be placed as per commented code above

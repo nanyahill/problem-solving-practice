@@ -20,7 +20,7 @@ public class SymmetricBinaryTreeTest {
 
         root.right = new TreeNode<>(7);
         root.right.right = new TreeNode<>(3);
-        root.right.left = new TreeNode<>(4); // change the data value of this node to test for false symmetricity
+        root.right.left = new TreeNode<>(4); // change the heap value of this node to test for false symmetricity
 
         boolean expected = true;
         boolean actual = SymmetricBinaryTree.isSymmetric_Recursive(root);
