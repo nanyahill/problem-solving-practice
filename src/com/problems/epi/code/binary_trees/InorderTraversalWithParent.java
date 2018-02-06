@@ -5,6 +5,19 @@ import com.util.TreeNode;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Key insights on Binary Tree Traversal:
+ * Iterative with Stack: Follow the recursive version pattern;
+ * For example, 'visit/left/right' for pre-order, but use while loops.
+ * When the stack is empty and root is null; then we are done!
+ * Hint: The second inner while loop are all the same for the three traversals
+ * because you have to keep going left first until you reach the leftmost node.
+ * Iterative with Parent pointers: Keep things clear in my mind by having three pointer variable- curr, prev and next.
+ * After traversing a left subtree, next will point to the parent of the current node (i.e.left node). This enables the loop to go into the right subtree.
+ * After traversing the right subtree, next will point to the parent of the current node (i.e. root node of subtree).
+ * Time Complexity: O(n)
+ * Space Complexity: O(1)
+ */
 public class InorderTraversalWithParent {
     // @include
     public static List<Integer> inorderTraversal(TreeNode<Integer> tree) {
