@@ -3,8 +3,10 @@ package com.problems.epi.code.heaps.implementation;
 import java.util.NoSuchElementException;
 
 /**
- * This class demonstrates all the operations of a max-heap including heapsort.
+ * This class implements a heap using an array
+ * It demonstrates all the operations of a max-heap including heapsort.
  * The same idea applies for min-heap except that comparisons of keys are reversed
+ * TODO: Implement HeapSort
  */
 public class Heap<T extends Comparable<T>> {
 
@@ -30,7 +32,7 @@ public class Heap<T extends Comparable<T>> {
     }
 
     /**
-     * This class constructs a heap from an input array using the bottom-up heap construction
+     * This method constructs a heap from an input array using the bottom-up heap construction
      * Notes: First element starts at index 1.
      *        Parental nodes occupy the first (Math.floor(i/2)) positions of the array
      *        Leaf nodes occupy the last (Math.floor(i/2)) positions of the array
