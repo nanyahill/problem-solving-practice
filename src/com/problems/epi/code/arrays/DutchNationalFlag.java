@@ -2,34 +2,24 @@ package com.problems.epi.code.arrays;
 
 import java.util.*;
 
-public class DutchNationalFlagProblem {
+/**
+ * Dijkstra 3-way Partition Algo: Rearrange all elements in an array such that all elements less than A[i] (the pivot) is to the left side and elements greater than the pivot is to the right side
+ * 1) Initially all the correct positions of elements in the array are unknown.
+ * 2) Create three variables to maintain three sections of the array- smaller = 0, equal = 0, and larger = n - 1
+ * 3) Scan equal from left to right; v is the pivot value.
+ *      – (a[equal] < v): exchange a[smaller] with a[equal]; increment both smaller and equal
+ *      – (a[i] > v): exchange a[larger] with a[equal]; decrement larger
+ *      – (a[equal] == v): increment equal
+ * 4) Repeat until equal and larger pointers cross
+ */
+public class DutchNationalFlag {
 
-    enum Color { RED, WHITE, BLUE };
-    //enum keys { 23 };
+    public enum Color { RED, WHITE, BLUE };
 
-    /**
-     * This menthod could work for Variant 1 as well
-     * @param nums
-     * @param pivot
-     */
-
-    public static void dutchFlagPartition(List<Color> nums, int pivot) {
-            int equal = 0, smaller = 0, larger = nums.size();
-            while (equal < larger) {
-                if (nums.get(equal).ordinal() < pivot) {
-                    Collections.swap(nums, equal++, smaller++);
-                } else if (nums.get(equal).ordinal() == pivot) {
-                    equal++;
-                } else {
-                    Collections.swap(nums, equal, --larger);
-                }
-            }
-    }
-
-    public static void dutchFlagPartition2(int[] nums, int index) {
-        int equal = 0, smaller = 0, larger = nums.length;
+    public static void dutchFlagPartition_Generic(int[] nums, int index) {
+        int equal = 0, smaller = 0, larger = nums.length - 1; // important!
         int pivot = nums[index];
-        while (equal < larger) {
+        while (equal <= larger) {
             if (nums[equal] < pivot) {
                 int tmp = nums[equal];
                 nums[equal] = nums[smaller];
@@ -40,10 +30,52 @@ public class DutchNationalFlagProblem {
                 equal++;
             } else {
                 int tmp = nums[equal];
-                nums[equal] = nums[--larger];
-                nums[larger] = tmp;
+                nums[equal] = nums[larger];
+                nums[larger--] = tmp;
             }
         }
+    }
+
+    /**
+     * This method could work for Variant 1 as well
+     * Note that this algorithm produces a perfect flag as in the name if the pivot index is the middle num
+     * Else it partitions around the given index which could result in 0, 1, 0, 1, 2, 2, 2 if 2 is the pivot value
+     * This is a valid partition
+     * @param nums
+     * @param pivot
+     */
+    public static void dutchFlagPartition_WithColor(List<Color> nums, int pivot) {
+            int equal = 0, smaller = 0, larger = nums.size() - 1;//
+            while (equal <= larger) {
+                if (nums.get(equal).ordinal() < pivot) {
+                    Collections.swap(nums, equal++, smaller++);
+                } else if (nums.get(equal).ordinal() == pivot) {
+                    equal++;
+                } else {
+                    Collections.swap(nums, equal, larger--);
+                }
+            }
+    }
+
+    public static char[] dutchFlagPartition2(char[] nums, int index) {
+        int equal = 0, smaller = 0, larger = nums.length - 1;
+        int pivot = nums[index];
+        while (equal <= larger) {
+            if (nums[equal] < pivot) {
+                char tmp = nums[equal];
+                nums[equal] = nums[smaller];
+                nums[smaller] = tmp;
+                equal++; smaller++;
+                //Collections.swap(nums, equal++, smaller++);
+            } else if (nums[equal] == pivot) {
+                equal++;
+            } else {
+                char tmp = nums[equal];
+                nums[equal] = nums[larger];
+                nums[larger--] = tmp;
+            }
+        }
+        return nums;
     }
 
     /**
@@ -132,38 +164,6 @@ public class DutchNationalFlagProblem {
                 i = j;
                 j++;
             }
-        }
-    }
-
-    private static void generateRandArray(List<Integer> A) {
-        Random ran = new Random();
-        for (int i = 0; i < 10; i++) {
-            //int tmp = ;
-            A.add(ran.nextInt(5));
-        }
-    }
-
-    public static void main(String[] args) {
-        for(int i = 0; i < 10; i++) {
-            List<Integer> A = new ArrayList<Integer>();
-            generateRandArray(A);
-            for (int j = 0; j < 10; j++) {
-                System.out.print(A.get(j) + " ");
-            }
-            System.out.print("---> ");
-
-            List<Boolean> bools = Arrays.asList( false, true, false, false, true, true, false, true, true );
-            dutchFlagPartitionVariant22(A, 5);
-            //dutchFlagPartitionVariant4(bools);
-
-            int[] nums = { 3, 5, 2, 4, 2, 2, 1, 2 };
-            dutchFlagPartition2(nums, nums.length - 1);
-
-            for (int j = 0; j < 10; j++) {
-                System.out.print(A.get(j) + " ");
-            }
-            System.out.println();
-
         }
     }
 }

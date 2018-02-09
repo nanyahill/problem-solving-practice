@@ -1,5 +1,7 @@
 package com.problems.epi.test.arrays;
 
+import org.junit.Test;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -10,112 +12,191 @@ import java.util.List;
  */
 public class TestClass {
 
-    public static void applyPermutation(List<Integer> perm, List<Character> A) {
-        for (int i = 0; i < A.size(); ++i) {
-            // Check if the element at index i has not been moved by checking if
-            // perm.get(i) is nonnegative.
-            int next = i;
-            while (perm.get(next) >= 0) {
-                Collections.swap(A, i, perm.get(next));
-                int temp = perm.get(next);
-                // Subtracts perm.size() from an entry in perm to make it negative,
-                // which indicates the corresponding move has been performed.
-                perm.set(next, perm.get(next) - perm.size());
-                next = temp;
+    /******************************************************************************
+     *  Compilation:  javac Quick.java
+     *  Execution:    java Quick < input.txt
+     *  Dependencies: StdOut.java StdIn.java
+     *  Data files:   https://algs4.cs.princeton.edu/23quicksort/tiny.txt
+     *                https://algs4.cs.princeton.edu/23quicksort/words3.txt
+     *
+     *  Sorts a sequence of strings from standard input using quicksort.
+     *
+     *  % more tiny.txt
+     *  S O R T E X A M P L E
+     *
+     *  % java Quick < tiny.txt
+     *  A E E L M O P R S T X                 [ one string per line ]
+     *
+     *  % more words3.txt
+     *  bed bug dad yes zoo ... all bad yet
+     *
+     *  % java Quick < words3.txt
+     *  all bad bed bug dad ... yes yet zoo    [ one string per line ]
+     *
+     *
+     *  Remark: For a type-safe version that uses static generics, see
+     *
+     *    https://algs4.cs.princeton.edu/23quicksort/QuickPedantic.java
+     *
+     ******************************************************************************/
+
+    /**
+     * The {@code Quick} class provides static methods for sorting an
+     * array and selecting the ith smallest element in an array using quicksort.
+     * <p>
+     * For additional documentation,
+     * see <a href="https://algs4.cs.princeton.edu/23quick">Section 2.3</a> of
+     * <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
+     *
+     * @author Robert Sedgewick
+     * @author Kevin Wayne
+     */
+
+    // This class should not be instantiated.
+    private TestClass() {
+    }
+
+    /**
+     * Rearranges the array in ascending order, using the natural order.
+     *
+     * @param a the array to be sorted
+     */
+    public static void sort(Comparable[] a) {
+        //StdRandom.shuffle(a);
+        sort(a, 0, a.length - 1);
+        assert isSorted(a);
+    }
+
+    // quicksort the subarray from a[lo] to a[hi]
+    private static void sort(Comparable[] a, int lo, int hi) {
+        if (hi <= lo) return;
+        int j = partition(a, lo, hi);
+        sort(a, lo, j - 1);
+        sort(a, j + 1, hi);
+        assert isSorted(a, lo, hi);
+    }
+
+    // partition the subarray a[lo..hi] so that a[lo..j-1] <= a[j] <= a[j+1..hi]
+    // and return the index j.
+    private static int partition(Comparable[] a, int lo, int hi) {
+        int i = lo;
+        int j = hi + 1;
+        Comparable v = a[1];
+        while (true) {
+
+            // find item on lo to swap
+            while (less(a[++i], v)) {
+                if (i == hi) break;
             }
+
+            // find item on hi to swap
+            while (less(v, a[--j])) {
+                if (j == lo) break;      // redundant since a[lo] acts as sentinel
+            }
+
+            // check if pointers cross
+            if (i >= j) break;
+
+            exch(a, i, j);
         }
 
-        // Restore perm.
-        for (int i = 0; i < perm.size(); i++) {
-            perm.set(i, perm.get(i) + perm.size());
+        // put partitioning item v at a[j]
+        exch(a, lo, j);
+
+        // now, a[lo .. j-1] <= a[j] <= a[j+1 .. hi]
+        return j;
+    }
+
+    /**
+     * Rearranges the array so that {@code a[k]} contains the kth smallest key;
+     * {@code a[0]} through {@code a[k-1]} are less than (or equal to) {@code a[k]}; and
+     * {@code a[k+1]} through {@code a[n-1]} are greater than (or equal to) {@code a[k]}.
+     *
+     * @param a the array
+     * @param k the rank of the key
+     * @return the key of rank {@code k}
+     * @throws IllegalArgumentException unless {@code 0 <= k < a.length}
+     */
+    public static Comparable select(Comparable[] a, int k) {
+        if (k < 0 || k >= a.length) {
+            throw new IllegalArgumentException("index is not between 0 and " + a.length + ": " + k);
+        }
+        //StdRandom.shuffle(a);
+        int lo = 0, hi = a.length - 1;
+        while (hi > lo) {
+            int i = partition(a, lo, hi);
+            if (i > k) hi = i - 1;
+            else if (i < k) lo = i + 1;
+            else return a[i];
+        }
+        return a[lo];
+    }
+
+
+    /***************************************************************************
+     * Helper sorting functions.
+     ***************************************************************************/
+
+    // is v < w ?
+    private static boolean less(Comparable v, Comparable w) {
+        if (v == w) return false;   // optimization when reference equals
+        return v.compareTo(w) < 0;
+    }
+
+    // exchange a[i] and a[j]
+    private static void exch(Object[] a, int i, int j) {
+        Object swap = a[i];
+        a[i] = a[j];
+        a[j] = swap;
+    }
+
+
+    /***************************************************************************
+     * Check if array is sorted - useful for debugging.
+     ***************************************************************************/
+    private static boolean isSorted(Comparable[] a) {
+        return isSorted(a, 0, a.length - 1);
+    }
+
+    private static boolean isSorted(Comparable[] a, int lo, int hi) {
+        for (int i = lo + 1; i <= hi; i++)
+            if (less(a[i], a[i - 1])) return false;
+        return true;
+    }
+
+
+    // print array to standard output
+    private static void show(Comparable[] a) {
+        for (int i = 0; i < a.length; i++) {
+            //StdOut.println(a[i]);
         }
     }
 
+    /**
+     * Reads in a sequence of strings from standard input; quicksorts them;
+     * and prints them to standard output in ascending order.
+     * Shuffles the array and then prints the strings again to
+     * standard output, but this time, using the select method.
+     *
+     * @param args the command-line arguments
+     */
     public static void main(String[] args) {
-        int[] arr = { 310, 315, 275, 295, 260, 270, 290, 230, 255, 250 };
-        int[] arr2 = { 1,3,5,4,2,3,4,5 };
-        int[] nums = { 3, 5, 2, 4, 2, 2, 1, 2 };
-        //partitionaArray(nums, 7);
-        applyPermutation(new ArrayList<Integer>(Arrays.asList(new Integer[] {4, 3, 2, 0, 1})), new ArrayList<Character>(Arrays.asList(new Character[] {'a', 'b', 'c', 'd', 'e'})));
+        //String[] a = StdIn.readAllStrings();
+        Integer[] a = {0, 1, 2, 0, 1, 2, 2};
+        TestClass.sort(a);
+        System.out.print(Arrays.toString(a));
+        show(a);
+        assert isSorted(a);
+
+        // shuffle
+        //StdRandom.shuffle(a);
+
+        // display results again using select
+        //StdOut.println();
+        for (int i = 0; i < a.length; i++) {
+            String ith = (String) TestClass.select(a, i);
+            // StdOut.println(ith);
+        }
     }
 
-    private static void swap(int[] nums, int src, int dest) {
-        int tmp = nums[src];
-        nums[src] = nums[dest];
-        nums[dest] = tmp;
-    }
-
-    public static int maxProfit(int[] prices) {
-        int maxCur = 0, maxSoFar = 0;
-        for(int i = 1; i < prices.length; i++) {
-            maxCur = Math.max(0, maxCur += prices[i] - prices[i-1]);
-            maxSoFar = Math.max(maxCur, maxSoFar);
-        }
-        return maxSoFar;
-    }
-
-    public static int longestContinousSubArray(int[] nums) {
-        if(nums == null || nums.length == 0) {
-            return 0;
-        }
-        int count = 1;
-        int maxCount = Integer.MIN_VALUE;
-        for(int i = 1; i < nums.length; i++) {
-            if(nums[i] <= nums[i - 1]) {
-                maxCount = Math.max(count, maxCount);
-                count = 1;
-            }
-            else count++;
-        }
-        return Math.max(count, maxCount);
-    }
-
-    public static int maxSubArrayBF(int[] array) {
-        int best = 0;
-        for (int a = 0; a < array.length; a++) {
-            int sum = 0;
-            for (int b = a; b < array.length; b++) {
-                sum += array[b];
-                best = Math.max(best,sum);
-            }
-        }
-        return best;
-    }
-
-    public static List<Integer> enumerateAllPrimes(int num) {
-        if(num <= 1) {
-            return new ArrayList<Integer>();
-        }
-        List<Integer> result = new ArrayList<Integer>();
-        for(int i = 2; i <= num; i++) {
-            boolean isPrime = true;
-            for(int j = 2; j * j <= num; j++) {
-                if(i % j == 0) {
-                    isPrime = false;
-                }
-            }
-            if(isPrime) result.add(i);
-        }
-        return result;
-    }
-
-    public static List<Integer> enumerateAllPrimes2(int num) {
-        if(num <= 1) {
-            return new ArrayList<Integer>();
-        }
-        //List<Boolean> lookUpTable = new ArrayList<Boolean>();
-        List<Boolean> lookUpTable = new ArrayList<Boolean> (Collections.nCopies(num + 1, true));
-        List<Integer> res = new ArrayList<Integer>();
-        lookUpTable.set(0, false);
-        lookUpTable.set(1, false);
-        for(int i = 2; i <= num; i++) {
-            if(lookUpTable.get(i)) {
-                res.add(i);
-            }
-            for(int j = 2*i; j <= num; j+=i) {
-                lookUpTable.set(j, false);
-            }
-        }
-        return res;
-    }
 }

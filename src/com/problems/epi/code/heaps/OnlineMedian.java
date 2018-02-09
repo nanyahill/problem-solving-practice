@@ -17,9 +17,11 @@ import java.util.PriorityQueue;
  * 1. Create two heaps- maxHeap (maintains collection of elements in the smaller half of the set(left hand side)) and minHeap (maintains collection of elements in the larger half of the set (right hand side)).
  * 2. Moving from left to right, assume a new element belongs to the smaller half set, thus, add element to the maxHeap.
  * 3. Since maxHeap received a new element, it is required to balance the minHeap as well. Thus, take the largest from the maxHeap (the front element) and add it to the minHeap. This step is called the balancing step.
- * 4. Also, the size property- if the size of the set is odd (2 * n + 1), the maxHeap is allowed to hold n+1 elements while the minHeap hold n elements. Otherwise, they both hold n elements. Thus, the size property needs to be checked, i.e. is the minHeap.size() > maxHeap.size()? If yes, move the front element (smallest) of the minHeap and add it to the maxHeap (the element becomes then largest in the maxHeap).
+ * 4. Also, the size property- if the size of the set is odd (2 * -[[[[[[[[[[[[[[[[[;n + 1), the maxHeap is allowed to hold n+1 elements while the minHeap hold n elements. Otherwise, they both hold n elements. Thus, the size property needs to be checked, i.e. is the minHeap.size() > maxHeap.size()? If yes, move the front element (smallest) of the minHeap and add it to the maxHeap (the element becomes then largest in the maxHeap).
  * 5. Find the median- check if size of the set is odd or even (by checking if the size of the two heaps are the same). If even, return the average of the front elements of the two heaps. Otherwise, return the largest element from the smaler half (i.e. the front element of the maxHeap).
  * Be careful: Since median is a double, average is computed as (a+b)/2.0
+ * Time complexity per entry: O(logn)
+ * Space Complexity: O(n)
  */
 public class OnlineMedian {
 
