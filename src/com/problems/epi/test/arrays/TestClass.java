@@ -81,7 +81,7 @@ public class TestClass {
     private static int partition(Comparable[] a, int lo, int hi) {
         int i = lo;
         int j = hi + 1;
-        Comparable v = a[1];
+        Comparable v = a[lo];
         while (true) {
 
             // find item on lo to swap
@@ -182,8 +182,9 @@ public class TestClass {
      */
     public static void main(String[] args) {
         //String[] a = StdIn.readAllStrings();
-        Integer[] a = {0, 1, 2, 0, 1, 2, 2};
-        TestClass.sort(a);
+//        Integer[] a = {0, 1, 2, 0, 1, 2, 2};
+        Integer[] a = {2, 1};
+        TestClass.select(a, 1);
         System.out.print(Arrays.toString(a));
         show(a);
         assert isSorted(a);

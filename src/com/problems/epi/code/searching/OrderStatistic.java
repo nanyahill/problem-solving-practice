@@ -1,40 +1,49 @@
 package com.problems.epi.code.searching;
 
-import java.util.NoSuchElementException;
+import com.problems.epi.code.heaps.ComputeKthClosetStar;
+
 import java.util.Random;
 
 public class OrderStatistic {
-    public static int findKthLargest(int[] A, int k) {
+    public static Comparable findKthLargest(Comparable[] A, int k) {
         if(A == null || A.length == 0) return 0;
         int lo = 0, hi = A.length - 1;
         Random rand = new Random();
         k = A.length - k;
-        while(lo <= hi) {
+        while(lo < hi) {
             int pvt = rand.nextInt(hi - lo + 1) + lo;
-            int j = partition(A, lo, hi, A[pvt]);
-            if(j == k) return A[k];
+            swap(A, lo, pvt);
+            int j = partition(A, lo, hi);
+            if(j == k) break;
             else if(j < k) lo = j + 1;
             else hi = j - 1;
         }
-        return 0;
+        return A[k];
     }
 
-    private static int partition(int[] A, int lo, int hi, int pvt) {
+    private static int partition(Comparable[] A, int lo, int hi) {
         if(A == null || A.length == 0) throw new IllegalStateException();
-        //hi = hi + 1;
-        while(lo < hi) {
-            while(A[lo++] < pvt) if(lo == hi) break;
-            while(A[hi--] > pvt) if(hi == lo) break;
-            //if(lo >= hi) break;
-            swap(A, lo, hi);
+        int i = lo;
+        int j = hi + 1;
+        while(true) { // could also say while(i < j) but this would always be true due to the inner if statement
+            while(i < hi && A[++i] < A[lo]);
+            while(j > lo && A[--j] > A[lo]);
+            if(i >= j) break;
+            swap(A, i, j);
         }
-        return hi;
+        swap(A, lo, j);
+        return j;
     }
 
-    private static void swap(int[] A, int lo, int hi) {
+    private static void swap(Comparable[] A, int i, int j) {
         if(A == null || A.length == 0) throw new IllegalStateException();
-        int tmp = A[lo];
-        A[lo] = A[hi];
-        A[hi] = tmp;
+        Comparable tmp = A[i];
+        A[i] = A[j];
+        A[j] = tmp;
+    }
+
+    public static void main(String[] args) {
+        Comparable[] in = {2, 1};
+        System.out.print(findKthLargest(in, 1));
     }
 }

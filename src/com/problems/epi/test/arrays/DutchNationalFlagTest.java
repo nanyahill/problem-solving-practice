@@ -47,12 +47,12 @@ public class DutchNationalFlagTest {
 
         System.out.println(pivotIndex);
         System.out.println(A);
-        DutchNationalFlag.dutchFlagPartition_WithColor(A, pivotIndex); //partitions around a specific color chosen at random
+        //DutchNationalFlag.dutchFlagPartition_WithColor(A, pivotIndex); //partitions around a specific color chosen at random
         System.out.println(A);
 
         int[] B = {1, 2};
         int i = 0, j = 0;
-        while(B[i++] == 8) System.out.println(i + " i");
+        while(B[i++] == 2) System.out.println(i + " i");
         System.out.print(i);
     }
 }

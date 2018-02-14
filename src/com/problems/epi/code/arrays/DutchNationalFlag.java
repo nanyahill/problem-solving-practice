@@ -40,7 +40,7 @@ public class DutchNationalFlag {
      * This method could work for Variant 1 as well
      * Note that this algorithm produces a perfect flag as in the name if the pivot index is the middle num
      * Else it partitions around the given index which could result in 0, 1, 0, 1, 2, 2, 2 if 2 is the pivot value
-     * This is a valid partition
+     * which is still a valid partition
      * @param nums
      * @param pivot
      */
