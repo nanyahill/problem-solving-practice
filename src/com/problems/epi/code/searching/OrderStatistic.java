@@ -1,10 +1,33 @@
 package com.problems.epi.code.searching;
 
-import com.problems.epi.code.heaps.ComputeKthClosetStar;
-
 import java.util.Random;
 
+/**
+ * Key Insight:
+ * Kth largest means that we want to get the N-K -th element in the array when sorted.
+ * For Kth smallest means you want to get the kth element in the array when sorted.
+ * When you partition an array around a pivot, p, you partially sort the array.
+ * At the end of the partition, A[p] is in its final position.
+ * Partitioning the left and right halves also places the pivot used for partitioning in its final position.
+ * Hence, at any point in time, if the returned index of the final position of the pivot is the same as k,
+ * then you would have found the kth largest/smallest element depending on the question.
+ * Side Notes:
+    - For the partition, you want to randomly select a pivot using a random number generator- this would ensure that the wprst case (O(n^2)) rarely happens.
+    - Before partition, it is advisable to swap the first element with the element at the pivot.
+    This helps to get the pivot out the way of the array partition.
+    This is done because the pivot does not know where it will end up until the other elements are moved.
+    When the other elements have been moved, the final position of 	the right pointer is the pivot's new position, hence the swap.
+    Note that the pivot may also be swapped with the last element, in this case the position of i is returned rather than j.
+    - Using prefix operators means that if swapping pivot with the first element,
+    then j would be initialized to hi + 1 and j would be returned from the partition method.
+    In the same way, if swapping pivot with the last element, then i would be initialized to lo - 1 and i would be returned from the partition method.
+    - It is harder to do three-way partition (Dutch National Flag) for Quick select or Quick Sort.
+ * Learning: This is a selection Algorithm. The version implemented here is called Quick Select.
+    - It uses the same partition step (two-way partitioning) algorithm in Quick sort but it processes only one side of the partition.
+    - Unlike quick sort which processes the two sides.
+ */
 public class OrderStatistic {
+
     public static Comparable findKthLargest(Comparable[] A, int k) {
         if(A == null || A.length == 0) return 0;
         int lo = 0, hi = A.length - 1;
@@ -12,7 +35,7 @@ public class OrderStatistic {
         k = A.length - k;
         while(lo < hi) {
             int pvt = rand.nextInt(hi - lo + 1) + lo;
-            swap(A, lo, pvt);
+            swap(A, hi, pvt);
             int j = partition(A, lo, hi);
             if(j == k) break;
             else if(j < k) lo = j + 1;
@@ -23,16 +46,17 @@ public class OrderStatistic {
 
     private static int partition(Comparable[] A, int lo, int hi) {
         if(A == null || A.length == 0) throw new IllegalStateException();
-        int i = lo;
-        int j = hi + 1;
-        while(true) { // could also say while(i < j) but this would always be true due to the inner if statement
-            while(i < hi && A[++i] < A[lo]);
-            while(j > lo && A[--j] > A[lo]);
+        int i = lo - 1;
+        int j = hi;
+        Comparable v = A[hi];
+        while(i < j) {
+            while(i < hi && less(A[++i],v));
+            while(j > lo && less(v, A[--j]));
             if(i >= j) break;
             swap(A, i, j);
         }
-        swap(A, lo, j);
-        return j;
+        swap(A, hi, i);
+        return i;
     }
 
     private static void swap(Comparable[] A, int i, int j) {
@@ -42,8 +66,8 @@ public class OrderStatistic {
         A[j] = tmp;
     }
 
-    public static void main(String[] args) {
-        Comparable[] in = {2, 1};
-        System.out.print(findKthLargest(in, 1));
+    public static boolean less(Comparable a, Comparable b) {
+        if(a == b) return false;
+        return a.compareTo(b) < 0;
     }
 }
