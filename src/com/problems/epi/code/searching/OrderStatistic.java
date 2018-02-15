@@ -28,6 +28,10 @@ import java.util.Random;
  */
 public class OrderStatistic {
 
+    /**
+     * Time Complexity: O(n)
+     * Space Complexity: O(1)
+     */
     public static Comparable findKthLargest(Comparable[] A, int k) {
         if(A == null || A.length == 0) return 0;
         int lo = 0, hi = A.length - 1;
@@ -35,7 +39,7 @@ public class OrderStatistic {
         k = A.length - k;
         while(lo < hi) {
             int pvt = rand.nextInt(hi - lo + 1) + lo;
-            swap(A, hi, pvt);
+            swap(A, hi, pvt); // swap(A, lo, pvt);
             int j = partition(A, lo, hi);
             if(j == k) break;
             else if(j < k) lo = j + 1;
@@ -46,17 +50,17 @@ public class OrderStatistic {
 
     private static int partition(Comparable[] A, int lo, int hi) {
         if(A == null || A.length == 0) throw new IllegalStateException();
-        int i = lo - 1;
-        int j = hi;
-        Comparable v = A[hi];
+        int i = lo - 1; // i = lo;
+        int j = hi; // j = hi + 1;
+        Comparable v = A[hi]; // v = A[lo];
         while(i < j) {
             while(i < hi && less(A[++i],v));
             while(j > lo && less(v, A[--j]));
             if(i >= j) break;
             swap(A, i, j);
         }
-        swap(A, hi, i);
-        return i;
+        swap(A, hi, i); // swap(A, lo, j);
+        return i; // return j;
     }
 
     private static void swap(Comparable[] A, int i, int j) {
