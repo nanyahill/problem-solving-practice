@@ -1,4 +1,4 @@
-package com.problems.epi.test.searching;
+package com.problems.epi.test.searching.binary_search;
 
 import com.problems.epi.code.searching.binary_search.SearchFirstOccurenceOfK;
 import org.junit.Test;

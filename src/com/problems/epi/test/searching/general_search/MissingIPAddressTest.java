@@ -1,4 +1,4 @@
-package com.problems.epi.test.searching;
+package com.problems.epi.test.searching.general_search;
 
 import com.problems.epi.code.searching.general_search.MissingIPAddress;
 import org.junit.Test;
