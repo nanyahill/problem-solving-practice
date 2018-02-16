@@ -1,6 +1,6 @@
 package com.problems.epi.test.searching;
 
-import com.problems.epi.code.searching.MissingIPAddress;
+import com.problems.epi.code.searching.general_search.MissingIPAddress;
 import org.junit.Test;
 
 import java.util.*;

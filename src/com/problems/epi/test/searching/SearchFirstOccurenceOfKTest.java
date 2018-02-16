@@ -1,6 +1,6 @@
 package com.problems.epi.test.searching;
 
-import com.problems.epi.code.searching.SearchFirstOccurenceOfK;
+import com.problems.epi.code.searching.binary_search.SearchFirstOccurenceOfK;
 import org.junit.Test;
 
 public class SearchFirstOccurenceOfKTest {

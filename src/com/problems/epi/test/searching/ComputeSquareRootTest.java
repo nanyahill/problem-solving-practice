@@ -1,6 +1,6 @@
 package com.problems.epi.test.searching;
 
-import com.problems.epi.code.searching.ComputeSquareRoot;
+import com.problems.epi.code.searching.binary_search.ComputeSquareRoot;
 import org.junit.Test;
 
 public class ComputeSquareRootTest {

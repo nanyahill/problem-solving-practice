@@ -1,4 +1,4 @@
-package com.problems.epi.code.searching;
+package com.problems.epi.code.searching.binary_search;
 
 /**
  * Key Insight:

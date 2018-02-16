@@ -1,6 +1,6 @@
 package com.problems.epi.test.searching;
 
-import com.problems.epi.code.searching.OrderStatistic;
+import com.problems.epi.code.searching.general_search.OrderStatistic;
 import org.junit.Test;
 
 public class OrderStatisticTest {

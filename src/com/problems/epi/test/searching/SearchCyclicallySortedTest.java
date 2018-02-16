@@ -1,6 +1,6 @@
 package com.problems.epi.test.searching;
 
-import com.problems.epi.code.searching.SearchCyclicallySorted;
+import com.problems.epi.code.searching.binary_search.SearchCyclicallySorted;
 import org.junit.Test;
 
 public class SearchCyclicallySortedTest {
