@@ -13,6 +13,7 @@ import java.util.HashSet;
    What DS can be used to store these nodes? (Think HashTable because lookup and insert is fast).
  - For this problem, a hashset will suffice because we are storing the distinct parents of each node.
    The moment we get a duplicate parent, we have our answer!
+ - Time & Space Complexity: O(d1 + d2) where d1 = distance of node1 to LCA, d2 = distance of node2 to LCA
  */
 public class LowestCommonAncestor_WithParentPointers {
     public static TreeNode findLCA(TreeNode n1, TreeNode n2) {
