@@ -11,12 +11,12 @@ import java.util.*;
 public class IntersectionOfTwoSortedArrays {
 
     /**
-     * Brute Force: For each element in array comapre with every other elements of the second array.
+     * Brute Force: For each element in array compare with every other elements of the second array.
      * Time: O(mn), Space: O(1)
      Key Insight:
      - Two arrays are sorted in the same order (Think Binary Search)
      - Based on the possible lengths of the two arrays, different solutions are possible:
-     - Iterate over shorter array and serach for each element in longer array using Binary Search
+     - Iterate over shorter array and search for each element in longer array using Binary Search
      Time Complexity; O(nlogm) where n = length of shorter array, m = length of longer array
      Space Complexity: O(1)
      - Store the shorter array in a set (or hashtable) ad iterate over longer array and check if element is in the set
@@ -28,7 +28,7 @@ public class IntersectionOfTwoSortedArrays {
      - If element in i is less than element in j, move i ahead because there is no element equal to that smaller element in the array iterated using j.
      - If element in j is less than element in i, move j ahead because there is no element equal to that smaller element in the array iterated using i.
 
-     CAUTION: You may be forced to use a list and then convert to an int array (noy Integer array) by iterating over the list,
+     CAUTION: You may be forced to use a list and then convert to an int array (not Integer array) by iterating over the list,
                 IF you are asked to return an int[]
 
      NOTE: A variant is what if the two arrays are unsorted. Possible Solutions:
