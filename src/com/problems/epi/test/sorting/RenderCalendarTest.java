@@ -16,7 +16,7 @@ public class RenderCalendarTest {
                 new RenderCalendar.Event(8, 9), new RenderCalendar.Event(9, 17), new RenderCalendar.Event(11, 13), new RenderCalendar.Event(12, 15),
                 new RenderCalendar.Event(14, 15));
         int expected = 3;
-        int actual = RenderCalendar.findMaxOverLappingEvents(events.toArray(new RenderCalendar.Event[0]));
+        int actual = RenderCalendar.findMaxOverlapingEvents_TwoPointer(events.toArray(new RenderCalendar.Event[0]));
         assert (expected == actual);
     }
 
