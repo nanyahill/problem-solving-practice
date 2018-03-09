@@ -138,7 +138,7 @@ public class MyLinkedList<T> {
     }
 
     /**
-     * Time Complexity: O(n)
+     * Time Complexity: O(n)- because you have to get the preceding element
      * Space Complexity: O(1)
      */
     public void addBefore (ListNode nodeAfter, ListNode nodeToAdd) {

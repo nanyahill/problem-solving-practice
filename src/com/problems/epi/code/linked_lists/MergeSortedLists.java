@@ -34,4 +34,41 @@ public class MergeSortedLists {
         current.next = l1 == null ? l2 : l1;
         return dummy.next;
     }
+
+    public static ListNode mergeTwoLists(ListNode<Integer> l1, ListNode<Integer> l2) {
+        if(l1 == null) {
+            return l2;
+        }
+        if(l2 == null) {
+            return l1;
+        }
+        ListNode res = null;
+        ListNode currRes = res;
+        while(l1 != null && l2 != null) {
+            if(l1.data <= l2.data) {
+                if(res == null) {
+                    res = l1;
+                    currRes = l1;
+                }
+                else {
+                    currRes.next = l1;
+                    currRes = currRes.next;
+                }
+                l1 = l1.next;
+            }
+            else {
+                if(res == null) {
+                    res = l2;
+                    currRes = l2;
+                }
+                else {
+                    currRes.next = l2;
+                    currRes = currRes.next;
+                }
+                l2 = l2.next;
+            }
+        }
+        currRes.next = l1 == null ? l2 : l1;
+        return res;
+    }
 }

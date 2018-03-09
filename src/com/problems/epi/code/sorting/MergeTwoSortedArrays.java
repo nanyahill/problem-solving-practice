@@ -6,6 +6,8 @@ package com.problems.epi.code.sorting;
  - This is a typical sorting problem. (Ask- What order should the final result be?- ascending or descending).
  - The end of one of the array has empty slots (Think can we fill in from the back?)
  - The length of the part of array A that has elements is given as well as the length of array B (Think- could use lengths in some way, for e.g. from the back).
+ Note: When solving merging of two sorted arrays remember at the end that one side of the array is already sorted.
+        This may not be applicable to lists because you are appending the result in a new ListNode.
  Algorithm:
  1) Iterate over elements from the back from each array, until the end of both array
  - A small trick that can make the while loop a one liner is to use a ternary operator.
