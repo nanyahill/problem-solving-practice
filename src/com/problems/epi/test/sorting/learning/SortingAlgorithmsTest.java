@@ -1,7 +1,8 @@
 package com.problems.epi.test.sorting.learning;
 
-import com.problems.epi.code.sorting.learning.InsertionSort;
+import com.problems.epi.code.sorting.learning.MergeSort;
 import com.util.ListNode;
+import org.junit.Assert;
 import org.junit.Test;
 
 public class SortingAlgorithmsTest {
@@ -19,11 +20,15 @@ public class SortingAlgorithmsTest {
         expected.next = new ListNode<>(3);
         expected.next.next = new ListNode<>(4);
 
-        ListNode<Integer> actual = InsertionSort.insertionSort_LinkedList(head);
-        assert(expected == actual);
+        //ListNode<Integer> actual = InsertionSort.insertionSort_LinkedList(head);
+        //assert(expected == actual);
+    }
 
-
-
-
+    @Test
+    public void mergeSort_WithArrays() {
+        int[] input = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
+        int[] expected = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        int[] actual  = MergeSort.mergeSort_Recursive_WithArrays(input);
+        Assert.assertArrayEquals(expected, actual);
     }
 }

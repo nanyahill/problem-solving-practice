@@ -18,7 +18,7 @@ public class MergeSortedListsTest {
         expected.next.next = new ListNode(5);
         expected.next.next.next = new ListNode(7);
         expected.next.next.next.next = new ListNode(11);
-        ListNode actual = MergeSortedLists.mergeSortedLists(l1, l2);
+        ListNode actual = MergeSortedLists.mergeSortedLists_WithDummyNode(l1, l2);
         while(expected != null) {
             assert expected.data == actual.data;
             expected = expected.next;
@@ -40,7 +40,7 @@ public class MergeSortedListsTest {
         expected.next.next = new ListNode(2);
         expected.next.next.next = new ListNode(3);
         expected.next.next.next.next = new ListNode(4);
-        ListNode actual = MergeSortedLists.mergeTwoLists(l1, l2);
+        ListNode actual = MergeSortedLists.mergeSortedLists_WithoutDummyNode(l1, l2);
         while(expected != null) {
             assert expected.data == actual.data;
             expected = expected.next;
