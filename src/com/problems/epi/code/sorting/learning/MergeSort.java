@@ -32,7 +32,16 @@ public class MergeSort {
      * - Run the merge for each adjacent array of the width in the input array, thus inner loop runs to end of input
      */
     public static int[] mergeSort_Iterative_WithArrays(int[] A) {
-
+        if(A == null || A.length == 0) return A;
+        int[] helper = new int[A.length];
+        for(int width = 1; width < A.length; width *= 2) {
+            for(int i = 0; i < A.length - width; i += 2*width) {
+                int lo = i;
+                int mid = lo + width - 1;
+                int hi = Math.min(lo + 2*width - 1, A.length - 1);
+                merge_WithArrays(A, helper, lo, mid, hi);
+            }
+        }
         return A;
     }
 

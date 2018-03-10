@@ -25,10 +25,18 @@ public class SortingAlgorithmsTest {
     }
 
     @Test
-    public void mergeSort_WithArrays() {
+    public void mergeSort_Recursive_WithArrays() {
         int[] input = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
         int[] expected = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
         int[] actual  = MergeSort.mergeSort_Recursive_WithArrays(input);
+        Assert.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void mergeSort_Iterative_WithArrays() {
+        int[] input = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
+        int[] expected = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        int[] actual  = MergeSort.mergeSort_Iterative_WithArrays(input);
         Assert.assertArrayEquals(expected, actual);
     }
 }

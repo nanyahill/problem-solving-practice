@@ -39,7 +39,7 @@ public class OrderStatistic {
         k = A.length - k;
         while(lo < hi) {
             int pvt = rand.nextInt(hi - lo + 1) + lo;
-            swap(A, hi, pvt); // swap(A, lo, pvt);
+            swap(A, hi, pvt); // swap(A, lo, pvt); //keep pvt separately and focus on the unsorted (non-pvt) elements
             int j = partition(A, lo, hi);
             if(j == k) break;
             else if(j < k) lo = j + 1;
