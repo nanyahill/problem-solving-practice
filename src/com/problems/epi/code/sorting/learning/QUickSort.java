@@ -18,7 +18,7 @@ public class QuickSort {
     }
 
     private static void quickSort_Recursive(int[] A, int lo, int hi) {
-        while(lo < hi) {
+        if(lo < hi) {
             Random rand = new Random();
             int pvt = rand.nextInt(hi - lo + 1) + lo; // instead of using RNG, pick pvt as the last element in A
             // Below is done in order to keep pvt separately and focus on the unsorted (non-pvt) elements

@@ -1,6 +1,7 @@
 package com.problems.epi.test.sorting.learning;
 
 import com.problems.epi.code.sorting.learning.MergeSort;
+import com.problems.epi.code.sorting.learning.QuickSort;
 import com.util.ListNode;
 import org.junit.Assert;
 import org.junit.Test;
@@ -25,7 +26,7 @@ public class SortingAlgorithmsTest {
     }
 
     @Test
-    public void mergeSort_Recursive_WithArrays() {
+    public void mergeSort_Recursive_WithArraysTest() {
         int[] input = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
         int[] expected = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
         int[] actual  = MergeSort.mergeSort_Recursive_WithArrays(input);
@@ -33,10 +34,18 @@ public class SortingAlgorithmsTest {
     }
 
     @Test
-    public void mergeSort_Iterative_WithArrays() {
+    public void mergeSort_Iterative_WithArraysTest() {
         int[] input = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
         int[] expected = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
         int[] actual  = MergeSort.mergeSort_Iterative_WithArrays(input);
+        Assert.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void quickSort_RecursiveTest() {
+        int[] input = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
+        int[] expected = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        int[] actual  = QuickSort.quickSort_Recursive(input);
         Assert.assertArrayEquals(expected, actual);
     }
 }
