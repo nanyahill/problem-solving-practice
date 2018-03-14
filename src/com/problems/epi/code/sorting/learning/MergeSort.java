@@ -56,7 +56,7 @@ public class MergeSort {
         }
     }
 
-    public static ListNode<Integer> mergeSort_Recursive_WithLists(ListNode<Integer> head) {
+    public static ListNode<Integer> mergeSort_WithLists(ListNode<Integer> head) {
         if(head == null || head.next == null) return head;
         ListNode<Integer> preSlow = null, slow = head, fast = head;
         while(fast != null && fast.next != null) {
@@ -65,6 +65,6 @@ public class MergeSort {
             slow = slow.next;
         }
         preSlow.next = null; // used to form two separate lists
-        return MergeSortedLists.mergeSortedLists_WithDummyNode(mergeSort_Recursive_WithLists(head), mergeSort_Recursive_WithLists(slow));
+        return MergeSortedLists.mergeSortedLists_WithDummyNode(mergeSort_WithLists(head), mergeSort_WithLists(slow));
     }
 }
