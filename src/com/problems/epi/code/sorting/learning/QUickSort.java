@@ -76,11 +76,11 @@ public class QuickSort {
             ListNode<Integer> tmp = headAndTail.head;
             while (tmp != null && tmp.next != pivot) { tmp = tmp.next; }
             tmp.next = null;
-            headAndTail.head = quickSort_Recursive_WithLists(headAndTail.head, tmp, headAndTail);
+            headAndTail.head = quickSort_Recursive_WithLists(headAndTail.head, tmp, new HeadAndTail());
             tmp = getTail(headAndTail.head);
             tmp.next = pivot;
         }
-        pivot.next = quickSort_Recursive_WithLists(pivot.next, headAndTail.tail, headAndTail);
+        pivot.next = quickSort_Recursive_WithLists(pivot.next, headAndTail.tail, new HeadAndTail());
         return headAndTail.head;
     }
 
