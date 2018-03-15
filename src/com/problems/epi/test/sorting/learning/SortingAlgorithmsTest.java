@@ -6,6 +6,9 @@ import com.util.ListNode;
 import org.junit.Assert;
 import org.junit.Test;
 
+import static com.problems.epi.code.sorting.learning.QuickSort.quickSort_DualPivot;
+import static com.problems.epi.code.sorting.learning.QuickSort.quickSort_ThreeWay;
+
 public class SortingAlgorithmsTest {
 
     @Test
@@ -46,6 +49,22 @@ public class SortingAlgorithmsTest {
         int[] input = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
         int[] expected = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
         int[] actual  = QuickSort.quickSort_Recursive_WithArrays(input);
+        Assert.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void quickSort_ThreeWayTest() {
+        int[] input = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
+        int[] expected = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        int[] actual  = quickSort_ThreeWay(input);
+        Assert.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void quickSort_DualPivotTest() {
+        int[] input = {2, 2, 2, 2};
+        int[] expected = {2, 2, 2, 2};
+        int[] actual  = quickSort_DualPivot(input);
         Assert.assertArrayEquals(expected, actual);
     }
 }

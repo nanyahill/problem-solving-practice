@@ -11,6 +11,12 @@ import java.util.*;
  *      – (a[i] > v): exchange a[larger] with a[equal]; decrement larger
  *      – (a[equal] == v): increment equal
  * 4) Repeat until equal and larger pointers cross
+ *  At the end of the algorithm-
+     *  elements from lo to smaller are less than pivot,
+     *  elements from smaller to larger are equal to the pivot,
+     *  elements from larger + 1 to end of array are greater than pivot
+ *  Hence, the name 3way partition.
+ *  Note: At the end of the partition, the elements that are between smaller and larger are all equal to the pivot
  */
 public class DutchNationalFlag {
 
@@ -20,7 +26,7 @@ public class DutchNationalFlag {
         int equal = 0, smaller = 0, larger = nums.length - 1; // important!
         int pivot = nums[index];
         while (equal <= larger) {
-            if (nums[equal] < pivot) {
+            if (nums[equal] < pivot) { // <= because all elements need to be checked/compared
                 int tmp = nums[equal];
                 nums[equal] = nums[smaller];
                 nums[smaller] = tmp;
