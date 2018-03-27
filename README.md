@@ -17,5 +17,15 @@ Data Structures:
 Algorithms:
 - Searching
 - Sorting
+  - Comparison-based
+    - Selection Sort
+    - Bubble Sort
+    - Insertion Sort
+    - Shell Sort
+    - Merge Sort
+    - Quick Sort
+  - Non-Comparison based
+    - Radix Sort
+    - Counting Sort
 - Dynamic Programming
 - Greedy Algorithms
