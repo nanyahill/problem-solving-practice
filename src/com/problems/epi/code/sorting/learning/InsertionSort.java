@@ -10,14 +10,14 @@ public class InsertionSort {
      */
     public static int[] insertionSort_Arrays(int[] A) {
         if(A == null || A.length == 0) return null;
-        for(int i = 1; i < A.length; i++) { // start from 1 because you assume A[0] is the sorted list while A[1]..A[n-1] is unsorted
-            int value = A[i];
+        // start from 1 because you assume A[0] is the sorted list while A[1]..A[n-1] is unsorted
+        for(int i = 1; i < A.length; i++) {
+            // analogy: create a hole in the wall to fill up
             int hole = i;
-            while(hole > 0 && A[hole - 1] > value) {
-                A[hole] = A[hole - 1];
+            while(hole > 0 && A[hole - 1] > A[hole]) {
+                swap(A, hole, hole-1);
                 hole--;
             }
-            A[hole] = value;
         }
         return A;
     }
@@ -50,5 +50,12 @@ public class InsertionSort {
             hole.next = temp;
         }
         return dummy.next;
+    }
+
+    private static void swap(int[] A, int i, int j) {
+        if (A == null || A.length == 0) throw new IllegalStateException();
+        int tmp = A[i];
+        A[i] = A[j];
+        A[j] = tmp;
     }
 }

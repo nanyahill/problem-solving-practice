@@ -11,7 +11,7 @@ import java.util.*;
 public class SortApproximatelySorted {
 
     /**
-     * Min-Heap Method: Performs well for large values of k and sequence
+     * Min-Heap_Old Method: Performs well for large values of k and sequence
      * Time Complexity: O(nlogk)
      * Space Complexity: O(k)
      */

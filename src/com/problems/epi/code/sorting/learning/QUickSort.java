@@ -1,8 +1,6 @@
 package com.problems.epi.code.sorting.learning;
 
 import com.util.ListNode;
-
-import java.util.Arrays;
 import java.util.Random;
 
 /**

@@ -1,5 +1,6 @@
 package com.problems.epi.test.sorting.learning;
 
+import com.problems.epi.code.sorting.learning.InsertionSort;
 import com.problems.epi.code.sorting.learning.MergeSort;
 import com.problems.epi.code.sorting.learning.QuickSort;
 import com.util.ListNode;
@@ -26,6 +27,14 @@ public class SortingAlgorithmsTest {
 
         //ListNode<Integer> actual = InsertionSort.insertionSort_LinkedList(head);
         //assert(expected == actual);
+    }
+
+    @Test
+    public void insertionSort_ArraysTest() {
+        int[] input = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
+        int[] expected = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        int[] actual  = InsertionSort.insertionSort_Arrays(input);
+        Assert.assertArrayEquals(expected, actual);
     }
 
     @Test
