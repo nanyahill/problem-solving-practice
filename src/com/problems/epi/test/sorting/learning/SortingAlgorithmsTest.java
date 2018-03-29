@@ -1,14 +1,9 @@
 package com.problems.epi.test.sorting.learning;
 
-import com.problems.epi.code.sorting.learning.InsertionSort;
-import com.problems.epi.code.sorting.learning.MergeSort;
-import com.problems.epi.code.sorting.learning.QuickSort;
+import com.problems.epi.code.sorting.learning.*;
 import com.util.ListNode;
 import org.junit.Assert;
 import org.junit.Test;
-
-import static com.problems.epi.code.sorting.learning.QuickSort.quickSort_DualPivot;
-import static com.problems.epi.code.sorting.learning.QuickSort.quickSort_ThreeWay;
 
 public class SortingAlgorithmsTest {
 
@@ -65,7 +60,7 @@ public class SortingAlgorithmsTest {
     public void quickSort_ThreeWayTest() {
         int[] input = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
         int[] expected = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-        int[] actual  = quickSort_ThreeWay(input);
+        int[] actual  = QuickSort.quickSort_ThreeWay(input);
         Assert.assertArrayEquals(expected, actual);
     }
 
@@ -73,7 +68,23 @@ public class SortingAlgorithmsTest {
     public void quickSort_DualPivotTest() {
         int[] input = {2, 2, 2, 2};
         int[] expected = {2, 2, 2, 2};
-        int[] actual  = quickSort_DualPivot(input);
+        int[] actual  = QuickSort.quickSort_DualPivot(input);
+        Assert.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void heapSort() {
+        int[] input = {1, 9, 8, 17, 6, 15, 4, 3, 2, 1};
+        int[] expected = {1, 1, 2, 3, 4, 6, 8, 9, 15, 17 };
+        int[] actual  = HeapSort.heapSort(input);
+        Assert.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shellSort() {
+        int[] input = {1, 9, 8, 17, 6, 15, 4, 3, 2, 1};
+        int[] expected = {1, 1, 2, 3, 4, 6, 8, 9, 15, 17 };
+        int[] actual  = ShellSort.shellSort(input);
         Assert.assertArrayEquals(expected, actual);
     }
 }
