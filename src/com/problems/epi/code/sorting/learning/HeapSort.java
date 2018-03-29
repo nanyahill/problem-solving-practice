@@ -6,15 +6,18 @@ package com.problems.epi.code.sorting.learning;
  *************** 1.1 Swim: takes nlogn not so efficient. Main Idea of swim- each element is inserted successively into the heap.
  *************** 1.2 Sink: takes n time. Main Idea of sink- each position in the array is the root of a small subheap.
  ******* 2. Sort Down: Takes O(nlogn) time because you are deleting the max (logn) for n - 1 elements (first element is already in place).
+ * Time complexity: O(nlogn)
+ * Space Complexity: O(1)
  */
 public class HeapSort {
     public static int[] heapSort(int[] A) {
         if (A == null || A.length == 0) return null;
         // create a max heap using sink method because it is more efficient than swim method
         // max-heap is created because we are sorting in ascending order, if otherwise, use min-heap.
-        createMaxHeap_UsingSink(A);
+        createMaxHeap_UsingSink(A); // takes O(n)
         int j = A.length;
-        // Sort down from n to 2 (that is n - 1 elements)
+        // Sort down from n to 2 (that is n - 1 elements). Take O(nlogn)
+        // Big Idea: Calling extractMax() n - 1 times
         while (j > 1) {
             swap(A, 1, j--);
             sink(A, 1, j);

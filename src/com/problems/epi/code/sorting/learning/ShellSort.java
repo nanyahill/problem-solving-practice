@@ -9,6 +9,8 @@ package com.problems.epi.code.sorting.learning;
  * - Each value of h can be called a gap.
  * - A subarray consists of elements that are h elements apart.
  * - Overall, the original array is sorted by h-sorting subarrays for each value of h.
+ * Time complexity: O(n ^ 3/2) due to the type of sequence chosen. Any less efficient choice can lead to n^2 time complexity
+ * Space Complexity: O(1)
  */
 public class ShellSort {
 
