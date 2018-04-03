@@ -8,6 +8,7 @@ package com.problems.epi.code.sorting.learning;
  ******* 2. Sort Down: Takes O(nlogn) time because you are deleting the max (logn) for n - 1 elements (first element is already in place).
  * Time complexity: O(nlogn)
  * Space Complexity: O(1)
+ * NOTE: To sort in ascending order: construct a max-heap in stage 1. Else, construct a min-heap.
  */
 public class HeapSort {
     public static int[] heapSort(int[] A) {

@@ -87,4 +87,20 @@ public class SortingAlgorithmsTest {
         int[] actual  = ShellSort.shellSort(input);
         Assert.assertArrayEquals(expected, actual);
     }
+
+    @Test
+    public void countingSort() {
+        int[] input = { -5, -2, 9, 0, -1, 2, 3, 5, -4, 6, 8 };
+        int[] expected = { -5, -4, -2, -1, 0, 2, 3, 5, 6, 8, 9 };
+        int[] actual  = CountingSort.countingSort(input, -5, 9);
+        Assert.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void countingSort_Alternative() {
+        int[] input = { 9, 4, 1, 7, 9, 1, 2, 0, 1, 0, 3 };
+        int[] expected = { 0, 0, 1, 1, 1, 2, 3, 4, 7, 9, 9 };
+        int[] actual  = CountingSort.countingSort_Alternative(input, 0, 9);
+        Assert.assertArrayEquals(expected, actual);
+    }
 }
