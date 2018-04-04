@@ -16,18 +16,22 @@ import java.util.Arrays;
  */
 public class CountingSort {
 
+    // This method works well with data with metadata (e.g. database keys).
+    // Still works for data with no metadata
     public static int[] countingSort(int[] A, int min, int max) {
         if(A == null || A.length == 0) return null;
         int[] countArray = new int[max - min + 1];
         int[] result = new int[A.length];
         for(int i = 0; i < A.length; i++) countArray[A[i] - min]++;
         for(int j = 1; j < countArray.length; j++) countArray[j] = countArray[j] + countArray[j - 1];
-        for(int k = 0; k < result.length; k++) {
+        // Starts from behind to maintain stability
+        for(int k = result.length - 1; k >= 0; k--) {
             result[--countArray[A[k] - min]] = A[k];
         }
         return result;
     }
 
+    // This method works well with data with no metadata (e.g. simple integers)
     public static int[] countingSort_Alternative(int[] A, int min, int max) {
         if(A == null || A.length == 0) return null;
         int[] countArray = new int[max - min + 1];
@@ -42,12 +46,5 @@ public class CountingSort {
             }
         }
         return result;
-    }
-
-    public static void main(String[] args) {
-        int[] A = { 9, 4, 1, 7, 9, 1, 2, 0, 1, 0, 3 };
-
-        int[] B = { -5, -2, 9, 0, -1, 2, 3, 5, -4, 6, 8 };
-        System.out.print(Arrays.toString(countingSort(B, -5, 9)));
     }
 }
