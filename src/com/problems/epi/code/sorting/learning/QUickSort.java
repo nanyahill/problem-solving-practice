@@ -83,12 +83,12 @@ public class QuickSort {
     private static void quickSort_ThreeWay(int[] A, int lo, int hi) {
         if (lo < hi) {
             // Instead of using an RNG either the first or last element may be picked
-            Random rand = new Random();
-            int pvtIdx = rand.nextInt(hi - lo + 1) + lo;
-            int pvt = A[pvtIdx];
+//            Random rand = new Random();
+//            int pvtIdx = rand.nextInt(hi - lo + 1) + lo;
+//            int pvt = A[pvtIdx];
             //int pvt = A[hi];
-            //int pvt = a[lo];
-            int lt = lo, eq = lo, gt = hi;
+            int pvt = A[lo];
+            int lt = lo, eq = lo + 1, gt = hi; //eq = lo + 1 since pivot is at lo
             while (eq <= gt) { // <= because all elements need to be checked/compared
                 if (A[eq] < pvt) swap(A, eq++, lt++);
                 else if (A[eq] > pvt) swap(A, eq, gt--);
