@@ -23,6 +23,19 @@ public class InsertionSort {
     }
 
     /**
+     * Time: O(n^2)
+     * Space: O(1)
+     */
+    public static int[] insertionSort_Arrays_Cleaner(int[] A) {
+        if(A == null || A.length == 0) return null;
+        for(int i = 0; i < A.length; i++) {
+            for(int j = i; j > 0 && A[j - 1] > A[j]; j--)
+                swap(A, j, j-1);
+        }
+        return A;
+    }
+
+    /**
      * The main difference in this insertion sort algo is that insertion is quick and easy
      * Takes O(1) space. Although time is still O(n^2)
      * When a value is misplaced the sorted portion of the list is traversed up until

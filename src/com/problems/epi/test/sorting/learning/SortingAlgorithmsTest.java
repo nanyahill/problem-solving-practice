@@ -33,6 +33,14 @@ public class SortingAlgorithmsTest {
     }
 
     @Test
+    public void insertionSort_Arrays_CleanerTest() {
+        int[] input = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
+        int[] expected = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        int[] actual  = InsertionSort.insertionSort_Arrays_Cleaner(input);
+        Assert.assertArrayEquals(expected, actual);
+    }
+
+    @Test
     public void mergeSort_Recursive_WithArraysTest() {
         int[] input = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
         int[] expected = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
@@ -75,7 +83,7 @@ public class SortingAlgorithmsTest {
     }
 
     @Test
-    public void heapSort() {
+    public void heapSortTest() {
         int[] input = {1, 9, 8, 17, 6, 15, 4, 3, 2, 1};
         int[] expected = {1, 1, 2, 3, 4, 6, 8, 9, 15, 17 };
         int[] actual  = HeapSort.heapSort(input);
@@ -83,7 +91,7 @@ public class SortingAlgorithmsTest {
     }
 
     @Test
-    public void shellSort() {
+    public void shellSortTest() {
         int[] input = {1, 9, 8, 17, 6, 15, 4, 3, 2, 1};
         int[] expected = {1, 1, 2, 3, 4, 6, 8, 9, 15, 17 };
         int[] actual  = ShellSort.shellSort(input);
@@ -91,7 +99,7 @@ public class SortingAlgorithmsTest {
     }
 
     @Test
-    public void countingSort() {
+    public void countingSortTest() {
         int[] input = { -5, -2, 9, 0, -1, 2, 3, 5, -4, 6, 8 };
         int[] expected = { -5, -4, -2, -1, 0, 2, 3, 5, 6, 8, 9 };
         int[] actual  = CountingSort.countingSort(input, -5, 9);
@@ -99,7 +107,7 @@ public class SortingAlgorithmsTest {
     }
 
     @Test
-    public void countingSortSedgewick() {
+    public void countingSortSedgewickTest() {
         int[] input = { -5, -2, 9, 0, -1, 2, 3, 5, -4, 6, 8 };
         int[] expected = { -5, -4, -2, -1, 0, 2, 3, 5, 6, 8, 9 };
         int[] actual  = CountingSort.countingSortSedgewick(input, -5, 9);
@@ -107,7 +115,7 @@ public class SortingAlgorithmsTest {
     }
 
     @Test
-    public void countingSort_Alternative() {
+    public void countingSort_AlternativeTest() {
         int[] input = { 9, 4, 1, 7, 9, 1, 2, 0, 1, 0, 3 };
         int[] expected = { 0, 0, 1, 1, 1, 2, 3, 4, 7, 9, 9 };
         //int[] actual  = CountingSort.countingSort_Alternative(input, 0, 9);
@@ -116,11 +124,27 @@ public class SortingAlgorithmsTest {
     }
 
     @Test
-    public void radixSort() {
+    public void radixSortTest() {
         //String[] s = {"a", "aa", "ab", "abc", "d", "qq", "ff"};
         String[] a = { "she", "sells", "seashells", "by", "the", "sea", "shore", "the", "shells", "she", "sells", "are", "surely", "seashells"  };
         String[] expected = { "are", "by", "sea", "seashells", "seashells", "sells", "sells", "she", "she", "shells", "shore", "surely", "the", "the" };
         RadixSort.MSDRadixSort(a);
         Assert.assertArrayEquals(a, expected);
+    }
+
+    @Test
+    public void bucketSortTest() {
+        double[] input = {0.89, 0.56, 0.66, 0.12, 0.65, 0.34};
+        double[] expected = { 0.12, 0.34, 0.56, 0.65, 0.66, 0.89 };
+        double[] actual  = BucketSort.bucketSort_Doubles(input, 2);
+        Assert.assertArrayEquals(expected, actual, 1e-9);
+    }
+
+    @Test
+    public void bucketSort_IntegersTest() {
+        int[] input = { 9, 4, 1, 7, 9, 1, 2, 0, 1, 0, 3 };
+        int[] expected = { 0, 0, 1, 1, 1, 2, 3, 4, 7, 9, 9 };
+        int[] actual  = BucketSort.bucketSort_Integers(input, 0, 9, 2);
+        Assert.assertArrayEquals(expected, actual);
     }
 }
