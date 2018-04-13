@@ -19,9 +19,30 @@ public class SortingAlgorithmsTest {
         ListNode<Integer> expected = new ListNode<>(1);
         expected.next = new ListNode<>(3);
         expected.next.next = new ListNode<>(4);
+    }
 
-        //ListNode<Integer> actual = InsertionSort.insertionSort_LinkedList(head);
-        //assert(expected == actual);
+    @Test
+    public void selectionSortTest() {
+        int[] input = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
+        int[] expected = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        int[] actual  = SelectionSort.selectionSort(input);
+        Assert.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void bubbleSortTest() {
+        int[] input = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
+        int[] expected = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        int[] actual  = BubbleSort.bubbleSort(input);
+        Assert.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void bubbleSort_OptimizationTest() {
+        int[] input = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
+        int[] expected = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        int[] actual  = BubbleSort.bubbleSort_Optimization(input);
+        Assert.assertArrayEquals(expected, actual);
     }
 
     @Test
