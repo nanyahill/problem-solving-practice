@@ -1,36 +1,17 @@
-package com.problems.epi.code.binary_search_trees;
+package com.problems.epi.code.binary_trees;
 
 import com.util.TreeNode;
 
 import java.util.HashSet;
 import java.util.Set;
 
-public class FindLowestCommonAncestor {
-
-    // LCA in BST Iterative method
-    // Time Complexity: O(h), Space Complexity: O(1)
-    public static TreeNode findLCAInBST_Iterative(TreeNode<Integer> root, TreeNode<Integer> p, TreeNode<Integer> q) {
-        if (root == null || p == null || q == null) return null;
-        TreeNode lca = null;
-        while (root != null) {
-                if (root.data > Math.max(p.data, q.data)) root = root.left;
-            else if (root.data < Math.min(p.data, q.data)) root = root.right;
-            else {
-                lca = root;
-                break;
-            }
-        }
-        return lca;
-    }
-
-    // LCA in BST Recursive method
-    // Time Complexity: O(h), Space Complexity: O(1)
-    public static TreeNode findLCAInBST_Recursive(TreeNode<Integer> root, TreeNode<Integer> p, TreeNode<Integer> q) {
-        if (root == null || p == null || q == null) return null;
-        if (root.data > Math.max(p.data, q.data)) return findLCAInBST_Recursive(root.left, p, q);
-        else if (root.data < Math.min(p.data, q.data)) return findLCAInBST_Recursive(root.right, p, q);
-        else return root;
-    }
+/**
+ * This class contains how to find the LCA in Binary Trees for the following cases:
+ *      - Without Parent Pointers (top down vs bottom up)
+ *      - With Parent Pointers (with extra space vs without extra space)
+ * Note this class was not exactly a problem in EPI. The class consists of two problems in EPI (with/without parents)
+ */
+public class LowestCommonAncestor {
 
     // LCA in Binary Tree Top-Down Approach
     // Time Complexity: O(n^2), Space Complexity: O(1)
