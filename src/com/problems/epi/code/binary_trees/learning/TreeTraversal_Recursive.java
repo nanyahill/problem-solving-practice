@@ -41,14 +41,20 @@ public class TreeTraversal_Recursive {
     }
 
     public static void main(String[] args) {
-        TreeNode<Integer> root = new TreeNode<>(5);
-        root.left = new TreeNode<>(7);
-        root.left.left = new TreeNode<>(4);
-        root.left.right = new TreeNode<>(3);
-        root.left.right.left = new TreeNode<>(6);
-        root.right = new TreeNode<>(8);
-        root.right.right = new TreeNode<>(9);
-        root.right.right.left = new TreeNode<>(10);
+        TreeNode<Integer> root = new TreeNode<>(19);
+        root.left = new TreeNode<>(11);
+        root.left.left = new TreeNode<>(5);
+        root.left.left.left = new TreeNode<>(2);
+        root.left.left.left.right = new TreeNode<>(3);
+        root.left.left.right = new TreeNode<>(7);
+        root.left.right = new TreeNode<>(13);
+        root.left.right.left = new TreeNode<>(12);
+        root.left.right.right = new TreeNode<>(17);
+
+        root.right = new TreeNode<>(29);
+        root.right.right = new TreeNode<>(31);
+        root.right.left = new TreeNode<>(23);
+
         preOrder(root);
         System.out.println(listPreOrder);
         inOrder(root);

@@ -40,7 +40,7 @@ public class TreeTraversalTest {
         //Inorder Test
         Assert.assertArrayEquals(new Integer[]{4, 7, 6, 3, 5, 8, 10, 9}, TreeTraversal_Iterative_WithStack.inOrder(root).toArray());
         //Postorder Test
-        Assert.assertArrayEquals(new Integer[]{4, 6, 3, 7, 10, 9, 8, 5}, TreeTraversal_Iterative_WithStack.postOrder(root).toArray());
+        Assert.assertArrayEquals(new Integer[]{4, 6, 3, 7, 10, 9, 8, 5}, TreeTraversal_Iterative_WithStack.postOrderWithOneStack(root).toArray());
     }
 
     @Test
