@@ -1,0 +1,6 @@
+- In general, arrays have good cache performance.
+- Arrays can be used to perform binary search unlike Liknedlists.
+- Unsorted array is probably the easiest data structure to maintain, although it is not susceptible to binary search.
+- Self-organizing lists, what is it? <research>- mentioned in Algorithm Design Manual by Skienna, pg 368.
+- A sorted array is an appropriate data structures for searching but not good where there are many insertions and deleteions.
+-

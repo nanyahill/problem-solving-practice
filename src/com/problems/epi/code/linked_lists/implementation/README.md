@@ -1,0 +1,3 @@
+- Linkedlist are not suscepible to binary search because elements cannot be accessed by index.
+- Maintaining a sorted linkedlist is worth the effort if trying to eliminate duplicates
+-
