@@ -44,12 +44,14 @@ public class NQueensPuzzle {
             if (board[i][col] == 1) return false;
 
         // Check for 135 degree diagonal
+        // We only want to check for upper diagonals because they have been solved already
         // start form i = row - 1 and j = col - 1 because you want to check for previous solved positions,
         // if i should start from row + 1 and j starts from col + 1 it means you are checking for positions that have not been solved yet
         for (int i = row - 1, j = col - 1; i >= 0 && j >= 0; i--, j--)
             if (board[i][j] == 1) return false;
 
         // Check for 45 degree diagonal
+        // We only want to check for upper diagonals because they have been solved already
         // i decreases here because row is your position and you want to check for previous solved positions,
         // if i should increase it means you are checking for positions that have not been solved yet
         for (int i = row - 1, j = col + 1; i >= 0 && j < n; i--, j++)
