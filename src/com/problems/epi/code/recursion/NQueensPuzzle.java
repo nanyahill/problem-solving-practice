@@ -26,10 +26,10 @@ public class NQueensPuzzle {
         } else {
             for (int col = 0; col < n; col++) {
                 if (isValid(row, col)) {
-                    board[row][col] = 1;
+                    board[row][col] = 1; // place queen
                     tmp.add(col);
                     solve(n, row + 1, tmp, result);
-                    board[row][col] = 0;
+                    board[row][col] = 0; // remove queen
                     tmp.remove(tmp.size() - 1);
                 }
             }
