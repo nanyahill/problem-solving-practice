@@ -32,7 +32,9 @@ public class Scrap {
 
     public static void main(String[] args) {
         //System.out.println(recurrence1(5));
-        System.out.println(recurrence1Another2(5));
+        //System.out.println(recurrence1Another2(5));
+        String s1 = "abc";
+        System.out.print(s1.substring(0,1));
 
     }
 }
