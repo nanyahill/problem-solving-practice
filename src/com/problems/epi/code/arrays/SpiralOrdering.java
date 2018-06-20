@@ -14,24 +14,26 @@ public class SpiralOrdering {
         if (A == null || A.length == 0) return null;
         int rows = A.length, cols = A[0].length;
         int[] result = new int[rows * cols];
-        int T = 0, R = cols - 1, B = rows - 1, L = 0;
+        // this is neither the starting or ending point of the directions
+        // it is simply what row/col the direction is starting with.
+        int T = 0, R = cols - 1, B = rows - 1, L = 0; // T = Top, R= Right, B = Bottom, L = Left
         int dir = 0, idx = 0;
 
         while (T <= B && L <= R) {
-            if (dir == 0) {
-                for (int i = T; i < cols - 1; i++)
+            if (dir == 0) { // moves from L to R
+                for (int i = L; i <= R; i++)
                     result[idx++] = A[T][i];
                 T++;
-            } else if (dir == 1) {
-                for (int i = R; i < rows - 1; i++)
+            } else if (dir == 1) { // moves from T to B
+                for (int i = T; i <= B; i++)
                     result[idx++] = A[i][R];
                 R--;
-            } else if (dir == 2) {
-                for (int i = B; i >= 0; i--)
+            } else if (dir == 2) { // moves from R to L
+                for (int i = R; i >= L; i--)
                     result[idx++] = A[B][i];
                 B--;
-            } else {
-                for (int i = L; i >= 0; i--)
+            } else { // moves from B to T
+                for (int i = B; i >= T; i--) // >= because L moves from last row to the second row. Element in first row and first column has already been visited.
                     result[idx++] = A[i][L];
                 L++;
             }

@@ -5,7 +5,7 @@ import java.util.*;
 /**
  * Dijkstra 3-way Partition Algo: Rearrange all elements in an array such that all elements less than A[i] (the pivot) is to the left side and elements greater than the pivot is to the right side
  * 1) Initially all the correct positions of elements in the array are unknown.
- * 2) Create three variables to maintain three sections of the array- smaller = 0, equal = 0, and larger = n - 1
+ * 2) Create three variables to maintain three sections of the array- smaller = 0 (ranges from 0 to smaller), equal = 0 (ranges from smaller + 1 to equal), and larger = n - 1 (ranges from equal + 1 to larger)
  * 3) Scan equal from left to right; v is the pivot value.
  *      – (a[equal] < v): exchange a[smaller] with a[equal]; increment both smaller and equal
  *      – (a[i] > v): exchange a[larger] with a[equal]; decrement larger

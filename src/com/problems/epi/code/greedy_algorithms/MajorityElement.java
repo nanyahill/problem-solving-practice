@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class MajorityElement {
 
-    public static String findMajority_BruteForce(List<String> input) {
+    public static String findMajorityElement_BruteForce(List<String> input) {
         if(input == null || input.size() == 0) return "";
         Map<String, Integer> map = new HashMap<>();
         int size = input.size();
@@ -25,7 +25,7 @@ public class MajorityElement {
         return "";
     }
 
-    public static String findMajority_Efficient(Iterator<String> input) {
+    public static String findMajorityElement_Efficient(Iterator<String> input) {
         if(input == null) return "";
         int counter = 0;
         String candidate = "";
