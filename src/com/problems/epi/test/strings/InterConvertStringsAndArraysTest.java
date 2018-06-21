@@ -10,7 +10,7 @@ public class InterConvertStringsAndArraysTest {
     public void parseIntTest() {
         String input = "-123";
         int expected = -123;
-        int actual = InterConvertStringsAndArrays.parseIntBruteForce(input);
+        int actual = InterConvertStringsAndArrays.stringToInt(input);
         Assert.assertEquals(expected, actual);
     }
 
@@ -18,7 +18,7 @@ public class InterConvertStringsAndArraysTest {
     public void toStringTest() {
         int input = 123;
         String expected = "123";
-        String actual = InterConvertStringsAndArrays.toString(input);
+        String actual = InterConvertStringsAndArrays.intToString(input);
         Assert.assertEquals(expected, actual);
     }
 }

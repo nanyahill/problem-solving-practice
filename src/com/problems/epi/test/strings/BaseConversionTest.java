@@ -8,9 +8,9 @@ public class BaseConversionTest {
 
     @Test
     public void convertBaseTest() {
-        String input = "-2147483648";
-        int b1 = 10;
-        int b2 = 2;
+        String input = "0";
+        int b1 = 7;
+        int b2 = 13;
         String expected = "-10000000000000000000000000000000";
         String actual = BaseConversion.convertBase(input, b1, b2);
         Assert.assertEquals(expected, actual);
