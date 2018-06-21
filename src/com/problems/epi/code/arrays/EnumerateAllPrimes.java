@@ -40,62 +40,22 @@ public class EnumerateAllPrimes {
      * that uses the idea of a sieve to
      * eliminate all the multiples of primes
      * An array/list of booleans is used as the sieve
-     * Time Complexity: O(nloglogn) which is
-     * closer to O(n)
+     * Time Complexity: O(nloglogn) (because time to sift out multiples of p is proportional to n/p) which is
+     * closer to O(n) but better than O(n)
      * Space complexity: O(n)
      */
-    public static List<Integer> enumerateAllPrimes2(int num) {
-        if (num <= 1) {
-            return new ArrayList<Integer>();
-        }
-        List<Boolean> lookUpTable = new ArrayList<Boolean>(Collections.nCopies(num + 1, true));
-        List<Integer> res = new ArrayList<Integer>();
-        lookUpTable.set(0, false);
-        lookUpTable.set(1, false);
-        for (int i = 2; i <= num; i++) {
-            if (lookUpTable.get(i)) {
-                res.add(i);
-            }
-            for (int j = 2 * i; j <= num; j += i) {
-                lookUpTable.set(j, false);
+    public static List<Integer> enumerateAllPrimes2(int n) {
+        if(n <= 0) return Collections.emptyList();
+        boolean[] bitArray = new boolean[n + 1];
+        Arrays.fill(bitArray, true); // Assume all the numbers in the bitarray is a prime (i.e bitarray is set to true);
+        List<Integer> res = new ArrayList<>();
+        for(int i = 2; i <= n; i++) {
+            if(bitArray[i] == false) continue;
+            res.add(i);
+            for(int j = i*2; j <= n; j+=i) {
+                bitArray[j] = false;
             }
         }
         return res;
-    }
-
-    public static List<Integer> generateAllPrimes(int n) {
-        List<Integer> res = new ArrayList<Integer>();
-        //if (n < 2) return (Integer[]) res.toArray();
-        int[] sieve = new int[n + 1];
-        for (int i = 2; i <= n; i++) {
-            if (sieve[i] != 0) continue;
-            for (int j = 2 * i; j <= n; j += i) {
-                sieve[j] = i;
-            }
-            res.add(i);
-        }
-        Integer[] result = new Integer[res.size()];
-        result = res.toArray(result);
-
-        List<Integer> list = new ArrayList<Integer>(Arrays.asList(result));
-        return list;
-    }
-
-    public static void main(String[] args) {
-        ArrayList<String> strings = new ArrayList<String>();
-        strings.add("Hello, World!");
-        strings.add("Welcome to CoderPad.");
-        strings.add("This pad is running Java 8.");
-
-        for (String string : strings) {
-            System.out.println(string);
-        }
-        //Integer[] result = generateAllPrimes(100000);
-
-        System.out.print(generateAllPrimes(100000).size());
-        System.out.println();
-        for (int i = 0; i < 10; i++) {
-            System.out.println((int) (1000 * Math.random()));
-        }
     }
 }
