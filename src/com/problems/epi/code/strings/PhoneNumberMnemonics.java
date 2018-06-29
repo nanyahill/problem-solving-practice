@@ -1,6 +1,7 @@
 package com.problems.epi.code.strings;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -16,23 +17,38 @@ public class PhoneNumberMnemonics {
      * Time Complexity: O(n4^n)
      * Space Complexity: O(1)
      */
-    static String[] map = {"0", "1", "abc", "def", "ghi", "jkl","mno","pqrs","tuv","wxyz"};
+    private static final String[] KEYS = {"0", "1", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
     public static List<String> phoneMnemonic(String phoneNumber) {
         if(phoneNumber == null || phoneNumber.length() == 0) return null;
+        char[] prefix = new char[phoneNumber.length()];
         List<String> result = new ArrayList<>();
-        phoneMnemonicHelper(phoneNumber, 0, "", result);
+        phoneMnemonicHelper(phoneNumber, prefix, 0, result);
         return result;
     }
 
-    private static void phoneMnemonicHelper(String phoneNumber, int pos, String prefix, List<String> res) {
-        if(pos == phoneNumber.length()) {
+    // This old method uses string concatenation which is not efficient because a new string is created each time
+//    private static void phoneMnemonicHelper(String phoneNumber, int pos, String prefix, List<String> res) {
+//        if(pos == phoneNumber.length()) {
+//            res.add(new String(prefix));
+//        }
+//        else {
+//            int digit = phoneNumber.charAt(pos) - '0';
+//            for(int i = 0; i < map[digit].length(); i++) {
+//                char c = map[digit].charAt(i);
+//                phoneMnemonicHelper(phoneNumber, pos + 1, prefix + c, res);
+//            }
+//        }
+//    }
+
+    private static void phoneMnemonicHelper(String digits, char[] prefix, int idx, List<String> res) {
+        if (idx == digits.length()) {
             res.add(new String(prefix));
-        }
-        else {
-            int digit = phoneNumber.charAt(pos) - '0';
-            for(int i = 0; i < map[digit].length(); i++) {
-                char c = map[digit].charAt(i);
-                phoneMnemonicHelper(phoneNumber, pos + 1, prefix + c, res);
+            return;
+        } else {
+            String chars = KEYS[digits.charAt(idx) - '0'];
+            for (int i = 0; i < chars.length(); i++) {
+                prefix[idx] = chars.charAt(i);
+                phoneMnemonicHelper(digits, prefix, idx + 1, res);
             }
         }
     }

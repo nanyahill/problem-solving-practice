@@ -9,8 +9,8 @@ public class ReplaceAndRemoveTest {
     @Test
     public void replaceAndRemoveTest() {
         char[] input = {'a', ' '};
-        char[] expected = {'d', 'd'};
-        char[] actual = ReplaceAndRemove.replaceAndRemove(input, 1);
-        Assert.assertArrayEquals(expected, actual);
+        int expected = 2;
+        int actual = ReplaceAndRemove.replaceAndRemove(input, 1);
+        Assert.assertEquals(expected, actual);
     }
 }
