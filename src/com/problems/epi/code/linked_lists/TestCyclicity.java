@@ -41,4 +41,39 @@ public class TestCyclicity {
         }
         return null;
     }
+
+    public static ListNode<Integer> hasCycle(ListNode<Integer> head) {
+        if(head == null) return head;
+        ListNode<Integer> fast = head;
+        ListNode<Integer> slow = head;
+        while(fast != null && fast.next != null)
+        {
+            fast = fast.next.next;
+            slow = slow.next;
+            if(fast == slow) break;
+        }
+        fast = head;
+        while(fast != slow) {
+            fast = fast.next;
+            slow = slow.next;
+            if(fast == slow) return fast;
+        }
+        return fast == slow ? fast : null;
+    }
+
+    public static ListNode<Integer> hasCycle2(ListNode<Integer> head) {
+        ListNode slow = head, fast = head;
+        while(fast != null && fast.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+            if (slow == fast) {
+                while (head != slow) {
+                    head = head.next;
+                    slow = slow.next;
+                }
+                return slow;
+            }
+        }
+        return null;
+    }
 }
