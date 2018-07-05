@@ -2,7 +2,6 @@ package com.problems.epi.code.stacks_queues.queues;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
-import java.util.NoSuchElementException;
 
 /**
  * Key Insight: In a Queue, insertions happen at the back while deletions happen at the front.
@@ -15,38 +14,29 @@ import java.util.NoSuchElementException;
  */
 public class QueueImpl_WithStacks<T> {
 
-    Deque<T> s1 = new ArrayDeque<>();
-    Deque<T> s2 = new ArrayDeque<>();
-    T front;
-
-    public void enqueue(T val) {
-        if (s1.isEmpty()) front = val;
-        s1.push(val);
+    Deque<Integer> stackNewest; // holds newest queue elements
+    Deque<Integer> stackOldest; // holds oldest queue elements
+    int size = 0;
+    public QueueImpl_WithStacks() {
+        stackNewest = new ArrayDeque<>();
+        stackOldest = new ArrayDeque<>();
+    }
+    public void enqueue(Integer val) {
+        stackNewest.push(val);
+        size++;
     }
 
-    public T dequeue() {
-        if (s2.isEmpty()) {
-            if (populateS2()) {
-                Object valToDelete = s2.pop();
-                return (T) valToDelete;
-            }
-            throw new NoSuchElementException();
-        }
-        return s2.pop();
+    public Integer dequeue() {
+        if(stackOldest.isEmpty()) moveStack();
+        size--;
+        return stackOldest.pop();
     }
 
-    public boolean isEmpty() {
-        return s1.isEmpty() && s2.isEmpty();
+    private void moveStack() {
+        if(stackNewest.isEmpty()) throw new IllegalStateException();
+        while(!stackNewest.isEmpty()) stackOldest.push(stackNewest.pop());
     }
 
-    public T front() {
-        if (!s2.isEmpty()) return s2.peek();
-        return front;
-    }
-
-    private boolean populateS2() {
-        if (s1.isEmpty()) return false;
-        while (!s1.isEmpty()) s2.push(s1.pop());
-        return true;
-    }
+    public boolean isEmpty() { return size == 0; }
+    public int size() { return size; }
 }
