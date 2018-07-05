@@ -1,5 +1,7 @@
 package com.problems.epi.code.stacks_queues.queues;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.NoSuchElementException;
 
 /**
@@ -12,24 +14,13 @@ import java.util.NoSuchElementException;
 
 // This class implements a circular queue.
 public class Queue_WithCircularArray_NoResizing<T> {
-    Object[] elements = null;
-    int front = -1;
-    int rear = -1;
-    int capacity;
-    int size = 0;
+    public Integer[] data;
+    public int size, front = 0, rear = 0;
+    public int capacity;
 
     public Queue_WithCircularArray_NoResizing(int capacity) {
-        elements = new Object[capacity];
+        data = new Integer[capacity];
         this.capacity = capacity;
-    }
-
-    // front() and rear() return just the index
-    public int front() {
-        return front;
-    }
-
-    public int rear() {
-        return rear;
     }
 
     public int size() {
@@ -37,33 +28,21 @@ public class Queue_WithCircularArray_NoResizing<T> {
     }
 
     public boolean isEmpty() {
-        return front == -1 && rear == -1;
+        return size == 0;
     }
 
-    public boolean isFull() {
-        return rear + 1 == capacity && front == 0;
-    } //if front == 0, no dequeue has happened
-
-    public void enqueue(T val) {
-        if (isFull()) throw new IllegalStateException("Queue is full");
-        else if (isEmpty()) {
-            front = rear = 0;
-        } else {
-            rear = (rear + 1) % capacity;
-        }
-        elements[rear] = val;
+    public void enqueue(Integer val) {
+        if (size == capacity) System.out.print("Queue is full");
+        data[rear] = val;
+        rear = (rear + 1) % capacity;
         size++;
     }
 
-    public T dequeue() {
-        if (isEmpty()) throw new NoSuchElementException();
-        Object val = elements[front];
-        if (front == rear) {
-            front = -1;
-            rear = -1;
-        }
+    public Integer dequeue() {
+        if (isEmpty()) throw new NoSuchElementException("The queue is empty!");
+        Integer valToDelete = data[front];
         front = (front + 1) % capacity;
         size--;
-        return (T) val;
+        return valToDelete;
     }
 }

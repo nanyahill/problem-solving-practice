@@ -67,7 +67,7 @@ public class MyArrayList<E> {
                 data[i] = old[i];
             }
         }
-        for(int i = size(); i > idx; i--) {
+        for(int i = size(); i > idx; i--) { // create space to insert element at position idx
             data[i] = data[i - 1];
         }
         data[idx] = val;

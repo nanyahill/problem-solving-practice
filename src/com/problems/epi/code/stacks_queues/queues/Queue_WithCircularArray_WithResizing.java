@@ -15,14 +15,12 @@ import java.util.NoSuchElementException;
 // This class allows the array to be resized. In essence, it isn't really a circular queue.
 // It just uses the concept of circular queue implementation
 public class Queue_WithCircularArray_WithResizing<T> {
-    Object[] elements = null;
-    int front = -1;
-    int rear = -1;
-    int capacity;
-    int size;
+    public Integer[] data;
+    public int size, front = 0, rear = 0;
+    public int capacity;
 
     public Queue_WithCircularArray_WithResizing(int capacity) {
-        elements = new Object[capacity];
+        data = new Integer[capacity];
         this.capacity = capacity;
     }
 
@@ -34,39 +32,24 @@ public class Queue_WithCircularArray_WithResizing<T> {
         return size == 0;
     }
 
-    public boolean isFull() {
-        return rear + 1 == capacity;
-    }
-
-    public void enqueue(T val) {
-        if (isFull()) {
-            // Rotate array so the elements appear consecutively
-            // This is need when front is no longer 0
-            // If this isn't done, enqueue will overwrite elements
-            Collections.rotate(Arrays.asList(elements), -front);
-            //Reset front and rear
+    public void enqueue(Integer val) {
+        if (size == capacity) { // full
+            Collections.rotate(Arrays.asList(data), -front);
             front = 0;
             rear = size;
-            elements = Arrays.copyOf(elements, capacity * 2);
-            capacity = elements.length;
-        } else if (isEmpty()) {
-            front = rear = 0;
-        } else {
-            rear = (rear + 1) % capacity;
+            data = Arrays.copyOf(data, capacity * 2);
+            capacity = data.length;
         }
-        elements[rear] = val;
+        data[rear] = val;
+        rear = (rear + 1) % capacity;
         size++;
     }
 
-    public T dequeue() {
-        if (isEmpty()) throw new NoSuchElementException();
-        Object val = elements[front];
-        if (front == rear) { // Last element in the queue
-            front = -1;
-            rear = -1;
-        }
+    public Integer dequeue() {
+        if (isEmpty()) throw new NoSuchElementException("The queue is empty!");
+        Integer valToDelete = data[front];
         front = (front + 1) % capacity;
         size--;
-        return (T) val;
+        return valToDelete;
     }
 }
