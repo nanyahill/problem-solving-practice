@@ -21,15 +21,15 @@ public class SymmetricBinaryTree {
      * Space Complexity: O(n)- worst case of a linear tree; call stack is O(n)
      */
     public static boolean isSymmetric_Recursive(TreeNode root) {
-        return checkSubTree(root, root);
+
+        if(root == null) return true;
+        return isMirror(root, root);
     }
 
-    private static boolean checkSubTree(TreeNode left, TreeNode right) {
-        if (left == null && right == null) return true;
-        else if (left != null && right != null) {
-            return (left.data == right.data) && (checkSubTree(left.left, right.right)) && (checkSubTree(left.right, right.left));
-        }
-        return false;
+    private static boolean isMirror(TreeNode<Integer> left, TreeNode<Integer> right) {
+        if(left == null && right == null) return true;
+        if(left == null || right == null) return false;
+        return (left.data == right.data && isMirror(left.left, right.right) && isMirror(left.right, right.left));
     }
 
     /**
