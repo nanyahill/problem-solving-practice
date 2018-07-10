@@ -14,31 +14,22 @@ import java.util.*;
  */
 public class ComputeKthClosetStar {
 
-    public static class Coords {
+    public static class Star implements Comparable<Star> {
         double x, y, z;
+        public double distance;
+        public int id;
 
-        public Coords(double x, double y, double z){
+        public Star(double x, double y, double z) {
             this.x = x;
             this.y = y;
             this.z = z;
         }
-    }
 
-    public static class Star implements Comparable<Star> {
-        Coords coord;
-        public double distance;
-        public int id;
-
-        public Star(Coords coord, int id) {
-            this.coord = coord;
-            this.id = id;
+        public double distance() {
+            return Math.sqrt(x * x + y * y + z * z);
         }
 
-        public void distance() {
-            this.distance = Math.sqrt((coord.x * coord.x) + (coord.y * coord.y) + (coord.z * coord.z));
-        }
-
-        public int compareTo(Star s) { return Double.compare(this.distance, s.distance); }
+        public int compareTo(Star that) { return Double.compare(this.distance(), that.distance()); }
     }
 
     public static List<Star> computeKthClosetStars(List<Star> stars, int k) {

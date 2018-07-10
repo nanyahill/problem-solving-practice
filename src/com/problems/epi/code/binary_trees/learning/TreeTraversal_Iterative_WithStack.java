@@ -30,8 +30,8 @@ public class TreeTraversal_Iterative_WithStack {
             root = stack.pop();
             res.add(root.data);
             // Process left first by pushing right node before left node
-            if(root.right != null) stack.push(root.right);
-            if(root.left != null) stack.push(root.left);
+            if(root.right != null) stack.push(root.right); // !important
+            if(root.left != null) stack.push(root.left);  // !important
         }
         return  res;
     }

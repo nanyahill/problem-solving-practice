@@ -37,18 +37,18 @@ public class TreeTraversal_Iterative_WithParentPointers {
         if(root == null) return res;
         TreeNode<Integer> curr = root, prev = null, next;
         while(curr != null) {
-            if(curr.parent == prev) {
+            if(curr.parent == prev) { // to check if curr is from the right child
                 next = curr.left;
                 if(next == null) { // done with left side
                     res.add(curr.data);
                     next = (curr.right != null) ? curr.right : curr.parent;
                 }
             }
-            else if(curr.left == prev) { // moving to right side
+            else if(curr.left == prev) { // to check if curr is from the left child
                 res.add(curr.data);
                 next = (curr.right != null) ? curr.right : curr.parent;
             }
-            else next = curr.parent;
+            else next = curr.parent; // curr is the root of the subtree
             prev = curr;
             curr = next;
         }

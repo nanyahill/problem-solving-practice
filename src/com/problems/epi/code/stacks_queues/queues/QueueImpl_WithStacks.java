@@ -37,6 +37,11 @@ public class QueueImpl_WithStacks<T> {
         while(!stackNewest.isEmpty()) stackOldest.push(stackNewest.pop());
     }
 
+    public int front() {
+        if(stackOldest.isEmpty()) moveStack();
+        return stackOldest.peek();
+    }
+
     public boolean isEmpty() { return size == 0; }
     public int size() { return size; }
 }
