@@ -15,17 +15,16 @@ public class SortApproximatelySorted {
      * Time Complexity: O(nlogk)
      * Space Complexity: O(k)
      */
-    public static List<Integer> sortAlmostSorted_Heap(List<Integer> sequence, int k) {
-        if (sequence == null || sequence.size() == 0) return null;
+    public static List<Integer> sortAlmostSorted_Heap(Iterator<Integer> seq, int k) {
         List<Integer> res = new ArrayList<>();
-        PriorityQueue<Integer> minHeap = new PriorityQueue<>(sequence.size());
-        Iterator<Integer> seqIter = sequence.iterator();
-        while (minHeap.size() < k && seqIter.hasNext()) minHeap.offer(seqIter.next());
-        while (seqIter.hasNext()) {
-            minHeap.offer(seqIter.next());
-            res.add(minHeap.poll());
+        if (seq == null) return res;
+        PriorityQueue<Integer> pq = new PriorityQueue<>(k, (o1, o2) -> Integer.compare(o1, o2));
+        while (seq.hasNext())
+        {
+            pq.add(seq.next());
+            if(pq.size() == k) res.add(pq.poll());
         }
-        while (!minHeap.isEmpty()) res.add(minHeap.poll());
+        while (!pq.isEmpty()) res.add(pq.poll());
         return res;
     }
 

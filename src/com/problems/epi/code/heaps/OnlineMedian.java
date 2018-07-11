@@ -1,9 +1,6 @@
 package com.problems.epi.code.heaps;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.PriorityQueue;
+import java.util.*;
 
 /**
  * Key Insight:
@@ -25,16 +22,17 @@ import java.util.PriorityQueue;
  */
 public class OnlineMedian {
 
-    public static List<Double> onlineMedian(List<Integer> seq) {
-        if(seq == null || seq.size() == 0) return null;
+    public static List<Double> onlineMedian(Iterator<Integer> seq) {
         List<Double> res = new ArrayList<>();
+        if(seq == null) return res;
         PriorityQueue<Integer> minHeap = new PriorityQueue<>();
         PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Collections.reverseOrder());
-        for(Integer val : seq) {
-            maxHeap.offer(val);
-            minHeap.add(maxHeap.poll());
-            if(maxHeap.size() < minHeap.size()) maxHeap.offer(minHeap.poll());
-            double median = (maxHeap.size() == minHeap.size()) ? (maxHeap.peek() + minHeap.peek()) / 2.0 : maxHeap.peek();
+        while(seq.hasNext()) {
+            Integer x = seq.next();
+            minHeap.add(x);
+            maxHeap.add(minHeap.remove());
+            if(maxHeap.size() > minHeap.size()) minHeap.add(maxHeap.remove());
+            double median = maxHeap.size() == minHeap.size() ? 0.5 * (minHeap.peek() + maxHeap.peek()) : minHeap.peek();
             res.add(median);
         }
         return res;
