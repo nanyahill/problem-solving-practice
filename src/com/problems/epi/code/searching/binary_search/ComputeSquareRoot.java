@@ -17,21 +17,22 @@ public class ComputeSquareRoot {
     public static int computeSquareRoot_BrutForce(int num) {
         if(num < 0) return -1; // Accepts only non-negative integers
         int res = 0;
-        for(long i = 0; i <= Math.ceil(num*0.5); i++) { // square root of num can be at most Math.ceil(num/2)
-            long isquared = i*i;
-            if(isquared <= num) res = (int) i;
+        for(int i = 0; i <= Math.ceil(num*0.5); i++) { // square root of num can be at most Math.ceil(num/2)
+            long isquared = (long) i*i;
+            if(isquared <= num) res = i;
         }
         return res;
     }
 
-    public static long computeSquareRoot(long num) {
+    public static int computeSquareRoot(int num) {
         if(num < 0) return -1; // Accepts only non-negative integers
-        long lo = 0, hi = num;
-        long res = 0;
+        int lo = 0, hi = num;
+        int res = 0;
         while(lo <= hi) {
-            long mid = lo + ((hi - lo) / 2);
-            if(mid*mid == num) return mid;
-            else if(mid*mid < num) {
+            int mid = lo + ((hi - lo) / 2);
+            long midsquared = (long) mid*mid;
+            if(midsquared == num) return mid;
+            else if(midsquared < num) {
                 res = mid;
                 lo = mid + 1;
             }
