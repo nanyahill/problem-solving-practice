@@ -46,11 +46,13 @@ public class MissingIPAddress {
                 BitSet candidates = new BitSet(bucketCount);
                 while(iter.hasNext()) {
                     int address = iter.next();
-                    if(i == address >>> 16) {
-                        candidates.set((bucketCount - 1) & address); // set the lower 16th bit of address
+                    if(i == address >>> 16) { // find addresses whose upper bits are the same
+                        // 1111 1111 1111 1111 & address = the lower 16 bits of address
+                        candidates.set((bucketCount - 1) & address); // gets the lower 16th bit of address
                     }
                 }
                 for(int j = 0; j < (1 << 16); j++) { // iterates from 0 to (1 << 16) - 1, i.e. lower 16 bits
+                    // j = lower 16 bits of address.
                     if(!candidates.get(j)) { // checks if the lower 16th bit of address is set
                         return i << 16 | j;
                     }
