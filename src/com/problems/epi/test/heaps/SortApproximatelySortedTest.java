@@ -13,7 +13,7 @@ public class SortApproximatelySortedTest {
     public void sortApproximatelySorted_HeapTest() {
         List<Integer> input = Arrays.asList(new Integer[]{3, -1, 2, 6, 4, 5, 8});
         Integer[] expected = {-1, 2, 3, 4, 5, 6, 8};
-        Integer[] actual = SortApproximatelySorted.sortAlmostSorted_Heap(input, 2).toArray(new Integer[0]);
+        Integer[] actual = SortApproximatelySorted.sortAlmostSorted_Heap(input.iterator(), 2).toArray(new Integer[0]);
         Assert.assertArrayEquals(expected, actual);
     }
 

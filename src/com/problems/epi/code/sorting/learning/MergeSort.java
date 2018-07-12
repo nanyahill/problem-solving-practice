@@ -23,6 +23,21 @@ public class MergeSort {
         }
     }
 
+    private static void merge_WithArrays(int[] A, int[] helper, int lo, int mid, int hi) {
+        for(int i = lo; i <= hi; i++) helper[i] = A[i];
+        int i = lo, j = mid + 1;
+        for(int k = lo; k <= hi; k++) {
+            if(i > mid) {
+                A[k] = helper[j++];
+            }
+            if(j > hi) {
+                A[k] = helper[i++];
+            }
+            else if(helper[i] <= helper[j]) A[k] = helper[i++];
+            else A[k] = helper[j++];
+        }
+    }
+
     /**
      * Key Ideas:
      * - merges pairs of adjacent arrays of 1 element, next merges for 2 elements, and so on up to 2^k elements
@@ -43,17 +58,6 @@ public class MergeSort {
             }
         }
         return A;
-    }
-
-    private static void merge_WithArrays(int[] A, int[] helper, int lo, int mid, int hi) {
-        for(int i = lo; i <= hi; i++) helper[i] = A[i];
-        int i = lo, j = mid + 1;
-        for(int k = lo; k <= hi; k++) {
-            if(i > mid) A[k] = helper[j++];
-            if(j > hi) A[k] = helper[i++];
-            else if(helper[i] <= helper[j]) A[k] = helper[i++];
-            else A[k] = helper[j++];
-        }
     }
 
     public static ListNode<Integer> mergeSort_WithLists(ListNode<Integer> head) {

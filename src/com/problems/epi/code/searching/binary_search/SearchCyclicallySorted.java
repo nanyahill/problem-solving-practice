@@ -20,12 +20,13 @@ public class SearchCyclicallySorted {
     public static int findMin(int[] nums) {
         if(nums == null || nums.length == 0) return -1;
         int lo = 0, hi = nums.length - 1;
-        while(lo < hi) {
+        while(lo <= hi) {
             int m = lo + ((hi - lo) / 2);
             if(nums[m] > nums[hi]) lo = m + 1;
-            else hi = m;
+            else if (nums[m] < nums[hi])hi = m;
+            else return m;
         }
-        return lo;
+        return -1;
     }
 
     /**

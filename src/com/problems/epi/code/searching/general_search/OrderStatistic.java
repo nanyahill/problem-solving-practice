@@ -32,7 +32,7 @@ public class OrderStatistic {
      * Time Complexity: O(n)
      * Space Complexity: O(1)
      */
-    public static Comparable findKthLargest(Comparable[] A, int k) {
+    public static int findKthLargest(int[] A, int k) {
         if(A == null || A.length == 0) return 0;
         int lo = 0, hi = A.length - 1;
         Random rand = new Random();
@@ -40,7 +40,8 @@ public class OrderStatistic {
         while(lo < hi) {
             int pvt = rand.nextInt(hi - lo + 1) + lo;
             swap(A, hi, pvt); // swap(A, lo, pvt); //keep pvt separately and focus on the unsorted (non-pvt) elements
-            int j = partition(A, lo, hi);
+            //int j = partition(A, lo, hi);
+            int j = partition_WithDNF(A, lo, hi, pvt);
             if(j == k) break;
             else if(j < k) lo = j + 1;
             else hi = j - 1;
@@ -48,11 +49,21 @@ public class OrderStatistic {
         return A[k];
     }
 
-    private static int partition(Comparable[] A, int lo, int hi) {
+    private static int partition_WithDNF(int[] A, int lo, int hi, int pvt) {
+        int eq = lo;
+        while(eq <= hi) {
+            if(A[eq] < pvt) swap(A, eq++, lo++);
+            else if(A[eq] > pvt) swap(A, eq, hi--);
+            else eq++;
+        }
+        return lo;
+    }
+
+    private static int partition(int[] A, int lo, int hi) {
         if(A == null || A.length == 0) throw new IllegalStateException();
         int i = lo - 1; // i = lo;
         int j = hi; // j = hi + 1;
-        Comparable v = A[hi]; // v = A[lo];
+        int v = A[hi]; // v = A[lo];
         while(i < j) {
             while(i < hi && less(A[++i],v));
             while(j > lo && less(v, A[--j]));
@@ -63,9 +74,9 @@ public class OrderStatistic {
         return i; // return j;
     }
 
-    private static void swap(Comparable[] A, int i, int j) {
+    private static void swap(int[] A, int i, int j) {
         if(A == null || A.length == 0) throw new IllegalStateException();
-        Comparable tmp = A[i];
+        int tmp = A[i];
         A[i] = A[j];
         A[j] = tmp;
     }
