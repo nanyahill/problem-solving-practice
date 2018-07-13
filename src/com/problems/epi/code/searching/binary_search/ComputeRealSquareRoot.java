@@ -15,32 +15,33 @@ package com.problems.epi.code.searching.binary_search;
 public class ComputeRealSquareRoot {
 
     public static double computeRealSquareRoot(double x) {
-        double lo, hi;
+        double lo, hi, result = 1.0;
         if(x < 1.0) {
-            lo= x;
+            lo = x;
             hi = 1.0;
         }
         else {
             lo = 1.0;
             hi = x;
         }
-        while(compare(lo, hi) != Ordering.EQUAL) {
+        while(compare(lo, hi) <= 0) {
             double mid = lo + 0.5 * (hi - lo);
-            double midSquared = mid * mid;
-            if(compare(midSquared, x) == Ordering.LARGER) hi = mid;
-            else lo = mid;
+            double midsquared = mid*mid;
+            if(compare(midsquared, x) > 0) hi = mid;
+            else if (compare(midsquared, x) < 0) {
+                lo = mid;
+            }
+            else return mid;
         }
-        return lo;
+        return result;
     }
 
-    public enum Ordering { SMALLER, EQUAL, LARGER }
-
-    public static Ordering compare(double a, double b) {
-        final double EPSILON = 0.00001;
-        // Uses normalization for precision problem.
-        double diff = (a - b) / b; // In textbook, (a - b) / Math.max(Math.abs(a), Math.abs(b));
-        return diff < -EPSILON
-                ? Ordering.SMALLER
-                : (diff > EPSILON ? Ordering.LARGER : Ordering.EQUAL);
+    public static int compare(double a, double b) {
+        final double EPSILON = 0.00000001;
+        // Uses normalization for precision problems
+        // Relative error: real_value - aprrox_value / real_value
+        double diff = (a - b) / a; //or divide by Math.max(Math.abs(a), Math.abs(b)) instead of divide by b
+        if(diff < -EPSILON) return -1;
+        else return diff > EPSILON ? 1 : 0;
     }
 }

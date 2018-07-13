@@ -9,6 +9,6 @@ public class ComputeRealSquareRootTest {
     public void computeRealSquareRoot() {
         double actual = ComputeRealSquareRoot.computeRealSquareRoot(0.5);
         double expected = Math.sqrt(0.5);
-        assert(ComputeRealSquareRoot.compare(actual,expected) == ComputeRealSquareRoot.Ordering.EQUAL);
+        assert(ComputeRealSquareRoot.compare(actual,expected) == 0);
     }
 }
