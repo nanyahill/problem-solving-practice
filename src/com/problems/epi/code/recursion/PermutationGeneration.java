@@ -101,6 +101,8 @@ public class PermutationGeneration {
 //        }
         String s = "acdgf";
         List<String> res = generatePermutations_Strings(s);
+
+
         //System.out.print(res.toString());
         //System.out.println("abcd".substring(0,0) + "abcd".substring(1));
     }
