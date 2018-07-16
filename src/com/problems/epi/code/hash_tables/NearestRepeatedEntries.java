@@ -1,6 +1,8 @@
 package com.problems.epi.code.hash_tables;
 
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /** Problem Type: Strings/HashTables
  Pattern: HashTable
@@ -17,17 +19,18 @@ import java.util.HashMap;
  */
 public class NearestRepeatedEntries {
 
-    public static int findNearestDistance(String[] words) {
-        if(words == null || words.length == 0) return -1;
-        int nearestDist = Integer.MAX_VALUE;
-        HashMap<String, Integer> map = new HashMap<>();
-        for(int i = 0; i < words.length; i++) {
-            if(!map.containsKey(words[i])) map.put(words[i], i);
-            else {
-                nearestDist = Math.min(nearestDist, i - map.get(words[i]));
-                map.put(words[i], i);
+    public static int findNearestDistance(List<String> para) {
+        int minDist = Integer.MAX_VALUE;
+        Map<String, Integer> map = new HashMap<>();
+        for(int i = 0; i < para.size(); i++) {
+            String word = para.get(i);
+            if(map.containsKey(word)) {
+                int lastSeenPosition = map.get(word);
+                int dist = i - lastSeenPosition;
+                minDist = Math.min(minDist, dist);
             }
+            map.put(word, i);
         }
-        return nearestDist != Integer.MAX_VALUE ? nearestDist : -1;
+        return minDist == Integer.MAX_VALUE ? -1 : minDist;
     }
 }
