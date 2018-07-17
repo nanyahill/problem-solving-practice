@@ -3,6 +3,7 @@ package com.problems.epi.code.hash_tables;
 import com.util.TreeNode;
 
 import java.util.HashSet;
+import java.util.Set;
 
 /** Problem Type: Trees/HashTables
  Pattern: HashTable
@@ -17,14 +18,17 @@ import java.util.HashSet;
  */
 public class LowestCommonAncestor_WithParentPointers {
     public static TreeNode findLCA(TreeNode n1, TreeNode n2) {
-        if(n1 == n2 || (n1 == null || n2 == null)) return null;
-        HashSet<TreeNode> parentSet = new HashSet<>();
-        while(n1.parent != null && n2.parent != null) {
-            if(!parentSet.add(n1.parent) && !parentSet.add(n2.parent))
-                return parentSet.contains(n1.parent) ? n1.parent : n2.parent;
-            n1 = n1.parent;
-            n2 = n2.parent;
+        Set<TreeNode> parentSet = new HashSet<>();
+        while(n1 != null || n2 != null) {
+            if (n1 != null) {
+                if (!parentSet.add(n1)) return n1;
+                n1 = n1.parent;
+            }
+            if (n2 != null) {
+                if (!parentSet.add(n2)) return n2;
+                n2 = n2.parent;
+            }
         }
-        return n1.parent == null ? n1 : n2;
+        return null; // nodes are in different trees.
     }
 }
