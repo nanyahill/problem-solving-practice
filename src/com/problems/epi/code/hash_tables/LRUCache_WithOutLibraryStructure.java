@@ -3,12 +3,12 @@ package com.problems.epi.code.hash_tables;
 import java.util.HashMap;
 import java.util.NoSuchElementException;
 
-public class LRUCache {
+public class LRUCache_WithOutLibraryStructure {
     HashMap<Integer, CacheNode> map = new HashMap<>();
     CacheNode head, tail;
     int capacity;
 
-    public LRUCache(int maxSize) { this.capacity = maxSize; }
+    public LRUCache_WithOutLibraryStructure(int maxSize) { this.capacity = maxSize; }
 
     public Double get(int key) {
         if(!map.containsKey(key)) return null; //throw new NoSuchElementException();

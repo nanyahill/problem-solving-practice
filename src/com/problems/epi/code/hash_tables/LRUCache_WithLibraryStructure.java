@@ -5,9 +5,9 @@ import java.util.Map;
 
 /**
  * An alternative solution to the LRU cache problem using LinkedHashMap
- * Note: LinkedHashMap uses a doubly linked list and a hash map under the hood; just like the implementation LRUCache.java
+ * Note: LinkedHashMap uses a doubly linked list and a hash map under the hood; just like the implementation LRUCache_WithOutLibraryStructure.java
  */
-public class LRUCache2 {
+public class LRUCache_WithLibraryStructure {
     int capacity;
     LinkedHashMap<Integer, Double> map = new LinkedHashMap<Integer, Double>(capacity, 1.0f, true) {
         @Override

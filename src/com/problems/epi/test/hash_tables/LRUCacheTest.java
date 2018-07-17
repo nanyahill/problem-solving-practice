@@ -1,6 +1,6 @@
 package com.problems.epi.test.hash_tables;
 
-import com.problems.epi.code.hash_tables.LRUCache;
+import com.problems.epi.code.hash_tables.LRUCache_WithOutLibraryStructure;
 import org.junit.Test;
 
 public class LRUCacheTest {
@@ -8,7 +8,7 @@ public class LRUCacheTest {
     @Test
     public void lruCacheTest() {
         final int CAPACITY = 2;
-        LRUCache c = new LRUCache(CAPACITY);
+        LRUCache_WithOutLibraryStructure c = new LRUCache_WithOutLibraryStructure(CAPACITY);
         System.out.println("c.insert(1, 1)");
         c.insert(1, 1.0);
         System.out.println("c.insert(1, 10)");
@@ -22,7 +22,7 @@ public class LRUCacheTest {
 
 
         // test capacity constraints honored, also FIFO ordering
-        c = new LRUCache(CAPACITY);
+        c = new LRUCache_WithOutLibraryStructure(CAPACITY);
         c.insert(1, 1.0);
         c.insert(2, 1.0);
         c.insert(3, 1.0);
