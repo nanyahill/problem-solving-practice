@@ -1,8 +1,6 @@
 package com.problems.epi.code.sorting;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * Problem Type:  Sorting, Geometric
@@ -39,39 +37,42 @@ public class RenderCalendar {
         }
     }
 
-    public static class EndPoint {
-        int time;
-        boolean isStart;
-
-        public EndPoint(int time, boolean isStart) {
+    private static class TimePoint implements Comparable <TimePoint>{
+        public int time;
+        public boolean isStart;
+        public TimePoint(int time, boolean isStart) {
             this.time = time;
             this.isStart = isStart;
         }
+        public int compareTo(TimePoint p) {
+            if(time != p.time) return Integer.compare(time, p.time);
+            return isStart && !p.isStart ? -1 : !isStart && p.isStart ? 1  : 0;
+        }
     }
 
-    public static int findMaxOverLappingEvents(Event[] events) {
-        if (events == null || events.length == 0) return -1;
-        EndPoint[] endPoints = new EndPoint[events.length * 2];
-        int idx = 0;
-        for (Event e : events) {
-            endPoints[idx++] = new EndPoint(e.start, true);
-            endPoints[idx++] = new EndPoint(e.end, false);
+    public static int findMaxOverLappingEvents(List<Event> events) {
+        if(events == null || events.size() == 0) return -1;
+        int maxNumberOfEvents = Integer.MIN_VALUE;
+        int countEvents = 0;
+        List<TimePoint> points = new ArrayList<>();
+        for(Event e : events) {
+            points.add(new TimePoint(e.start, true));
+            points.add(new TimePoint(e.end, false));
         }
-        // Testing out Java 8 Lambda function for use with Comparator
-        Arrays.sort(endPoints, (EndPoint e1, EndPoint e2) -> {
-            if (e1.time != e2.time) return Integer.compare(e1.time, e2.time);
-            // if times are equal, break tie by checking if either one is start time. Start time comes first
-            return e1.isStart && !e2.isStart ? -1 : !e1.isStart && e2.isStart ? 1 : 0;
+        Collections.sort(points, new Comparator<TimePoint>() { // or use Lambda or Comparable interface
+            public int compare(TimePoint p1, TimePoint p2) {
+                if(p1.time != p2.time) return Integer.compare(p1.time, p2.time);
+                return p1.isStart && !p2.isStart ? -1 : !p1.isStart && p2.isStart ? 1  : 0;
+            }
         });
-
-        int countSeenSoFar = 0, maxCountSeenSoFar = -1;
-        for (int i = 0; i < endPoints.length; i++) {
-            if (endPoints[i].isStart) {
-                countSeenSoFar++;
-                maxCountSeenSoFar = Math.max(maxCountSeenSoFar, countSeenSoFar);
-            } else countSeenSoFar--;
+        for(int i = 0; i < points.size(); i++) {
+            if(points.get(i).isStart == true) {
+                countEvents++;
+                maxNumberOfEvents = Math.max(countEvents, maxNumberOfEvents);
+            }
+            else countEvents--;
         }
-        return maxCountSeenSoFar;
+        return maxNumberOfEvents;
     }
 
     public static int findMaxOverlapingEvents_TwoPointer(Event[] events) {
@@ -93,7 +94,7 @@ public class RenderCalendar {
     }
 
     private static void check(int expected, List<Event> events) {
-        int got = findMaxOverLappingEvents(events.toArray(new Event[0]));
+        int got = findMaxOverLappingEvents(events);
         if (expected != got) {
             System.err.println("Failed on input " + events);
             System.err.println("Expected " + expected);

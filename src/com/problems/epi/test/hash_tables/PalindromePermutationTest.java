@@ -16,6 +16,6 @@ public class PalindromePermutationTest {
     public void isPalindromePermutationOptimizationTest() {
         String input = "rqadr";
         boolean expected = false;
-        assert(expected == PalindromePermutation.isPalindromePermutation_Optimization(input));
+        assert(expected == PalindromePermutation.isPalindromePermutation(input));
     }
 }

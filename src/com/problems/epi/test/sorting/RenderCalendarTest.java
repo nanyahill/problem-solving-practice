@@ -30,6 +30,6 @@ public class RenderCalendarTest {
             big2.add(new RenderCalendar.Event(-i, i));
         }
         int expected = N;
-        int actual = RenderCalendar.findMaxOverLappingEvents(big2.toArray(new RenderCalendar.Event[0]));
+        int actual = RenderCalendar.findMaxOverLappingEvents(big2);
     }
 }
