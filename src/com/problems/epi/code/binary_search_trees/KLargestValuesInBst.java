@@ -15,15 +15,13 @@ public class KLargestValuesInBst {
 
     private static void findKLargestInBstHelper(TreeNode<Integer> tree, int k,
                                                 List<Integer> kLargestElements) {
-        if(tree == null) return;
+        if (tree == null || kLargestElements.size() == k) return;
         // Perform reverse inorder traversal.
-        if (tree != null && kLargestElements.size() < k) {
-            findKLargestInBstHelper(tree.right, k, kLargestElements);
+        findKLargestInBstHelper(tree.right, k, kLargestElements);
+        kLargestElements.add(tree.data);
+        if (kLargestElements.size() < k) {
             kLargestElements.add(tree.data);
-            if (kLargestElements.size() < k) {
-                kLargestElements.add(tree.data);
-                findKLargestInBstHelper(tree.left, k, kLargestElements);
-            }
+            findKLargestInBstHelper(tree.left, k, kLargestElements);
         }
     }
 
@@ -34,8 +32,8 @@ public class KLargestValuesInBst {
     }
 
     private static void findKSmallestInBstHelper(TreeNode<Integer> tree, int k,
-                                                List<Integer> kSmallestElements) {
-        if(tree == null) return;
+                                                 List<Integer> kSmallestElements) {
+        if (tree == null) return;
         // Perform reverse inorder traversal.
         if (tree != null && kSmallestElements.size() < k) {
             findKSmallestInBstHelper(tree.left, k, kSmallestElements);
@@ -61,7 +59,7 @@ public class KLargestValuesInBst {
         root.right.right.left.right = new TreeNode<>(11);
         root.right.right.left.left = new TreeNode<>(9);
 
-        for(Integer val : findKSmallestInBst(root, 3)) {
+        for (Integer val : findKSmallestInBst(root, 3)) {
             System.out.print(val + ", ");
         }
     }

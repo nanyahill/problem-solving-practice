@@ -21,7 +21,10 @@ public class TestBSTPropertyTest {
         //root.right.right.right = new TreeNode<>(1);
 
         boolean expected = true;
-        assert(expected == TestBSTProperty.testBST_Alternative(root));
+        Integer d = 5;
+        Integer e = null;
+        //if(d < e) System.out.print("Nan");
+        assert(expected == TestBSTProperty.testBST(root));
 
     }
 }
