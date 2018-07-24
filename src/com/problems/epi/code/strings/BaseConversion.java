@@ -15,7 +15,7 @@ public class BaseConversion {
         boolean isNegative = str.charAt(0) == '-' ? true : false;
 
         // Convert from integer string in base b1 to integer in base 10
-        int valueInBase10 = convertStringToIntBase102(str, b1);
+        int valueInBase10 = convertStringToIntBase10(str, b1);
         // Convert from integer in base 10 to String in base b2
         String result = convertIntInBase10ToString(valueInBase10, b2, isNegative);
         return result;
@@ -25,17 +25,7 @@ public class BaseConversion {
         int result = 0;
         for (int i = (str.charAt(0) == '-' ? 1 : 0); i < str.length(); i++) {
             int digit = Character.isDigit(str.charAt(i)) ? str.charAt(i) - '0' : str.charAt(i) - 'A' + 10;
-            result = result * b1 + digit; // used in epi book not sure how this translates to method for converting from any base to base 10.
-        }
-        return result;
-    }
-
-    private static int convertStringToIntBase102(String str, int b1) {
-        int result = 0;
-        for (int i = str.length() - 1; i >= 0; i--) {
-            if (str.charAt(i) == '-') break;
-            int digit = Character.isDigit(str.charAt(i)) ? str.charAt(i) - '0' : str.charAt(i) - 'A' + 10;
-            result += digit * (Math.pow(b1, str.length() - i - 1)); // clearer for me- uses a * (b1^0) + b * (b1^1) +...+ z * (b1^n);
+            result = result * b1 + digit; // similar to res = res * 10 + digit used in strin to int conversion problem
         }
         return result;
     }
@@ -50,7 +40,6 @@ public class BaseConversion {
             result.append(c);
         } while (value != 0);
         if (negativeFlag == true) result.append('-');
-        else result.append("");
         return result.reverse().toString();
     }
 }
