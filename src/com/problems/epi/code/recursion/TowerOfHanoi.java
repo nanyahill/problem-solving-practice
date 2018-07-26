@@ -32,4 +32,26 @@ public class TowerOfHanoi {
         System.out.println("From: "+src+ " To: "+dest);
         computeTowerOfHanoi(numOfDisks - 1, pegs, spare, dest, src);
     }
+
+    public static List<List<Integer>> computeTowerHanoi(int numOfDisks) {
+        if(numOfDisks < 0) return null;
+        List<Deque<Integer>> pegs = new ArrayList<>();
+        for(int i = 0; i < 3; i++)
+            pegs.add(new ArrayDeque<Integer>());
+        for(int i = numOfDisks; i > 0; i--)
+            pegs.get(0).addFirst(i);
+        List<List<Integer>> result = new ArrayList<>();
+        computeTOH(numOfDisks, pegs, 0, 1, 2);
+        return result;
+    }
+
+    private static void computeTOH(int disksToMove, List<Deque<Integer>> pegs, int src, int dest, int aux) {
+        if(disksToMove == 0) return;
+        computeTOH(disksToMove - 1, pegs, src, aux, dest);
+        pegs.get(dest).addFirst(pegs.get(src).removeFirst());
+       // result.add(Arrays.asList(src, dest));
+        System.out.print(src + ", " + dest);
+        System.out.println();
+        computeTOH(disksToMove - 1, pegs, aux, dest, src);
+    }
 }

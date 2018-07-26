@@ -61,7 +61,8 @@ public class NQueensPuzzle {
 
     public static void main(String[] args) {
         NQueensPuzzle nqp = new NQueensPuzzle();
-        List<List<Integer>> r = nqp.solveNQueenPuzzle(4);
-        System.out.print(r.size());
+        //List<List<Integer>> r = nqp.solveNQueenPuzzle(4);
+        //System.out.print(r.size());
+        System.out.println("abcd".substring(0,0).isEmpty());
     }
 }

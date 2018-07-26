@@ -25,13 +25,13 @@ public class BaseConversion {
         int result = 0;
         for (int i = (str.charAt(0) == '-' ? 1 : 0); i < str.length(); i++) {
             int digit = Character.isDigit(str.charAt(i)) ? str.charAt(i) - '0' : str.charAt(i) - 'A' + 10;
-            result = result * b1 + digit; // similar to res = res * 10 + digit used in strin to int conversion problem
+            result = result * b1 + digit; // similar to res = res * 10 + digit used in string to int conversion problem
         }
         return result;
     }
 
     private static String convertIntInBase10ToString(int value, int b2, boolean negativeFlag) {
-        StringBuilder result = new StringBuilder("");
+        StringBuilder result = new StringBuilder();
         do {
             // Using Math.abs() for the case of -ve values
             int digit = Math.abs(value % b2);
