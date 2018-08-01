@@ -10,20 +10,18 @@ public class SudokuSolver {
     }
 
     private static boolean solveSudoku(int row, int col, int n, int[][] grid) {
-        if (row == n) return true; // base case
-        else {
-            if (col == n) {
-                row = row + 1;
-                col = 0;
-            }
-            // skip already solved cells
-            if (grid[row][col] != 0) return solveSudoku(row, col + 1, n, grid);
-            for (int i = 1; i <= 9; i++) {
-                if (isValidToInsert(row, col, grid, i)) {
-                    grid[row][col] = i;
-                    if (solveSudoku(row, col + 1, n, grid) == true) return true;
-                    grid[row][col] = 0;
-                }
+        if (col == grid[row].length) {
+            col = 0;
+            row = row + 1;
+            if (row == n) return true; // no more cells to solve
+        }
+        // skip already solved cells
+        if (grid[row][col] != 0) return solveSudoku(row, col + 1, n, grid);
+        for (int i = 1; i <= 9; i++) { // all possible choices
+            if (isValidToInsert(row, col, grid, i)) {
+                grid[row][col] = i;
+                if (solveSudoku(row, col + 1, n, grid) == true) return true;
+                grid[row][col] = 0;
             }
         }
         return false;

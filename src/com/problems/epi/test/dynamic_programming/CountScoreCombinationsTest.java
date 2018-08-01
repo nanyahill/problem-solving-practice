@@ -3,6 +3,7 @@ package com.problems.epi.test.dynamic_programming;
 import com.problems.epi.code.dynamic_programming.CountScoreCombinations;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 

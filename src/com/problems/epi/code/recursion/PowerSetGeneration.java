@@ -56,6 +56,7 @@ public class PowerSetGeneration {
     private static void generatePowerSet_Integers(List<Integer> tmp, List<List<Integer>> res, int idx, int n, List<Integer> set) {
         if(idx == n) {
             res.add(new ArrayList<>(tmp));
+            //System.out.println(tmp.toArray().toString());
         }
         else {
             tmp.add(set.get(idx));
@@ -89,7 +90,7 @@ public class PowerSetGeneration {
     }
 
     public static void main(String[] args) {
-        List<List<Integer>> result = generatePowerSet_Iterative(Arrays.asList(2, 3, 7));
+        List<List<Integer>> result = generatePowerSet_Iterative(Arrays.asList(1,2,3));
         for (List<Integer> set : result) {
             System.out.print(Arrays.toString(set.toArray()));
             System.out.println();

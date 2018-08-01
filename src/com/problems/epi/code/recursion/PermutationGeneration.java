@@ -14,20 +14,21 @@ public class PermutationGeneration {
             if (val == null) map.put(input.get(i), 1);
             else map.put(input.get(i), val + 1);
         }
-        generatePermutations_Duplicates(new ArrayList<>(), result, input.size(), map);
-        //generatePermutations_Distinct(new ArrayList<>(), result, input.size(), input);
+        //generatePermutations_Duplicates(new ArrayList<>(), result, input.size(), map);
+        generatePermutations_Distinct(new ArrayList<>(), result, input.size(), input, 0);
         //generatePermutations_Distinct2(result, input, 0);
         return result;
     }
 
-    private static void generatePermutations_Distinct(List<Integer> tmp, List<List<Integer>> result, int n, List<Integer> input) {
+    private static void generatePermutations_Distinct(List<Integer> tmp, List<List<Integer>> result, int n, List<Integer> input, int start) {
         if (tmp.size() == n) {
             result.add(new ArrayList<>(tmp));
         } else {
-            for (int i = 0; i < n; i++) {
-                if (tmp.contains(input.get(i))) continue;
+//            for (int i = 0; i < n; i++) {
+            for (int i = start; i < n; i++) {
+                //if (tmp.contains(input.get(i))) continue;
                 tmp.add(input.get(i));
-                generatePermutations_Distinct(tmp, result, n, input);
+                generatePermutations_Distinct(tmp, result, n, input, start + 1);
                 tmp.remove(tmp.size() - 1);
             }
         }
@@ -138,7 +139,7 @@ public class PermutationGeneration {
     }
 
     public static void main(String[] args) {
-        List<Integer> list = new ArrayList<>(Arrays.asList(new Integer[] {1,1,1,2,2,3,3}));
+        List<Integer> list = new ArrayList<>(Arrays.asList(new Integer[] {1,2,3}));
         List<List<Integer>> result = generatePermutations(list);
         for (List<Integer> set : result) {
             System.out.print(Arrays.toString(set.toArray()));
