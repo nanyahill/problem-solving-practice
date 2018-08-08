@@ -17,10 +17,11 @@ public class PatternInGrid {
     private static boolean isPatternInGrid(int[][] grid, int[] pattern, int i, int j, int pos) {
         if(pattern.length == pos) return true;
         if(i < 0 || i >= grid.length || j < 0 || j >= grid[i].length || grid[i][j] != (pattern[pos])) { return false; }
-        if(isPatternInGrid(grid, pattern, i - 1, j, pos + 1) ||
-                isPatternInGrid(grid, pattern, i + 1, j, pos + 1) ||
-                isPatternInGrid(grid, pattern, i, j - 1, pos + 1) ||
-                isPatternInGrid(grid, pattern, i, j + 1, pos + 1)) { return true; }
+        if(isPatternInGrid(grid, pattern, i - 1, j, pos + 1) || // check down
+                isPatternInGrid(grid, pattern, i + 1, j, pos + 1) || // check up
+                isPatternInGrid(grid, pattern, i, j - 1, pos + 1) || // check left
+                isPatternInGrid(grid, pattern, i, j + 1, pos + 1)) // check right
+                { return true; }
         return false;
     }
 

@@ -58,16 +58,18 @@ public class LevenshteinDistance {
     }
 
     private static int editDistance_TopDownDP(String s1, String s2, int i, int j, int[][] table) {
+        // return i or j as base case because if the end of either string is reached , you would need to do
+        // either an insert or delete operation i or j times.
         if(i == 0) return j;
         if(j == 0) return i;
         if(table[i][j] == -1) {
-            if(match(s1.charAt(i - 1), s2.charAt(j - 1)) == 0) return editDistance_TopDownDP(s1, s2, i - 1, j - 1, table);
-            else {
+            //if(match(s1.charAt(i - 1), s2.charAt(j - 1)) == 0) return editDistance_TopDownDP(s1, s2, i - 1, j - 1, table);
+            //else {
                 int subLast = 1 + editDistance_TopDownDP(s1, s2, i - 1, j - 1, table);
                 int delLast = 1 + editDistance_TopDownDP(s1, s2, i - 1, j, table);
                 int addLast = 1 + editDistance_TopDownDP(s1, s2, i, j - 1, table);
                 table[i][j] = Math.min(subLast, Math.min(addLast, delLast));
-            }
+            //}
         }
         return table[i][j];
     }

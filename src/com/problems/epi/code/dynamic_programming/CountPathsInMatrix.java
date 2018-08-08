@@ -8,6 +8,8 @@ public class CountPathsInMatrix {
         //int m = grid.length - 1;
         //int n = grid[0].length - 1;
         return countPaths_TopDownDP(grid, m - 1, n - 1);
+        //return countPaths_Recursive(m - 1, n - 1);
+        //return countPaths_BottomUpDP(grid, m - 1, n - 1);
     }
 
     private static int countPaths_Recursive(int m, int n) {

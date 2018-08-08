@@ -35,8 +35,8 @@ public class KnapsackProblem {
     }
 
     private static int findMaximumProfit_TopDownDP(List<Item> items, int i, int j, int[][] table) {
-        if (i == 0) return 0;
-        if (j == 0) return 0;
+        if (i == 0 || j == 0) return 0;
+        //if (j == 0) return 0;
         if (table[i][j] == -1) {
             table[i][j] = Math.max(findMaximumProfit_TopDownDP(items, i - 1, j, table), items.get(i-1).weight > j ? 0 : items.get(i-1).value + findMaximumProfit_TopDownDP(items, i - 1, j - items.get(i-1).weight, table));
         }
