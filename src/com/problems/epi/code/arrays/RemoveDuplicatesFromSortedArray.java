@@ -20,16 +20,17 @@ public class RemoveDuplicatesFromSortedArray {
         return countOfUniqueElements;
     }
 
-    public static int removeDuplicatesFromSortedArray2(int[] nums) {
+    /** O(1) space, O(n) time */
+    public static int removeDuplicatesFromSortedArray_Efficient(int[] nums) {
         if (nums == null || nums.length == 0) {
             return 0;
         }
-        int countOfUniqueElements = 1;
+        int writeIdx = 1;
         for (int j = 1; j < nums.length; j++) {
             if (nums[j] != nums[j - 1]) {
-                nums[countOfUniqueElements++] = nums[j];
+                nums[writeIdx++] = nums[j];
             }
         }
-        return countOfUniqueElements;
+        return writeIdx;
     }
 }

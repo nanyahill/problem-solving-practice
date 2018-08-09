@@ -14,7 +14,7 @@ public class RemveDuplicatesFromSortedArrayTest {
     public void removeDuplicatesFromSortedArrayTest() {
         int[] input = {2, 3, 3, 5, 5};
         int expected = 3;
-        int actual = RemoveDuplicatesFromSortedArray.removeDuplicatesFromSortedArray2(input);
+        int actual = RemoveDuplicatesFromSortedArray.removeDuplicatesFromSortedArray_Efficient(input);
         assertEquals(expected, actual);
     }
 }

@@ -19,7 +19,7 @@ public class SpiralOrdering {
         int T = 0, R = cols - 1, B = rows - 1, L = 0; // T = Top, R= Right, B = Bottom, L = Left
         int dir = 0, idx = 0;
 
-        while (T <= B && L <= R) {
+        while (T <= B && L <= R) { // <= because of the corner case at center when the dimensions of grid is odd, e.g 3x3
             if (dir == 0) { // moves from L to R
                 for (int i = L; i <= R; i++)
                     result[idx++] = A[T][i];
@@ -33,7 +33,7 @@ public class SpiralOrdering {
                     result[idx++] = A[B][i];
                 B--;
             } else { // moves from B to T
-                for (int i = B; i >= T; i--) // >= because L moves from last row to the second row. Element in first row and first column has already been visited.
+                for (int i = B; i >= T; i--) // >= because T is already in the second row where B needs to stop.
                     result[idx++] = A[i][L];
                 L++;
             }

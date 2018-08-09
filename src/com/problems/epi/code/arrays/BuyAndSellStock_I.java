@@ -16,17 +16,14 @@ public class BuyAndSellStock_I {
     }
 
     public static int computeProfit(int[] prices) {
-        if (prices == null || prices.length == 0) {
-            return 0;
-        }
+        if(prices == null || prices.length == 0) return 0;
         int costPrice = prices[0];
-        int result = 0;
-        for (int i = 1; i < prices.length; i++) {
-            result = Math.max(result, prices[i] - costPrice);
-            costPrice = Math.min(costPrice, prices[i]);
-
+        int maxProfit = Integer.MIN_VALUE;
+        for(int i = 1; i < prices.length; i++) {
+            maxProfit = Math.max(maxProfit, prices[i] - costPrice);
+            costPrice = Math.min(prices[i], costPrice);
         }
-        return result;
+        return maxProfit < 0 ? 0 : maxProfit; // for cases when input is [7, 6, 4, 3, 1]
     }
 
     public static void main(String[] args) {
