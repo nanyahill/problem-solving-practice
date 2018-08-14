@@ -26,6 +26,6 @@ public class CountScoreCombinationsTest {
         int expected = 18;
         //int actual = CountScoreCombinations.countAllSequencesOfCombinations_Recursive(plays, score);
         //assert(expected == actual);
-        System.out.print(CountScoreCombinations.countAllSequencesOfCombinations_Recursive2(plays, score));
+        System.out.print(CountScoreCombinations.countScoreCombinations_Recursive(plays, score));
     }
 }

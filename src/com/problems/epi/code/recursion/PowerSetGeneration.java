@@ -90,7 +90,7 @@ public class PowerSetGeneration {
     }
 
     public static void main(String[] args) {
-        List<List<Integer>> result = generatePowerSet_Iterative(Arrays.asList(1,2,3));
+        List<List<Integer>> result = generatePowerSet_Integers(Arrays.asList(1,2,3));
         for (List<Integer> set : result) {
             System.out.print(Arrays.toString(set.toArray()));
             System.out.println();
