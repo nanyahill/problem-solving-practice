@@ -41,7 +41,7 @@ public class MinimumCoinChange {
     /******************* Bottom Up DP Approach **************************
      *******************************************************************/
     public int coinChange_BottomUp(int[] coins, int amount) {
-        int[] cache = new int[amount + 1  ];
+        int[] cache = new int[amount + 1];
         Arrays.fill(cache, Integer.MAX_VALUE);
         cache[0] = 0;
         for(int i = 1; i <= amount; i++) {

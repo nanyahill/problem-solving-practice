@@ -30,20 +30,21 @@ public class LongestCommonSubSequence {
 
     /******************* Top Down DP Approach **************************
      *******************************************************************/
-    public static int longestCommonSubSequence_TopDownDP(String s1, String s2) {
-        if (s1 == null || s2 == null) return 0;
-        int[][] cache = new int[s1.length()][s2.length()];
-        Arrays.fill(cache, -1);
-        return longestCommonSubSequence_TopDownDP(s1, s2, s1.length(), s2.length(), cache);
+    public int longestCommonSubSequence_TopDown(String s1, String s2) {
+        if (s1 == null || s2 == null) return -1;
+        int[][] cache = new int[s1.length() + 1][s2.length() + 1];
+        initCache_TopDown(cache);
+        return longestCommonSubSequence_TopDown(s1, s2, s1.length(), s2.length(), cache);
     }
 
-    private static int longestCommonSubSequence_TopDownDP(String s1, String s2, int i, int j, int[][] cache) {
-        if(cache[i][j] != -1) return cache[i][j];
-        if (match(s1.charAt(i - 1), s2.charAt(j - 1)) == 1) // match exists
-            cache[i][j] = 1 + longestCommonSubSequence_TopDownDP(s1, s2, i - 1, j - 1, cache);
-        else { // match does not exist, do insert and delete
-            int tmp1 = longestCommonSubSequence_TopDownDP(s1, s2, i - 1, j, cache); // delete
-            int tmp2 = longestCommonSubSequence_TopDownDP(s1, s2, i, j - 1, cache); // insert
+    private int longestCommonSubSequence_TopDown(String s1, String s2, int i, int j, int[][] cache) {
+        if (i == 0 || j == 0) return 0;
+        if (cache[i][j] != -1) return cache[i][j];
+        if (match(s1.charAt(i - 1), s2.charAt(j - 1)) == 1) //(s1.charAt(i - 1) == s2.charAt(j - 1))
+            cache[i][j] = 1 + longestCommonSubSequence_TopDown(s1, s2, i - 1, j - 1, cache);
+        else {
+            int tmp1 = longestCommonSubSequence_TopDown(s1, s2, i - 1, j, cache);
+            int tmp2 = longestCommonSubSequence_TopDown(s1, s2, i, j - 1, cache);
             cache[i][j] = Math.max(tmp1, tmp2);
         }
         return cache[i][j];
@@ -51,16 +52,20 @@ public class LongestCommonSubSequence {
 
     /******************* Bottom Up DP Approach Time: O(), Space: **************************
      *******************************************************************/
-    public static int longestCommonSubSequence_BottomUpDP(String s1, String s2) {
-        if (s1 == null || s2 == null) return 0;
-        int[][] cache = new int[s1.length()][s2.length()];
-        Arrays.fill(cache, -1);
+    public static int longestCommonSubSequence_BottomUp(String s1, String s2) {
+        if(s1 == null || s2 == null) return -1;
+        int[][] cache = new int[s1.length() + 1][s2.length() + 1];
+        for(int i = 1; i <= s1.length(); i++) {
+            for(int j = 1; j <= s2.length(); j++) {
+                if(s1.charAt(i-1) == s2.charAt(j-1)) cache[i][j] = cache[i - 1][j - 1] + 1;
+                else cache[i][j] = Math.max(cache[i-1][j], cache[i][j-1]);
+            }
+        }
         return cache[s1.length()][s2.length()];
     }
 
-    private static void initTable_BottomUp(int[][] table) {
-        for (int i = 0; i < table.length; i++) table[i][0] = i;
-        for (int j = 0; j < table[0].length; j++) table[0][j] = j;
+    private static void initCache_TopDown(int[][] cache) {
+        for (int i = 0; i < cache.length; i++) Arrays.fill(cache[i], -1);
     }
 
     private static int match(char a, char b) {
@@ -68,8 +73,6 @@ public class LongestCommonSubSequence {
     }
 
     public static void main(String[] args) {
-        //System.out.print(longestCommonSubSequence_Recursion("TG", "TGTTCAGGTATCTGCTCGACAGGTCCCGCGCGCCAACCG"));
-        System.out.print(longestCommonSubSequence_Recursion("aaa", "aaa"));
-        //TG	TGTTCAGGTATCTGCTCGACAGGTCCCGCGCGCCAACCG // 37
+        System.out.print(longestCommonSubSequence_Recursion("agxtab", "ggtywab"));
     }
 }

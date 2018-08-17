@@ -14,7 +14,7 @@ public class CountScoreCombinationsTest {
         int score = 12;
         List<Integer> plays = Arrays.asList(2, 3, 7);
         int expected = 4;
-        //int actual = CountScoreCombinations.countScoreCombinations(plays, score);
+        //int actual = CountCoinChangeCombination.countScoreCombinations(plays, score);
         int actual = CountScoreCombinations.countScoreCombinations_Recursive(plays, score);
         assert(expected == actual);
     }
@@ -24,7 +24,7 @@ public class CountScoreCombinationsTest {
         int score = 12;
         List<Integer> plays = Arrays.asList(2, 3, 7);
         int expected = 18;
-        //int actual = CountScoreCombinations.countAllSequencesOfCombinations_Recursive(plays, score);
+        //int actual = CountCoinChangeCombination.countAllSequencesOfCombinations_Recursive(plays, score);
         //assert(expected == actual);
         System.out.print(CountScoreCombinations.countScoreCombinations_Recursive(plays, score));
     }
