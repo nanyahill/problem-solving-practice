@@ -30,7 +30,7 @@ public class KnapsackProblem {
     public static int findMaximumProfit_TopDownDP(List<Item> items, int weight) {
         if (items == null || items.size() == 0) return 0;
         int[][] table = new int[items.size() + 1][weight + 1];
-        Arrays.fill(table, -1);
+        for(int[] row : table)Arrays.fill(row, -1);
         return findMaximumProfit_TopDownDP(items, items.size(), weight, table);
     }
 

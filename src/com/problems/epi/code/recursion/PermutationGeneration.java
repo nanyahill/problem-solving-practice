@@ -15,35 +15,21 @@ public class PermutationGeneration {
             else map.put(input.get(i), val + 1);
         }
         //generatePermutations_Duplicates(new ArrayList<>(), result, input.size(), map);
-        generatePermutations_Distinct(new ArrayList<>(), result, input.size(), input, 0);
+        generatePermutations_Distinct(result, input, 0);
         //generatePermutations_Distinct2(result, input, 0);
         return result;
     }
 
-    private static void generatePermutations_Distinct(List<Integer> tmp, List<List<Integer>> result, int n, List<Integer> input, int start) {
-        if (tmp.size() == n) {
-            result.add(new ArrayList<>(tmp));
-        } else {
-//            for (int i = 0; i < n; i++) {
-            for (int i = start; i < n; i++) {
-                //if (tmp.contains(input.get(i))) continue;
-                tmp.add(input.get(i));
-                generatePermutations_Distinct(tmp, result, n, input, start + 1);
-                tmp.remove(tmp.size() - 1);
-            }
-        }
-    }
-
-    private static void generatePermutations_Distinct_WithSwapping(List<List<Integer>> result, List<Integer> input, int l) {
-        if (l == input.size() - 1) {
+    private static void generatePermutations_Distinct(List<List<Integer>> result, List<Integer> input, int l) {
+        if (l == input.size()) {
             result.add(new ArrayList<>(input));
             return;
         } else {
-            for (int i = 0; i < input.size(); i++) {
+            for (int i = l; i < input.size(); i++) {
                 //if (tmp.contains(input.get(i))) continue;
                 Collections.swap(input, i, l);
-               // tmp.add(input.get(i));
-                generatePermutations_Distinct_WithSwapping(result, input, l + 1);
+                // tmp.add(input.get(i));
+                generatePermutations_Distinct(result, input, l + 1);
                 //tmp.remove(tmp.size() - 1);
                 Collections.swap(input, i, l);
             }
@@ -52,10 +38,8 @@ public class PermutationGeneration {
 
     private static void generatePermutations_Duplicates(List<Integer> tmp, List<List<Integer>> result, int n, Map<Integer, Integer> map) {
         if (tmp.size() == n) {
-            //System.out.println(Arrays.toString(tmp.toArray()));
             result.add(new ArrayList<>(tmp));
         } else {
-            //for (int i = 0; i < map.size(); i++) {
             for (Map.Entry entry : map.entrySet()) {
                 Integer val = (Integer)entry.getValue();
                 if (val > 0) {
@@ -79,12 +63,11 @@ public class PermutationGeneration {
             if (val == null) map.put(input.charAt(i), 1);
             else map.put(input.charAt(i), val + 1);
         }
-        //generatePermutations_Duplicates(new ArrayList<>(), result, input.length(), map);
         generatePermutations_Strings_Distinct("", input, result);
         return result;
     }
 
-    // This is not very efficient due to all the string concatenation
+    // This is not very efficient due to the string concatenation
     private static void generatePermutations_Strings_Distinct(String perm, String input, List<String> result) {
         if (input.isEmpty()) {
             result.add(perm);
@@ -102,11 +85,8 @@ public class PermutationGeneration {
             return;
         } else {
             for (int i = l; i < input.length(); i++) {
-                //if (tmp.contains(input.get(i))) continue;
                 swap(input.toCharArray(), i, l);
-                // tmp.add(input.get(i));
                 generatePermutations_Strings_Distinct_WithSwapping(l + 1, input, result);
-                //tmp.remove(tmp.size() - 1);
                 swap(input.toCharArray(), i, l);
             }
         }
@@ -114,10 +94,8 @@ public class PermutationGeneration {
 
     private static void generatePermutations_Strings_Duplicates(List<Integer> tmp, List<List<Integer>> result, int n, Map<Integer, Integer> map) {
         if (tmp.size() == n) {
-            //System.out.println(Arrays.toString(tmp.toArray()));
             result.add(new ArrayList<>(tmp));
         } else {
-            //for (int i = 0; i < map.size(); i++) {
             for (Map.Entry entry : map.entrySet()) {
                 Integer val = (Integer)entry.getValue();
                 if (val > 0) {

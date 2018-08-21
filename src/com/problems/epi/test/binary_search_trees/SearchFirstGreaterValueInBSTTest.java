@@ -1,6 +1,6 @@
 package com.problems.epi.test.binary_search_trees;
 
-import com.problems.epi.code.binary_search_trees.implementation.SearchFirstGreaterValueInBST;
+import com.problems.epi.code.binary_search_trees.SearchFirstGreaterValueInBST;
 import com.util.TreeNode;
 import org.junit.Test;
 
