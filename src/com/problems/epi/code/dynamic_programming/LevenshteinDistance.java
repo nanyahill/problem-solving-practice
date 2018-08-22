@@ -1,4 +1,4 @@
-package com.problems.epi.code.classic_dynamic_programming;
+package com.problems.epi.code.dynamic_programming;
 
 public class LevenshteinDistance {
     /******************* Recursion Approach (Non-DP) **************************

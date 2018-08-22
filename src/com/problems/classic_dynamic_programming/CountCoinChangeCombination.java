@@ -1,4 +1,4 @@
-package com.problems.dynamic_programming;
+package com.problems.classic_dynamic_programming;
 
 import java.util.List;
 

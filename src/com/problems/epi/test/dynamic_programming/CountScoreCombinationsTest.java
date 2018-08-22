@@ -1,6 +1,6 @@
 package com.problems.epi.test.dynamic_programming;
 
-import com.problems.epi.code.classic_dynamic_programming.CountScoreCombinations;
+import com.problems.epi.code.dynamic_programming.CountScoreCombinations;
 import org.junit.Test;
 
 import java.util.Arrays;
