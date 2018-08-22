@@ -73,6 +73,8 @@ public class LongestCommonSubSequence {
     }
 
     public static void main(String[] args) {
-        System.out.print(longestCommonSubSequence_Recursion("agxtab", "ggtywab"));
+        //System.out.print(longestCommonSubSequence_Recursion("agxtab", "ggtywab"));
+        String s = "abcde";
+        System.out.print(s.substring(1));
     }
 }
