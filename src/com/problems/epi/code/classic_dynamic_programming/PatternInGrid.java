@@ -1,6 +1,4 @@
-package com.problems.epi.code.dynamic_programming;
-
-import java.util.*;
+package com.problems.epi.code.classic_dynamic_programming;
 
 public class PatternInGrid {
 

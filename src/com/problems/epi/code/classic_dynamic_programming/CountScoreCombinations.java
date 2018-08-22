@@ -1,8 +1,5 @@
-package com.problems.epi.code.dynamic_programming;
+package com.problems.epi.code.classic_dynamic_programming;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 class Result {
