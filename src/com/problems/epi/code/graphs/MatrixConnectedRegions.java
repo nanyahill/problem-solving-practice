@@ -4,6 +4,9 @@ import java.util.ArrayDeque;
 import java.util.List;
 import java.util.Queue;
 
+/**
+ * This problem is similar to the flood fill algorithm
+ */
 public class MatrixConnectedRegions {
 
     public static void findConnectedRegions_DFS(List<List<Boolean>> grid, int x, int y) {
