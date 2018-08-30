@@ -6,28 +6,28 @@ public class CountCoinChangeCombination {
 
     /******************* Recursion Approach (Non-DP) **************************
      **************************************************************************/
-    private static int countScoreCombinations_Recursive(List<Integer> coins, int change, int index) {
+    private static int countCoinChange_Recursive(List<Integer> coins, int change, int index) {
         if(index < 0) return 0;
         if(change == 0) return 1;
         if(change < 0) return 0;
-        return countScoreCombinations_Recursive(coins, change - coins.get(index), index) // with play
-                + countScoreCombinations_Recursive(coins, change, index - 1); // without play
+        return countCoinChange_Recursive(coins, change - coins.get(index), index) // with play
+                + countCoinChange_Recursive(coins, change, index - 1); // without play
     }
 
     /******************* Top Down DP Approach **************************
      *******************************************************************/
-    public static int countScoreCombinations_TopDown(int change, List<Integer> coins) {
+    public static int countCoinChange_TopDown(int change, List<Integer> coins) {
         if(coins == null || coins.size() == 0) return 1;
         int[][] cache = new int[coins.size()][change + 1];
-        return countScoreCombinations_TopDown(coins, coins.size() - 1, change, cache); // moving from right to left in coins list
+        return countCoinChange_TopDown(coins, coins.size() - 1, change, cache); // moving from right to left in coins list
     }
 
-    private static int countScoreCombinations_TopDown(List<Integer> coins, int i, int j, int[][] cache) {
+    private static int countCoinChange_TopDown(List<Integer> coins, int i, int j, int[][] cache) {
         if(i < 0) return 0;
         if(j == 0) return 1;
         if(j < 0) return 0;
-        int withthisPlay = countScoreCombinations_TopDown(coins, i, j - coins.get(i), cache);
-        int withoutPlay = countScoreCombinations_TopDown(coins, i - 1, j, cache);
+        int withthisPlay = countCoinChange_TopDown(coins, i, j - coins.get(i), cache);
+        int withoutPlay = countCoinChange_TopDown(coins, i - 1, j, cache);
         cache[i][j] = withoutPlay + withthisPlay;
         return cache[i][j];
     }
@@ -36,20 +36,20 @@ public class CountCoinChangeCombination {
      *******************************************************************/
     // Time Complexity: O(sn) where s = size of coins list and n = change
     // Space complexity: O(n)
-    public static int countScoreCombinations_BottomUp(List<Integer> coins, int change) {
-        if(coins == null || coins.size() == 0) return 1;
-        int[] scoreBoard = new int[change + 1];
-        scoreBoard[0] = 1;
+    public static int countCoinChange_BottomUp(List<Integer> coins, int change) {
+        int[] cache = new int[change + 1];
+        cache[0] = 1;
         for (int i = 0; i < coins.size(); i++) {
-            int code = coins.get(i); // minor optimization
-            for (int j = code; j <= change; j++) {
-                //int play = coins.get(i);
-                //if (j < play) continue;
-                int withThisPlay = scoreBoard[j - code];
-                int withoutThisPlay = scoreBoard[j];
-                scoreBoard[j] = withoutThisPlay + withThisPlay;
+            //int code = coins.get(i); // minor optimization
+            for (int j = 1; j <= change; j++) {
+                int changeLeft = j - coins.get(i);
+                if (changeLeft >= 0) {
+                    int withThisCoin = cache[changeLeft];
+                    int withoutThisCoin = cache[j];
+                    cache[j] = withoutThisCoin + withThisCoin;
+                }
             }
         }
-        return scoreBoard[change];
+        return cache[change];
     }
 }

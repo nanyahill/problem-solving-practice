@@ -49,6 +49,7 @@ public class PowerSetGeneration {
     public static List<List<Integer>> generatePowerSet_Integers(List<Integer> set) {
         List<List<Integer>> res = new ArrayList<>();
         if (set == null || set.size() == 0) return res;
+//        generatePowerSet_Integers(new ArrayList<>(), res, 0, set.size(), set);
         generatePowerSet_Integers(new ArrayList<>(), res, 0, set.size(), set);
         return res;
     }
@@ -91,7 +92,7 @@ public class PowerSetGeneration {
 
     public static List<List<Integer>> subsets(int[] nums) {
         List<List<Integer>> list = new ArrayList<>();
-        Arrays.sort(nums);
+        //Arrays.sort(nums);
         backtrack(list, new ArrayList<>(), nums, 0);
         return list;
     }
@@ -106,7 +107,8 @@ public class PowerSetGeneration {
     }
 
     public static void main(String[] args) {
-        List<List<Integer>> result = generatePowerSet(Arrays.asList(1,2,3));
+//        List<List<Integer>> result = generatePowerSet_Integers(Arrays.asList(new Integer[] {1,2,3,4,5}));
+       List<List<Integer>> result = generatePowerSet_Integers(Arrays.asList(new Integer[] {1,2,3}));
         for (List<Integer> set : result) {
             System.out.print(Arrays.toString(set.toArray()));
             System.out.println();

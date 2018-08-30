@@ -27,13 +27,16 @@ import java.util.*;
  */
 public class RenderCalendar {
 
-    public static class Event {
-        int start;
-        int end;
+    public static class Event implements Comparable <Event> {
+        public int start;
+        public int end;
 
         public Event(int start, int end) {
             this.start = start;
             this.end = end;
+        }
+        public int compareTo(Event e) {
+            return Integer.compare(this.start, e.start);
         }
     }
 
@@ -75,7 +78,7 @@ public class RenderCalendar {
         return maxNumberOfEvents;
     }
 
-    public static int findMaxOverlapingEvents_TwoPointer(Event[] events) {
+    public static int findMaxOverlapingEvents_TwoPointer2(Event[] events) {
         if (events == null || events.length == 0) return -1;
         int countSeenSoFar = 0, maxCountSeenSoFar = 0;
         int i = 1, j = 0; // because i is the fast pointer while j is the slow pointer
@@ -89,6 +92,24 @@ public class RenderCalendar {
                 countSeenSoFar--;
                 j++;
             }
+        }
+        return maxCountSeenSoFar;
+    }
+
+    public static int findMaxOverlapingEvents_TwoPointer(Event[] events) {
+        if (events == null || events.length == 0) return -1;
+        Arrays.sort(events);
+        int count = 0;
+        int maxCountSeenSoFar = 0;
+        for(int i = 0; i < events.length - 1; i++) {
+            Event curr = events[i];
+            Event next = events[i + 1];
+            if(curr.end >= next.start) {
+                count++;
+                Math.max(count, maxCountSeenSoFar);
+            }
+            else count = 0;
+
         }
         return maxCountSeenSoFar;
     }

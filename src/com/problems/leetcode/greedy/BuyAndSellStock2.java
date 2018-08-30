@@ -1,5 +1,8 @@
 package com.problems.leetcode.greedy;
 
+/*
+ * Leetcode #122
+ */
 public class BuyAndSellStock2 {
 
         public static int maxProfit(int[] prices) {
@@ -12,11 +15,6 @@ public class BuyAndSellStock2 {
                 }
             }
             return maxprofit;
-        }
-
-        public static void main(String[] args) {
-            int[] nums = {1, 7, 2, 3, 6, 7, 6, 7};
-            System.out.print(maxProfit(nums));
         }
 }
 

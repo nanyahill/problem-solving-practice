@@ -28,7 +28,17 @@ import java.util.*;
  - possible way: str.substring(startIndex, startIndex + (endIndex - startIndex) + 1) // adding 1 at the end because substring's endIndex is exclusive.
  - Before returning substring check if the final start and end indices are -1 for cases when the given inputs contain the same characters
  */
-public class SmallestSubArrayCoveringAllValues {
+public class SmallestSubArrayCoveringSet {
+
+    private static class Result {
+        public int start;
+        public int end;
+
+        public Result(int start, int end) {
+            this.start = start;
+            this.end = end;
+        }
+    }
 
     // This method just shows a way the brute force may be solved
     // Generating all the subrrays
@@ -87,34 +97,41 @@ public class SmallestSubArrayCoveringAllValues {
      *    - How you increment and decrement the character or string count in the hashmap
      *          - increment/decrement the count, store the new value in the map and then test new count value.
      */
-
-    public static int[] findSmallestSubArrayCoveringAllValues(String[] paragraph, HashSet<String> keywords) {
-        if(keywords == null || paragraph == null) return null;
-        if(keywords.size() > paragraph.length) return null;
-        HashMap<String, Integer> map = new HashMap<>();
-        int remainingToCover = keywords.size();
-        int[] result = {-1, -1};
-        for(String kWord : keywords) {
-            map.put(kWord, map.containsKey(kWord) ? map.get(kWord) + 1 : 1);
+    public static Result findShortestSubArray(List<String> strings, Set<String> keywords) {
+        Result result = new Result(-1, -1);
+        if(strings == null || keywords == null) return result;
+        int searchWords = keywords.size();
+        // A map is needed despite the hashset given because the exact count of keywords must match that in the shortest
+        // subarray. This can be easily verified using a hashmap. Think imagine there are 6 a's in paragraph
+        // but only 3 a's in keywords, without map you cannot verify when you have all the 3a's required.
+        Map<String, Integer> map = new HashMap<>();
+        for(String w : keywords) {
+            map.put(w, map.containsKey(w) ? map.get(w) + 1 : 1);
         }
-        for(int left = 0, right = 0; right < paragraph.length; right++) {
-            String word = paragraph[right];
+        int left = 0;
+        for(int right = 0; right < strings.size(); right++) {
+            String word = strings.get(right);
             if(map.containsKey(word)) {
-                map.put(word, map.get(word) - 1); // or just use prefix decrement
                 int count = map.get(word);
-                if(count >= 0) --remainingToCover;
+                --count;
+                map.put(word, count);
+                // if count < 0 means there are multiple similar strings in input that do not count towards the searchWords.
+                if(count >= 0) --searchWords;
             }
-            while(remainingToCover == 0) {
-                if((result[0] == -1 && result[1] == -1) || right - left < (result[1] - result[0])) {
-                    result[0] = left;
-                    result[1] = right;
+            while(searchWords == 0) {
+                if(result.start == -1 && result.end == -1 || (right - left) < (result.end - result.start)) {
+                    result.start = left;
+                    result.end = right;
                 }
-                Integer keyWordCount = map.get(paragraph[left]);
-                if(keyWordCount != null) {
-                    map.put(paragraph[left], ++keyWordCount); // prefix increment is important!
-                    if(keyWordCount > 0)++remainingToCover; // means that the key is the only key (no duplicates) in the current window
+                word = strings.get(left);
+                if(map.containsKey(word)) {
+                    int count = map.get(word); // missing word that needs to be found
+                    ++count;
+                    map.put(word, count); // prefix increment is important!
+                    // if count <= 0 means there are multiple similar strings in input that do not count towards the searchWords.
+                    if(count > 0) ++searchWords;
                 }
-                ++left;
+                left++;
             }
         }
         return result;
@@ -122,9 +139,25 @@ public class SmallestSubArrayCoveringAllValues {
 
     public static void main(String[] args) {
         String[] input = {"app", "ban", "cat"};
-        String[] set = {"ban", "cat"};
-        //findSmallestSubArray(input, new ArrayList<>(Arrays.asList(set)));
-        //generateAllSubstringsOfString(input, Arrays.asList(set));
+        String[] set = {"ban", "cat", "tak", "vex"};
+        Map<String, Integer> map = new HashMap<>();
+        for(String word : input) {
+            map.put(word, map.containsKey(word) ? map.get(word) + 1 : 1);
+        }
+        int j = 0;
+        for(int i = 1; i < set.length; i++) {
+            String s = set[i];
+            if(map.containsKey(s)) {
+                System.out.print("Yes");
+                System.out.println();
+            }
+            String x = set[j];
+            if(map.containsKey(x)){
+                System.out.print("Nan");
+                System.out.println();
+                j = j + 2;
+            }
+        }
 
     }
 }
