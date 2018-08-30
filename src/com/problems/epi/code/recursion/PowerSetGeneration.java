@@ -107,12 +107,13 @@ public class PowerSetGeneration {
     }
 
     public static void main(String[] args) {
-//        List<List<Integer>> result = generatePowerSet_Integers(Arrays.asList(new Integer[] {1,2,3,4,5}));
-       List<List<Integer>> result = generatePowerSet_Integers(Arrays.asList(new Integer[] {1,2,3}));
+       List<List<Integer>> result = generatePowerSet_Integers(Arrays.asList(new Integer[] {1,2,3,2}));
+       //List<List<Integer>> result = subsets(new int[] {1,2,3});
         for (List<Integer> set : result) {
             System.out.print(Arrays.toString(set.toArray()));
             System.out.println();
         }
+        System.out.print("a".substring(1));
 //        List<String> res = new ArrayList<>();
 //        generatePowerSet_str("", res, 0, 2, "ab");
 //        for (String set : res) {

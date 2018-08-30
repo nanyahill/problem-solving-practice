@@ -10,7 +10,7 @@ public class TowerOfHanoiTest {
 
     @Test
     public void computeTowerOfHanoiTest() {
-        TowerOfHanoi th = new TowerOfHanoi(NUM_OF_PEGS, NUM_OF_DISKS);
+        TowerOfHanoi th = new TowerOfHanoi();
         th.computeTowerHanoi(NUM_OF_DISKS);
     }
 }
