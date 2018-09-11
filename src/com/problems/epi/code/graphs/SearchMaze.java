@@ -42,4 +42,5 @@ public class SearchMaze {
     private static boolean isFeasible(Cell curr, List<List<Color>> maze) {
         return curr.i >= 0 && curr.i < maze.size() && curr.j >= 0 && curr.j < maze.get(curr.i).size() && maze.get(curr.i).get(curr.j) == Color.WHITE;
     }
+
 }

@@ -1,6 +1,6 @@
 package com.problems.leetcode.tests.arrays;
 
-import com.problems.leetcode.arrays.FindPivotIndex;
+import com.problems.leetcode.code.arrays.FindPivotIndex;
 import org.junit.Assert;
 import org.junit.Test;
 

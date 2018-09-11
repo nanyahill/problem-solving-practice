@@ -1,6 +1,6 @@
 package com.problems.leetcode.tests.arrays;
 
-import com.problems.leetcode.arrays.MaximumProductOfThreeNumbers;
+import com.problems.leetcode.code.arrays.MaximumProductOfThreeNumbers;
 import org.junit.Assert;
 import org.junit.Test;
 

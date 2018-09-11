@@ -20,6 +20,7 @@ public class StringTransformability {
     }
 
     // Uses BFS to find the least steps of transformation.
+    // This is a shortest path problem and is naturally computed using BFS.
     public static int transformString(Set<String> dict, String s, String t) {
         Set<String> visited = new HashSet<>(dict);
         Queue<StringWithDistance> queue = new ArrayDeque<>();

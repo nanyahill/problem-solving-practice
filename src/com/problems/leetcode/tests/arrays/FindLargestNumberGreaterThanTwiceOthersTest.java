@@ -1,6 +1,6 @@
 package com.problems.leetcode.tests.arrays;
 
-import com.problems.leetcode.arrays.FindLargestNumberGreaterThanTwiceOthers;
+import com.problems.leetcode.code.arrays.FindLargestNumberGreaterThanTwiceOthers;
 import org.junit.Assert;
 import org.junit.Test;
 

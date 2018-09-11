@@ -5,6 +5,7 @@ package com.util;
  */
 public class TreeNode<T> {
 
+    public String name;
     public T data;
     public TreeNode<T> parent = null;
     public TreeNode<T> left = null;
@@ -23,5 +24,10 @@ public class TreeNode<T> {
     public TreeNode(T data, TreeNode<T> parent) {
         this.data = data;
         this.parent = parent;
+    }
+
+    public TreeNode(T data, String name) {
+        this.data = data;
+        this.name = name;
     }
 }

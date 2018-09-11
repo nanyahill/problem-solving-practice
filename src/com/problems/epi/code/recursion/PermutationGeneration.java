@@ -20,28 +20,26 @@ public class PermutationGeneration {
         return result;
     }
 
-    private static void generatePermutations_Distinct(List<List<Integer>> result, List<Integer> input, int l) {
-        if (l == input.size()) {
+    private static void generatePermutations_Distinct(List<List<Integer>> result, List<Integer> input, int start) {
+        if (start == input.size()) {
             result.add(new ArrayList<>(input));
             return;
-        } else {
-            for (int i = l; i < input.size(); i++) {
-                //if (tmp.contains(input.get(i))) continue;
-                Collections.swap(input, i, l);
-                // tmp.add(input.get(i));
-                generatePermutations_Distinct(result, input, l + 1);
-                //tmp.remove(tmp.size() - 1);
-                Collections.swap(input, i, l);
-            }
         }
+        for (int i = start; i < input.size(); i++) {
+            Collections.swap(input, i, start);
+            generatePermutations_Distinct(result, input, start + 1);
+            Collections.swap(input, i, start);
+        }
+
     }
+
 
     private static void generatePermutations_Duplicates(List<Integer> tmp, List<List<Integer>> result, int n, Map<Integer, Integer> map) {
         if (tmp.size() == n) {
             result.add(new ArrayList<>(tmp));
         } else {
             for (Map.Entry entry : map.entrySet()) {
-                Integer val = (Integer)entry.getValue();
+                Integer val = (Integer) entry.getValue();
                 if (val > 0) {
                     entry.setValue(val - 1);
                     tmp.add((Integer) entry.getKey());
@@ -97,7 +95,7 @@ public class PermutationGeneration {
             result.add(new ArrayList<>(tmp));
         } else {
             for (Map.Entry entry : map.entrySet()) {
-                Integer val = (Integer)entry.getValue();
+                Integer val = (Integer) entry.getValue();
                 if (val > 0) {
                     entry.setValue(val - 1);
                     tmp.add((Integer) entry.getKey());
@@ -116,12 +114,47 @@ public class PermutationGeneration {
         nums[j] = tmp;
     }
 
-    public static void main(String[] args) {
-        List<Integer> list = new ArrayList<>(Arrays.asList(new Integer[] {1,2,3}));
-        List<List<Integer>> result = generatePermutations(list);
-        for (List<Integer> set : result) {
-            System.out.print(Arrays.toString(set.toArray()));
-            System.out.println();
+    public static List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> result = new ArrayList<List<Integer>>();
+        if (nums.length == 0) return result;
+
+        backtrack(result, nums, new ArrayList<Integer>(), 0);
+
+        return result;
+    }
+
+    private static void backtrack(List<List<Integer>> result, int[] nums, List<Integer> currentList, int index) {
+        if (currentList.size() == nums.length) {
+            result.add(currentList);
+            return;
         }
+
+        int n = nums[index];
+        for (int i = 0; i <= currentList.size(); i++) {
+            List<Integer> copy = new ArrayList<Integer>(currentList);
+            copy.add(i, n);
+            backtrack(result, nums, copy, index + 1);
+        }
+
+
+    }
+
+    public static void main(String[] args) {
+//        List<Integer> list = new ArrayList<>(Arrays.asList(new Integer[]{1, 2, 3}));
+//        List<List<Integer>> result = generatePermutations(list);
+//        for (List<Integer> set : result) {
+//            System.out.print(Arrays.toString(set.toArray()));
+//            System.out.println();
+//        }
+        String s = "cat";
+        System.out.println(s.substring(2,2));
+//        for(int i = 0; i < s.length(); i++) {
+//            String start = i == 0 ? "" : s.substring(0,i);
+//            String end = (i + 1) < s.length() ? s.substring(i+1) : "";
+//            System.out.print(start + " " + end);
+//            System.out.println();
+//
+//        }
+        //permute(a, 0);
     }
 }
