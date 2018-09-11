@@ -3,6 +3,9 @@ package com.problems.epi.code.sorting;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Similar to Leetcode #57: Insert Interval
+ */
 public class MergingIntervalsWithNewInterval {
 
     private static class Event {
