@@ -62,7 +62,7 @@ public class KnapsackProblem {
         if(items == null || items.size() == 0) return 0;
         int[] table = new int [weight + 1];
         for(int i = 1; i <= items.size(); i++) {
-            for(int j = 0; j < table.length; j++) {
+            for(int j = weight; j >= 0; j--) { // this order of for loop iteration is important, don't fully understand why
                 int itemWeight = items.get(i-1).weight;
                 int itemValue = items.get(i-1).value;
                 if(itemWeight > j) continue;

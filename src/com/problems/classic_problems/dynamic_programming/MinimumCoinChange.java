@@ -17,14 +17,14 @@ public class MinimumCoinChange {
         return min == Integer.MAX_VALUE ? -1 : min;
     }
 
+    /******************* Top Down DP Approach **************************
+     *******************************************************************/
     public static int coinChange_TopDown(int[] coins, int amount) {
         int[] cache = new int[amount + 1];
         Arrays.fill(cache, Integer.MAX_VALUE);
         return coinChange_TopDown(coins, amount, cache);
     }
 
-    /******************* Top Down DP Approach **************************
-     *******************************************************************/
     private static int coinChange_TopDown(int[] coins, int c, int[] cache) {
         if (c == 0) return 0;
         if (c < 0) return -1;

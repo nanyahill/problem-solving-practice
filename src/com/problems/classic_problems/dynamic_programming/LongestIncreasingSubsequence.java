@@ -71,15 +71,13 @@ public class LongestIncreasingSubsequence {
         if(nums == null || nums.length == 0) return 0;
         int result = 1; // 1 since if nums.length > 0 then least value of LIS is 1.
         int[] cache = new int[nums.length];
-        cache[0] = 1;
+        Arrays.fill(cache, 1);
         for(int i = 1; i < nums.length; i++) {
-            int taken = 0;
             for(int j = 0; j < i; j++) {
-                if(nums[i] > nums[j]) {
-                    taken = Math.max(cache[j], taken); // hold LIS from j to i - 1
+                if(nums[i] >= nums[j]) { // >= to allow duplicates
+                    cache[i] = Math.max(cache[j] + 1, cache[i]); // hold LIS from j to i - 1
                 }
             }
-            cache[i] = taken + 1;
             result = Math.max(result, cache[i]); // prevents an extra iteration of cache to find the result
         }
         return result;
