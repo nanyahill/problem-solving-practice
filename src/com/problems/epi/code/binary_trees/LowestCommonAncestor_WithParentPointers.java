@@ -3,7 +3,9 @@ package com.problems.epi.code.binary_trees;
 import com.util.TreeNode;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Key Insight: The lowest common ancestor is a first ancestor node that is common to both nodeA and nodeB.
@@ -14,16 +16,18 @@ public class LowestCommonAncestor_WithParentPointers {
      * Brute-Force: Iterate over any one of the nodes and store the nodes in its search path in a hash table.
      * Then iterate over the second node and return the first parent node that appears in the hash table.
      */
-    public static TreeNode<Integer> lowestCommonAncestor_BruteForce(TreeNode<Integer> n1, TreeNode<Integer> n2) {
-        if (n1 == null || n2 == null) return null;
-        List<TreeNode<Integer>> parents = new ArrayList<>();
-        while (n1.parent != null) {
-            n1 = n1.parent;
-            parents.add(n1);
-        }
-        while (n2.parent != null) {
-            n2 = n2.parent;
-            if (parents.contains(n2)) return n2;
+    public static TreeNode<Integer> lowestCommonAncestor_BruteForce(TreeNode<Integer> p, TreeNode<Integer> q) {
+        if (p == null || q == null) return null;
+        Set<TreeNode> set = new HashSet<>();
+        while (p != null || q != null) {
+            if (p != null) {
+                if(!set.add(p)) return p;
+                p = p.parent;
+            }
+            if (q != null) {
+                if(!set.add(q)) return q;
+                q = q.parent;
+            }
         }
         return null;
     }

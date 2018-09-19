@@ -1,43 +1,40 @@
 package com.problems.epi.test.playful;
 
-import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-public class Solution {
-
-    public static List<List<Integer>> generatePowerSet(List<Integer> nums) {
-        List<List<Integer>> result = new ArrayList<>();
-        if(nums == null || nums.size() == 0) return result;
-        generatePowerSet(nums, 0, result, new ArrayList<>());
-        return result;
-    }
-
-    private static void generatePowerSet(List<Integer> nums, int idx, List<List<Integer>> result, List<Integer> tmp) {
-        result.add(new ArrayList<>(tmp));
-        for(int i = idx; i < nums.size(); i++) {
-            tmp.add(nums.get(i));
-            generatePowerSet(nums, i + 1, result, tmp);
-            tmp.remove(tmp.size() - 1);
+class Solution {
+    public int search(int[] nums, int val) {
+        if(nums == null || nums.length == 0) return -1;
+        int minIdx = findSmallestElement(nums, 0, nums.length - 1);
+        if(minIdx >= 0) {
+            if(nums[minIdx] == val) return minIdx;
+            int lo = nums[nums.length - 1] > val ? minIdx : 0;
+            int hi = nums[nums.length - 1] > val ? nums.length - 1 : minIdx;
+            while(lo <= hi) {
+                int mid = lo + ((hi - lo))/2;
+                if(nums[mid] == val) return mid;
+                else if(nums[mid] < val) lo = mid + 1;
+                else hi = mid - 1;
+            }
         }
+        return -1;
     }
 
-//    @Test
-//    public void generatePowerSetTest()
+    private static int findSmallestElement(int[] A, int lo, int hi) {
+        while(lo <= hi) {
+            int mid = lo + ((hi - lo))/2;
+            if(A[mid] < A[hi]) {
+                hi = mid;
+            }
+            else if(A[mid] > A[hi]) {
+                lo = mid + 1;
+            }
+            else return mid;
+        }
+        return -1;
+    }
 
     public static void main(String[] args) {
-        Integer[] nums = {0,1,2};
-        List<List<Integer>> result = generatePowerSet(Arrays.asList(nums));
-        Integer[][] expected = { {}, {0}, {0, 1}, {0, 1, 2}, {0, 2}, {1}, {1, 2}, {2} };
-        //List<List<Integer>> expectedList = Arrays.asList(Arrays.asList(expected));
-        for(List<Integer> list : result) {
-            for(Integer num : list) {
-                System.out.print(num + ", ");
-            }
-            System.out.println();
-        }
-
+        int[] nums = {4,5,6,7,0,1,2};
+        //System.out.println(findSmallestElement(nums, 0, nums.length - 1));
+        System.out.println(10 % 12);
     }
 }

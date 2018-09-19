@@ -4,7 +4,7 @@ import com.problems.epi.code.binary_trees.LowestCommonAncestor_WithParentPointer
 import com.util.TreeNode;
 import org.junit.Test;
 
-public class LowestCommonAncestor_WithParentPointersTest {
+public class LowestCommonAncestor_InBinaryTree_WithParentPointersTest {
 
     @Test
     public void lowestCommonAncestor() {

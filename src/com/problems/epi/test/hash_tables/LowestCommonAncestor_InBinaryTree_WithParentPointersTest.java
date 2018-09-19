@@ -4,7 +4,7 @@ import com.problems.epi.code.hash_tables.LowestCommonAncestor_WithParentPointers
 import com.util.TreeNode;
 import org.junit.Test;
 
-public class LowestCommonAncestor_WithParentPointersTest {
+public class LowestCommonAncestor_InBinaryTree_WithParentPointersTest {
 
     @Test
     public void findLCATest() {
