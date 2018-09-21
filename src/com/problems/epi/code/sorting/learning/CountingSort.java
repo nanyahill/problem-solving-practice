@@ -8,7 +8,7 @@ import java.util.Arrays;
  - Elements of the input array map to the index of a temporary array (aka count array)
  - Each index of the count array stores the count of that index, that is, the frequency which the index appears as a value in the input.
  - A prefix-sum (running sum) is performed for elements in the count array to determine the starting position/place of the element in the sorted array.
- For example, count[i] = 3 means that value i in the input array should be in the third place in sorted array (i.e. position 2 using zero-based array indexing)
+ For example, count[i] = 3 means that the last value of i would appear in position 3 of the sorted array.
  - Overall there are three arrays- teh input array of size n, the count array of size k, the sorted array of size n.
  * Time complexity: O(n + k) where k is the size of the range.
  * Space Complexity: O(k)

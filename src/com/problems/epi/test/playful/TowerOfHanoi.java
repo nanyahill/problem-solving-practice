@@ -59,8 +59,8 @@ public class TowerOfHanoi {
     }
 
     public static void main(String[] args) {
-        //solveTowerHanoiProblem(3);
-        System.out.println(partition(new int[] {5,1,6,3,2,4}, 0, 5, 3));
+        solveTowerHanoiProblem(2);
+        //System.out.println(partition(new int[] {5,1,6,3,2,4}, 0, 5, 3));
         // 0 to 2; 0 to 1; 2 to 1
 
         // 0 to 2;
