@@ -1,6 +1,6 @@
-package com.problems.ctci.Chapter1;
+package com.problems.ctci.chapter1;
 
-public class ZeroMatrix {
+public class Question1_8 {
 
     public static void setZeroes(int[][] matrix) {
         if (matrix == null) return;

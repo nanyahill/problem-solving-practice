@@ -90,22 +90,22 @@ public class PermutationGeneration {
         }
     }
 
-    private static void generatePermutations_Strings_Duplicates(List<Integer> tmp, List<List<Integer>> result, int n, Map<Integer, Integer> map) {
-        if (tmp.size() == n) {
-            result.add(new ArrayList<>(tmp));
-        } else {
-            for (Map.Entry entry : map.entrySet()) {
-                Integer val = (Integer) entry.getValue();
-                if (val > 0) {
-                    entry.setValue(val - 1);
-                    tmp.add((Integer) entry.getKey());
-                    generatePermutations_Duplicates(tmp, result, n, map);
-                    entry.setValue(val);
-                    tmp.remove(tmp.size() - 1);
-                }
-            }
-        }
-    }
+//    private static void generatePermutations_Strings_Duplicates(List<Integer> tmp, List<List<Integer>> result, int n, Map<Integer, Integer> map) {
+//        if (tmp.size() == n) {
+//            result.add(new ArrayList<>(tmp));
+//        } else {
+//            for (Map.Entry entry : map.entrySet()) {
+//                Integer val = (Integer) entry.getValue();
+//                if (val > 0) {
+//                    entry.setValue(val - 1);
+//                    tmp.add((Integer) entry.getKey());
+//                    generatePermutations_Duplicates(tmp, result, n, map);
+//                    entry.setValue(val);
+//                    tmp.remove(tmp.size() - 1);
+//                }
+//            }
+//        }
+//    }
 
     private static void swap(char[] nums, int i, int j) {
         if (nums == null || nums.length == 0) throw new IllegalStateException();

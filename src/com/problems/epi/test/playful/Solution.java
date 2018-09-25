@@ -35,6 +35,6 @@ class Solution {
 
     public static void main(String[] args) {
         int[][] matrix = { {1,2,3,14}, {7,8,9,17}, {8,10,11,20} };
-        System.out.println(kthSmallest(matrix, 6));
+        System.out.println("abc".substring(0,1));
     }
 }
