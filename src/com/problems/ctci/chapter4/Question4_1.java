@@ -9,8 +9,8 @@ import java.util.Deque;
 public class Question4_1 {
 
     public static boolean doesPathExist_DFS(Graph graph, GraphNode start, GraphNode end) {
-        if(start == end) return true;
         start.visited = true;
+        if(start == end) return true;
         for(GraphNode child : start.children) {
             if(!child.visited) {
                 if(doesPathExist_DFS(graph, child, end)) return true;
@@ -26,8 +26,8 @@ public class Question4_1 {
         GraphNode n;
         while(!queue.isEmpty()) {
             n = queue.removeFirst();
-            if(n == end) return true;
             n.visited = true;
+            if(n == end) return true;
             for(GraphNode child : n.children) {
                 if(!child.visited) {
                     queue.addLast(child);
