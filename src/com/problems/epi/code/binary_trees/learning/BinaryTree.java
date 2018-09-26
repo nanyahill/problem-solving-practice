@@ -7,6 +7,7 @@ import java.util.NoSuchElementException;
 /**
  * A Binary Tree
  * Time complexity for all operations: O(n) because there is no order to tree data
+ * TODO: Have a method build binary tree from an array.
  */
 public class BinaryTree {
     private TreeNode root;

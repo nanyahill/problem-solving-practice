@@ -5,6 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * This problem can be easily used for integer inputs.
+ * See Leetcode Discuss: Reply from chrislzm in highly voted answer
+ */
 public class Question8_8 {
 
     public static List<String> getPerms(String str) {
