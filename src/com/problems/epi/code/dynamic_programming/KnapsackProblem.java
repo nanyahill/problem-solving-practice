@@ -47,10 +47,13 @@ public class KnapsackProblem {
         if(items == null || items.size() == 0) return 0;
         int[][] table = new int[items.size() + 1][weight + 1];
         //Arrays.fill(table[0], 0);
-        for(int i = 1; i < table.length; i++) {
-            for(int j = 0; j < table[0].length; j++) {
-                int itemWeight = items.get(i-1).weight;
-                int itemValue = items.get(i-1).value;
+        for(int i = 1; i <=items.size(); i++) {
+            int itemWeight = items.get(i-1).weight;
+            int itemValue = items.get(i-1).value;
+            // this order of inner for loop iteration is important,
+            // because you start with an almost full knapsack that has a
+            // remaining weight of j and you try to see what item can fill up that remaining weight
+            for(int j = 0; j <= weight; j++) {
                 if(itemWeight > j) table[i][j] = table[i-1][j];
                 else table[i][j] = Math.max(table[i-1][j], itemValue + table[i-1][j - itemWeight]);
             }
@@ -62,11 +65,12 @@ public class KnapsackProblem {
         if(items == null || items.size() == 0) return 0;
         int[] table = new int [weight + 1];
         for(int i = 1; i <= items.size(); i++) {
-            for(int j = weight; j >= 0; j--) { // this order of for loop iteration is important, don't fully understand why
-                int itemWeight = items.get(i-1).weight;
-                int itemValue = items.get(i-1).value;
-                if(itemWeight > j) continue;
-                else table[j] = Math.max(table[j], itemValue + table[j - itemWeight]);
+            int itemWeight = items.get(i-1).weight;
+            int itemValue = items.get(i-1).value;
+            // this order of inner for loop iteration is important,
+            // because an empty knapsack has a weight = wgt and you try to fill it up.
+            for(int j = weight; j >= itemWeight; j--) {
+                table[j] = Math.max(table[j], itemValue + table[j - itemWeight]);
             }
         }
         return table[weight];

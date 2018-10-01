@@ -2,12 +2,12 @@ package com.problems.ctci.chapter3;
 
 import java.util.NoSuchElementException;
 
-public class ThreeStacksInOneArray {
+public class Question3_1 {
     int[] data;
     int[] sizes;
     int stackCapacity;
 
-    public ThreeStacksInOneArray(int numOfStacks, int stackCapacity) {
+    public Question3_1(int numOfStacks, int stackCapacity) {
         this.stackCapacity = stackCapacity;
         data = new int[numOfStacks * stackCapacity];
         sizes = new int[numOfStacks];

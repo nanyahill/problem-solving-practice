@@ -4,7 +4,7 @@ import com.util.ListNode;
 
 import java.util.*;
 
-public class RemoveDupsFromUnsortedList {
+public class Question2_1 {
 
     /**
      * Time Complexity : O(n)

@@ -11,7 +11,7 @@ public class Question4_9 {
     public static List<LinkedList<Integer>> findAllSequences(TreeNode<Integer> root) {
         List<LinkedList<Integer>> result = new ArrayList<>();
         if(root == null) {
-            result.add(new LinkedList<Integer>());
+            result.add(new LinkedList<>());
             return result;
         }
         LinkedList<Integer> prefix = new LinkedList<>();
@@ -49,6 +49,5 @@ public class Question4_9 {
         weaveLists(left, right, weaved, prefix);
         prefix.removeLast();
         right.addFirst(headRight);
-        return;
     }
 }
