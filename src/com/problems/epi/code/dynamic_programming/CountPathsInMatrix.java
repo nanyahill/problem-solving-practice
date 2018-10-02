@@ -1,5 +1,9 @@
 package com.problems.epi.code.dynamic_programming;
 
+/**
+ * Similar to Robot in Grid WITHOUT obstacles
+ * Unique Paths I in Leetcode
+ */
 public class CountPathsInMatrix {
 
     public static int countPaths(int n, int m) {
@@ -49,16 +53,16 @@ public class CountPathsInMatrix {
         if (n == 0 || m == 0) return 0;
         int maxDim = Math.max(n, m);
         int minDim = Math.min(n, m);
-        int[] numberOfWays = new int[minDim];
-        numberOfWays[0] = 1;
+        int[] cache = new int[minDim];
+        cache[0] = 1;
         for (int i = 0; i < maxDim; i++) {
             for (int j = 0; j < minDim; j++) {
                 if (j > 0) {
-                    numberOfWays[j] += numberOfWays[j - 1];
+                    cache[j] += cache[j - 1];
                 }
             }
         }
-        return numberOfWays[numberOfWays.length - 1];
+        return cache[cache.length - 1];
     }
 
     public static void main(String[] args) {

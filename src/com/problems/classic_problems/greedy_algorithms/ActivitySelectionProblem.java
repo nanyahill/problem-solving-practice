@@ -31,7 +31,7 @@ public class ActivitySelectionProblem {
         }
     }
 
-    public int findMaxOverLappingProblems(Event[] events) {
+    public int findMaxNonOverLappingProblems(Event[] events) {
         if(events == null || events.length == 0) return 0;
         Arrays.sort(events, new EventComparator());
         int count = 1;
