@@ -54,14 +54,16 @@ public class SearchCyclicallySorted {
     public static int findK(int[] nums, int target) {
         if(nums == null || nums.length == 0) return -1;
         int minIdx = findMin(nums);
-        int len = nums.length;
-        int lo = (target <= nums[len - 1]) ? minIdx : 0; // left subarray
-        int hi = (target > nums[len - 1]) ? minIdx : len - 1; // right subarray
+        int lo = 0, hi = nums.length - 1;
+        //int len = nums.length;
+        //int lo = (target <= nums[len - 1]) ? minIdx : 0; // left subarray
+        //int hi = (target > nums[len - 1]) ? minIdx : len - 1; // right subarray
         while(lo <= hi) {
-            int m = lo + ((hi - lo) / 2);
-            if(nums[m] == target) return m;
-            else if(nums[m] < target) lo = m + 1;
-            else hi = m - 1;
+            int mid = lo + ((hi - lo) / 2);
+            int realmid = (mid + minIdx) % nums.length;
+            if(nums[realmid] == target) return realmid;
+            else if(nums[realmid] < target) lo = mid + 1;
+            else hi = mid - 1;
         }
         return -1;
     }
