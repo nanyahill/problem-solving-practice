@@ -23,7 +23,7 @@ public class InterConvertStringsAndArrays {
         do {
             int digit = Math.abs(num % 10); // Math.abs(..) is important here because if num is -ve, the digit would always be a negative number.
             num /= 10;
-            res.append(digit);
+            res.append(digit); //possible because StringBuilder has an append(int i) and digit ranges from 0-9
         } while (num != 0);
         if (isNegative) res.append("-"); // make sure to append the -ve sign before reversing
         return res.reverse().toString();
