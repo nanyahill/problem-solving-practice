@@ -1,13 +1,17 @@
 package com.problems.classic_problems.dynamic_programming;
 
 import java.util.Arrays;
+import java.util.List;
 
+// This can be used to solve longest non-decreasing subsequence
 public class LongestIncreasingSubsequence {
 
     /******************* Recursive Approach Time: O(n2^n), Space: O(n) **************************
      ***********************************************************************************************/
 
-    /** Recursive starting from the back of array */
+    /**
+     * Recursive starting from the back of array
+     */
     public int longestIncreasingSubSequence_Recursive(int[] nums) {
         if (nums == null || nums.length == 0) return 0;
         return longestIncreasingSubSequence_Recursive(nums, Integer.MAX_VALUE, nums.length - 1);
@@ -68,13 +72,13 @@ public class LongestIncreasingSubsequence {
     /******************* Bottom Up DP Approach Time: O(n^2), Space: O(n) **************************
      **********************************************************************************************/
     public static int longestIncreasingSubSequence_BottomUp(int[] nums) {
-        if(nums == null || nums.length == 0) return 0;
+        if (nums == null || nums.length == 0) return 0;
         int result = 1; // 1 since if nums.length > 0 then least value of LIS is 1.
         int[] cache = new int[nums.length];
         Arrays.fill(cache, 1);
-        for(int i = 1; i < nums.length; i++) {
-            for(int j = 0; j < i; j++) {
-                if(nums[i] >= nums[j]) { // >= to allow duplicates
+        for (int i = 1; i < nums.length; i++) {
+            for (int j = 0; j < i; j++) {
+                if (nums[i] >= nums[j]) { // >= to allow duplicates
                     cache[i] = Math.max(cache[j] + 1, cache[i]); // hold LIS from j to i - 1
                 }
             }
@@ -83,24 +87,42 @@ public class LongestIncreasingSubsequence {
         return result;
     }
 
-    public static int lengthOfLIS(int[] nums) {
-        int[] dp = new int[nums.length];
+    public static int longestIncreasingSubsequence_NLogN(List<Integer> nums) {
+        if (nums == null || nums.size() == 0) return 0;
+        int[] cache = new int[nums.size()];
         int len = 0;
         for (int num : nums) {
-            int i = Arrays.binarySearch(dp, 0, len, num);
-            if (i < 0) { // -ve means key was not found
-                i = -(i + 1); // to get the insertion point back
-            }
-            dp[i] = num;
-            if (i == len) {
-                len++;
-            }
+            int j = Arrays.binarySearch(cache, 0, len, num);
+            if (j < 0)
+                j = -(j + 1); // get real insertion point back where  value returned is (-(real insertion point) - 1) back
+            cache[j] = num;
+            if (len == j) len++;
         }
         return len;
     }
 
+    public static int longestNonDecreasingSubsequence_NLogN(List<Integer> nums) {
+        int[] cache = new int[nums.size()];
+        int len = 0;
+        for (int num : nums) {
+            int j = binarySearch(cache, 0, len - 1, num);
+            cache[j] = num;
+            if (len == j) len++;
+        }
+        return len;
+    }
+
+    private static int binarySearch(int[] nums, int lo, int hi, int num) {
+        while (lo <= hi) {
+            int mid = (lo + hi) >>> 1;
+            if (nums[mid] <= num) lo = mid + 1;
+            else hi = mid - 1;
+        }
+        return lo;
+    }
+
     public static void main(String[] args) {
-        int[] nums = new int[] {10, 9, 2, 5, 3, 7, 101, 18};
+        int[] nums = new int[]{10, 9, 2, 5, 3, 7, 101, 18};
         //System.out.print(lengthOfLIS(nums));
         //System.out.println(Arrays.binarySearch(new int[]{10}, 0, 1, 11));
         System.out.println(-0);

@@ -44,10 +44,11 @@ public class MinimumCoinChange {
         int[] cache = new int[amount + 1];
         Arrays.fill(cache, Integer.MAX_VALUE);
         cache[0] = 0;
-        for(int i = 1; i <= amount; i++) {
-            for(int j = 0; j < coins.length; j++) {
-                if((i - coins[j] >= 0) && cache[i - coins[j]] != Integer.MAX_VALUE)
-                    cache[i] = Math.min(cache[i], cache[i - coins[j]] + 1);
+        for (int i = 0; i < coins.length; i++) {
+            int coin = coins[i];
+            for (int j = 1; j <= amount; j++) {
+                if (j >= coin && cache[j - coin] != Integer.MAX_VALUE)
+                    cache[j] = Math.min(cache[j], cache[j - coin] + 1);
             }
         }
         return cache[amount] == Integer.MAX_VALUE ? -1 : cache[amount];
