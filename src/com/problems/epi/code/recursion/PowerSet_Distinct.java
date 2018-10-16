@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class PowerSetGeneration {
+public class PowerSet_Distinct {
 
     /*********************************** Integers *********************************************************/
 
@@ -49,15 +49,15 @@ public class PowerSetGeneration {
         }
     }
 
-    private static List<List<Integer>>  generatePowerSet_Iterative(List<Integer> set, List<List<Integer>> res) {
+    private static List<List<Integer>>  generatePowerSet_Iterative(int[] set, List<List<Integer>> res) {
         List<List<Integer>> result = new ArrayList<>();
-        if(set == null || set.size() == 0) return result;
-        for(int i = 0; i < (1 << set.size()); i++) {
+        if(set == null || set.length == 0) return result;
+        for(int i = 0; i < (1 << set.length); i++) {
             List<Integer> tmp = new ArrayList<>();
-            for(int j = 0; j < set.size(); j++) {
+            for(int j = 0; j < set.length; j++) {
                 // to print in squashed order: in which any subset involving aj can be listed only after all the subsets involving a1, . . . , aj−1
                 // use index n - j - 1 instead of j
-                if((i & (1 << j)) > 0) tmp.add(set.get(j));
+                if((i & (1 << j)) > 0) tmp.add(set[j]);
             }
 
             res.add(tmp);
@@ -81,13 +81,32 @@ public class PowerSetGeneration {
         }
     }
 
-    public static void main(String[] args) {
-       List<List<Integer>> result = generatePowerSet_Integers(Arrays.asList(new Integer[] {1,2,3,2}));
-       //List<List<Integer>> result = subsets(new int[] {1,2,3});
-        for (List<Integer> set : result) {
-            System.out.print(Arrays.toString(set.toArray()));
-            System.out.println();
+    public static List<String> powerSet(String s) {
+        List<String> result = new ArrayList<>();
+        if(s == null || s.length() == 0) return result;
+        powerSet(s, 0, "", result);
+        return result;
+    }
+
+    private static void powerSet(String s, int idx, String prefix, List<String> result) {
+        System.out.println(prefix);
+        for(int i = idx; i < s.length(); i++) {
+            char c = s.charAt(i);
+            powerSet(s, i + 1, prefix + c, result);
         }
-        System.out.print("a".substring(1));
+    }
+
+    public static void main(String[] args) {
+//        int[] set = new int[] {1,2,3};
+//        List<List<Integer>> result = new ArrayList<>();
+//       generatePowerSet_Iterative(set, result);
+//       //List<List<Integer>> result = subsets(new int[] {1,2,3});
+//        for (List<Integer> set2 : result) {
+//            System.out.print(Arrays.toString(set2.toArray()));
+//            System.out.println();
+//        }
+        String set = "abc";
+        //generatePowerSet_String("", set);
+        powerSet(set, 0, "", null);
     }
 }
