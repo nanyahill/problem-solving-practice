@@ -2,89 +2,46 @@ package com.problems.ctci.chapter1;
 
 public class Question1_8 {
 
-    public static void setZeroes(int[][] matrix) {
-        if (matrix == null) return;
+    public static void setZeroes(int[][] grid) {
+        if(grid == null || grid.length == 0) return;
         boolean firstRowHasZero = false;
         boolean firstColHasZero = false;
 
-        // Check 1st Row for zero
-        for (
-                int i = 0;
-                i < matrix[0].length; i++)
-
-        {
-            if (matrix[0][i] == 0) {
-                firstRowHasZero = true;
-                break;
-            }
-        }
-
-        // Check 1st Col for zero
-        for (
-                int j = 0;
-                j < matrix.length; j++)
-
-        {
-            if (matrix[j][0] == 0) {
-                firstColHasZero = true;
-                break;
-            }
-        }
-
-        // Check rest of matrix for zero
-        for (
-                int i = 1;
-                i < matrix.length; i++)
-
-        {
-            for (int j = 1; j < matrix[i].length; j++) {
-                if (matrix[i][j] == 0) {
-                    matrix[0][j] = 0;
-                    matrix[i][0] = 0;
+        // Iterate over all entries
+        for(int i = 0; i < grid.length; i++) {
+            for(int j = 0; j < grid[i].length; j++) {
+                if(grid[i][j] == 0) {
+                    if(i == 0) firstRowHasZero = true;
+                    if(j == 0) firstColHasZero = true;
+                    grid[i][0] = 0;
+                    grid[0][j] = 0;
                 }
             }
         }
 
-        // Set rows and cols of matrix to zero exept for first row and first col
-        // Rows
-        for (
-                int i = 1;
-                i < matrix.length; i++)
-
-        {
-            if (matrix[i][0] == 0) {
-                for (int j = 1; j < matrix[0].length; j++) {
-                    matrix[i][j] = 0;
-                }
-            }
-        }
-        // Cols
-        for (
-                int i = 1;
-                i < matrix[0].length; i++)
-
-        {
-            if (matrix[0][i] == 0) {
-                for (int j = 1; j < matrix.length; j++) {
-                    matrix[j][i] = 0;
-                }
-            }
+        // Nullify cols
+        for(int i = 1; i < grid[0].length; i++) {
+            if(grid[0][i] == 0) nullifyCol(grid, i);
         }
 
-        if (firstColHasZero)
-
-        {
-            for (int i = 0; i < matrix.length; i++) {
-                matrix[i][0] = 0;
-            }
+        // Nullify rows
+        for(int j = 1; j < grid.length; j++) {
+            if(grid[j][0] == 0) nullifyRow(grid, j);
         }
 
-        if (firstRowHasZero)
+        if(firstRowHasZero) nullifyRow(grid, 0);
+        if(firstColHasZero) nullifyCol(grid, 0);
+    }
 
-        {
-            for (int i = 0; i < matrix[0].length; i++) {
-                matrix[0][i] = 0;
-            }
+    private static void nullifyRow(int[][] grid, int row) {
+        for(int i = 0; i < grid[row].length; i++) {
+            grid[row][i] = 0;
+        }
+    }
+
+    private static void nullifyCol(int[][] grid, int col) {
+        for(int i = 0; i < grid.length; i++) {
+            grid[i][col] = 0;
         }
     }
 }
