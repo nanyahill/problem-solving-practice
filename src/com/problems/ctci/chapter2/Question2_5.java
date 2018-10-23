@@ -8,7 +8,7 @@ import java.util.Deque;
 public class Question2_5 {
 
     // Assumes LSD is the head of list
-    public static ListNode sumLists(ListNode L1, ListNode L2) {
+    public static ListNode sumLists_LSD(ListNode L1, ListNode L2) {
         if(L1 == null || L2 == null) return L1 == null ? L2 : L1;
         ListNode dummy = new ListNode(0);
         ListNode<Integer> curr1 = L1;
@@ -29,7 +29,7 @@ public class Question2_5 {
     }
 
     // Assumes MSD is the head of list
-    public static ListNode sumLists(ListNode<Integer> L1, ListNode<Integer> L2) {
+    public static ListNode sumLists_MSD(ListNode<Integer> L1, ListNode<Integer> L2) {
         if(L1 == null || L2 == null) return L1 == null ? L2 : L1;
         Deque<Integer> stack1 = new ArrayDeque<>();
         Deque<Integer> stack2 = new ArrayDeque<>();
