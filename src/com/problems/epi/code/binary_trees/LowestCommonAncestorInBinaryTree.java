@@ -67,8 +67,8 @@ public class LowestCommonAncestorInBinaryTree {
     }
 
     public static class Result {
-        int count;
-        TreeNode ancestor;
+        int count; // how many of two nodes were found in subtree
+        TreeNode ancestor; // their LCA, if both nodes were present.
         public Result(int count, TreeNode ancestor) {
             this.count = count;
             this.ancestor = ancestor;
