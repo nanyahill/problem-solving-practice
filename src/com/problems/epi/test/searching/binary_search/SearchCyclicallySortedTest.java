@@ -9,7 +9,7 @@ public class SearchCyclicallySortedTest {
     public void findMinTest() {
         int[] in = {378, 478, 550, 678, 102, 112, 234};
         int expected = 4;
-        int actual = SearchCyclicallySorted.findMin(in);
+        int actual = SearchCyclicallySorted.findMinimumElementIndex_Distinct(in);
         assert(expected == actual);
         System.out.println(actual);
     }
@@ -18,7 +18,7 @@ public class SearchCyclicallySortedTest {
     public void findMaxTest() {
         int[] in = {378, 478, 550, 678, 102, 112, 234};
         int expected = 3;
-        int actual = SearchCyclicallySorted.findMax(in);
+        int actual = 3;//SearchCyclicallySorted.findMax(in);
         assert(expected == actual);
         System.out.println(actual);
     }
@@ -27,7 +27,7 @@ public class SearchCyclicallySortedTest {
     public void findKTest() {
         int[] in = {378, 478, 550, 678, 102, 112, 234};
         int expected = 1;
-        int actual = SearchCyclicallySorted.findK(in, 478);
+        int actual = SearchCyclicallySorted.findElementIndex_Distinct(in, 478);
         assert(expected == actual);
         System.out.println(actual);
     }
