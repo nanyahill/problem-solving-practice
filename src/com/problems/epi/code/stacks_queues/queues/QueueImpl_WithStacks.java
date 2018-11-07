@@ -2,6 +2,7 @@ package com.problems.epi.code.stacks_queues.queues;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.NoSuchElementException;
 
 /**
  * Key Insight: In a Queue, insertions happen at the back while deletions happen at the front.
@@ -27,21 +28,25 @@ public class QueueImpl_WithStacks<T> {
     }
 
     public Integer dequeue() {
-        if(stackOldest.isEmpty()) moveStack();
+        if(isEmpty()) throw new NoSuchElementException();
+        if(stackOldest.isEmpty()) moveNewToOld();
         size--;
         return stackOldest.pop();
     }
 
-    private void moveStack() {
+    private void moveNewToOld() {
         if(stackNewest.isEmpty()) throw new IllegalStateException();
         while(!stackNewest.isEmpty()) stackOldest.push(stackNewest.pop());
     }
 
-    public int front() {
-        if(stackOldest.isEmpty()) moveStack();
+    public int peek() {
+        if(isEmpty()) throw new NoSuchElementException();
+        if(stackOldest.isEmpty()) moveNewToOld();
         return stackOldest.peek();
     }
 
-    public boolean isEmpty() { return size == 0; }
+    public boolean isEmpty() {
+        return stackNewest.isEmpty() && stackOldest.isEmpty();
+    }
     public int size() { return size; }
 }

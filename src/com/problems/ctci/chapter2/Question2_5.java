@@ -8,52 +8,44 @@ import java.util.Deque;
 public class Question2_5 {
 
     // Assumes LSD is the head of list
-    public static ListNode sumLists_LSD(ListNode L1, ListNode L2) {
+    public static ListNode sumLists_LSD(ListNode<Integer> L1, ListNode<Integer> L2) {
         if(L1 == null || L2 == null) return L1 == null ? L2 : L1;
         ListNode dummy = new ListNode(0);
-        ListNode<Integer> curr1 = L1;
-        ListNode<Integer> curr2 = L2;
-        ListNode curr3 = dummy;
+        ListNode curr = dummy;
         int carry = 0;
-        while(curr1 != null || curr2 != null || carry != 0) {
-            ListNode node = new ListNode(0);
-            int sum = (curr1 != null ? curr1.data : 0) + (curr2 != null ? curr2.data : 0) + carry;
-            node.data = sum % 10;
+        while(L1 != null || L2 != null || carry != 0) {
+            int sum = (L1 != null ? L1.data : 0) + (L2 != null ? L2.data : 0) + carry;
+            ListNode n = new ListNode(sum % 10);
             carry = sum / 10;
-            curr3.next = node;
-            curr1 = curr1 != null ? curr1.next : null;
-            curr2 = curr2 != null ? curr2.next : null;
-            curr3 = curr3.next;
+            curr.next = n;
+            curr = curr.next;
+            L1 = L1 != null ? L1.next : null;
+            L2 = L2 != null ? L2.next : null;
         }
         return dummy.next;
     }
 
     // Assumes MSD is the head of list
     public static ListNode sumLists_MSD(ListNode<Integer> L1, ListNode<Integer> L2) {
-        if(L1 == null || L2 == null) return L1 == null ? L2 : L1;
         Deque<Integer> stack1 = new ArrayDeque<>();
         Deque<Integer> stack2 = new ArrayDeque<>();
         while(L1 != null) {
-            stack1.offerLast(L1.data);
+            stack1.push(L1.data);
             L1 = L1.next;
         }
-
         while(L2 != null) {
-            stack2.offerLast(L2.data);
+            stack2.push(L2.data);
             L2 = L2.next;
         }
-
         int carry = 0;
-        ListNode result = null;
+        ListNode curr = null;
         while(!stack1.isEmpty() || !stack2.isEmpty() || carry != 0) {
-            int sum = carry;
-            if(!stack1.isEmpty()) sum += stack1.pollLast();
-            if(!stack2.isEmpty()) sum += stack2.pollLast();
-            ListNode head = new ListNode(sum % 10);
-            head.next = result;
-            result = head;
+            int sum = (!stack1.isEmpty() ? stack1.pop() : 0) + (!stack2.isEmpty() ? stack2.pop() : 0) + carry;
+            ListNode n = new ListNode(sum % 10);
+            n.next = curr;
+            curr = n;
             carry = sum / 10;
         }
-        return result;
+        return curr;
     }
 }

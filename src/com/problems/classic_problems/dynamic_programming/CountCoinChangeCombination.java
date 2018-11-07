@@ -46,7 +46,7 @@ public class CountCoinChangeCombination {
                 if (changeLeft >= 0) {
                     int withThisCoin = cache[changeLeft];
                     int withoutThisCoin = cache[j];
-                    cache[j] = withoutThisCoin + withThisCoin;
+                    cache[j] += cache[changeLeft];
                 }
             }
         }
