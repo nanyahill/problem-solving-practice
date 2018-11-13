@@ -23,7 +23,7 @@ public class SymmetricBinaryTree {
     public static boolean isSymmetric_Recursive(TreeNode root) {
 
         if(root == null) return true;
-        return isMirror(root, root);
+        return isMirror(root.left, root.right);
     }
 
     private static boolean isMirror(TreeNode<Integer> left, TreeNode<Integer> right) {
