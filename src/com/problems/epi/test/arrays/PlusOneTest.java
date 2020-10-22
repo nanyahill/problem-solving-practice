@@ -14,7 +14,7 @@ public class PlusOneTest {
     public void plusOneTest() {
         int[] input = { 2, 1, 4, 7, 4, 8, 3, 6, 4, 7 };
         int[] expected = {2, 1 , 4, 7, 4, 8, 3, 6, 4, 8};
-        int[] actual = PlusOne.plusOneAnother(input);
+        int[] actual = PlusOne.plusOneElegant(input);
         assertArrayEquals(expected, actual);
         //Assert.assertArrayEquals(expected,actual);
     }

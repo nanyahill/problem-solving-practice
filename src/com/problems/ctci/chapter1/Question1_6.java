@@ -44,7 +44,8 @@ public class Question1_6 {
         int duplicateCount = 0;
         for(int i = 0; i < input.length(); i++) {
             duplicateCount++;
-            if(i + 1 < input.length() && input.charAt(i) != input.charAt(i + 1)) {
+            // if i is on the last char OR next char is different from curr; increase the length;
+            if(i + 1 == input.length() || input.charAt(i) != input.charAt(i + 1)) {
                 compressedCount += 1 + String.valueOf(duplicateCount).length();
                 duplicateCount = 0;
             }

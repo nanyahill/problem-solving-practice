@@ -136,8 +136,9 @@ public class JumpGame {
 //        int[] nums = {5,9,3,2,1,0,2,3,3,1,0,0};
         //int[] nums = {1,1,1,0};
         //int[] nums = {6,5, 4, 3, 2, 1, 1};
-        int[] nums = {3, 0, 8, 2, 0, 0, 1};
-        System.out.print(canJump_Recursive(nums));
+        //int[] nums = {3, 0, 8, 2, 0, 0, 1};
+        //System.out.print(canJump_Recursive(nums));
+        System.out.println(2 & (1 << 3));
 //        List<List<Integer>> result = canJump_Recursive(nums);
 //        for (List<Integer> set : result) {
 //            System.out.print(Arrays.toString(set.toArray()));

@@ -6,10 +6,10 @@ public class Question1_7 {
         int n = image.length - 1;
         for (int i = 0; i <= (image.length / 2); i++) {
             for (int j = i; j < n - i; j++) {
-                int tmp = image[j][n - i];
-                image[j][n - i] = image[i][j];
-                image[i][j] = image[n - j][i];
-                image[n - j][i] = image[n - i][n - j];
+                int tmp = image[j][n - i]; // [i][n-j]
+                image[j][n - i] = image[i][j]; // [j][i]
+                image[i][j] = image[n - j][i]; // [n-i][j]
+                image[n - j][i] = image[n - i][n - j]; // [n-j][n-i]
                 image[n - i][n - j] = tmp;
             }
         }
@@ -53,6 +53,8 @@ public class Question1_7 {
     public static void main(String[] args) {
         int[][] image = {{5,1,9,11},{2,4,8,10},{13,3,6,7},{15,14,12,16}};
         rotateImageby90Degrees_UsingTranspose(image);
+        int sum = 'A';
+        System.out.println(sum);
 
     }
 }

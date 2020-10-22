@@ -1,11 +1,8 @@
 package com.problems.epi.test.hash_tables;
 
 import com.problems.epi.code.hash_tables.LRUCache_WithOutLibraryStructure;
-import org.junit.Test;
 
 public class LRUCacheTest {
-
-    @Test
     public void lruCacheTest() {
         final int CAPACITY = 2;
         LRUCache_WithOutLibraryStructure c = new LRUCache_WithOutLibraryStructure(CAPACITY);

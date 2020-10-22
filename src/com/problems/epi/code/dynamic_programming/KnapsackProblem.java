@@ -68,7 +68,7 @@ public class KnapsackProblem {
             int itemWeight = items.get(i-1).weight;
             int itemValue = items.get(i-1).value;
             // this order of inner for loop iteration is important,
-            // because an empty knapsack has a weight = wgt and you try to fill it up.
+            // because an empty knapsack has a capacity of wgt and you try to fill it up.
             for(int j = weight; j >= itemWeight; j--) {
                 table[j] = Math.max(table[j], itemValue + table[j - itemWeight]);
             }

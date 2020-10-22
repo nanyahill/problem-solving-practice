@@ -22,6 +22,7 @@ public class LRUCache_WithLibraryStructure {
     }
 
     public void put(int k, double v) {
+        map.get(k);
         if(!map.containsKey(k))
             map.put(k,v);
     }

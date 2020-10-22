@@ -12,10 +12,10 @@ public class Question4_11 {
             else root.insert(d);
         }
 
-        public TreeRandomNode delete(int d) {
-            if (root == null) return null;
-            else return root.delete(d);
-        }
+//        public TreeRandomNode delete(int d) {
+//            if (root == null) return null;
+//            else return root.delete(d);
+//        }
 
         public TreeRandomNode find(int d) {
             if (root == null) return null;
@@ -58,19 +58,24 @@ public class Question4_11 {
             if (idx < leftSize) {
                 return left.getRandomNode();
             } else if (idx == leftSize) return this;
+            /**
+             * Note that this can never give a null pointer exception
+             * because if right is null it means leftSize is either x or 0
+             * if leftsize is 0, it means the size is 1 and idx == leftsize (0 == 0)
+             */
             else return right.getRandomNode();
         }
 
-        private TreeRandomNode delete(int d) {
-            if (d < data) {
-                if (left == null) return null;
-                else return left.delete(d);
-            } else if (d == data) return this;
-            else {
-                if (right == null) return null;
-                else return right.delete(d);
-            }
-        }
+//        private TreeRandomNode delete(int d) {
+//            if (d < data) {
+//                if (left == null) return null;
+//                else return left.delete(d);
+//            } else if (d == data) return this;
+//            else {
+//                if (right == null) return null;
+//                else return right.delete(d);
+//            }
+//        }
 
         private TreeRandomNode find(int d) {
             if (d < data) {

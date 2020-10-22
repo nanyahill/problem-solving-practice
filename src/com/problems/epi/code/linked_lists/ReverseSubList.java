@@ -15,22 +15,18 @@ public class ReverseSubList {
      * Time Complexity: O(n) where n is the nth node in the original list
      * Space Complexity: O(1)
      */
-    public static ListNode<Integer> reverseSubListCleaner(ListNode<Integer> head, int m, int n) {
-        if(head == null || head.next == null || m == n) return head;
-        ListNode<Integer> dummy = new ListNode<>(0, null);
-        ListNode<Integer> pre = dummy;
-        dummy.next = head;
+    public static ListNode<Integer> reverseSubListCleaner(ListNode<Integer> head, int s, int f) {
+        if(head == null) return head;
+        ListNode dummy = new ListNode(0, head);
+        ListNode pre = dummy;
         int k = 1;
-        while(k++ < m) {
-            pre = pre.next;
-        }
-        ListNode<Integer> start = pre.next;
-        ListNode<Integer> next = start.next;
-        while(m++ < n) {
-            start.next = next.next;
-            next.next = pre.next;
-            pre.next = next;
-            next = start.next;
+        while(k++ < s) pre = pre.next;
+        ListNode start = pre.next;
+        while(s++ < f) {
+            ListNode tmp = start.next;
+            start.next = tmp.next;
+            tmp.next = pre.next;
+            pre.next = tmp;
         }
         return dummy.next;
     }

@@ -4,7 +4,7 @@ import java.util.List;
 
 public class PlusOne {
 
-    public static List<Integer> plusOne(List<Integer> digits) {
+    public static List<Integer> plusOneNonElegant(List<Integer> digits) {
         int n = digits.size() - 1;
         digits.set(n, digits.get(n) + 1);
         for (int i = n; i > 0; --i) {
@@ -23,7 +23,7 @@ public class PlusOne {
         return digits;
     }
 
-    public static int[] plusOneAnother(int[] digits) {
+    public static int[] plusOneElegant(int[] digits) {
         for (int i = digits.length - 1; i >= 0; i--) {
             if (digits[i] < 9) {
                 digits[i]++;

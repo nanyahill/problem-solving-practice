@@ -9,7 +9,7 @@ public class Question2_2 {
         ListNode fast = head;
         ListNode slow = head;
         while(k-- > 0) {
-            if(fast == null) return null;
+            if(fast == null) return null; // if k > length of list
             fast = fast.next;
         }
         while(fast != null) {

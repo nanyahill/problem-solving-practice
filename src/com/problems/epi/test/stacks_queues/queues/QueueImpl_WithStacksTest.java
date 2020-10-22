@@ -45,8 +45,6 @@ public class QueueImpl_WithStacksTest {
         assertDequeue(q, 11);
         assertDequeue(q, 12);
         //Now s2 contains 7 elements, while s1 is empty
-
-        assert(q.front() == 13);
     }
 
     private static void assertDequeue(QueueImpl_WithStacks<Integer> q, Integer t) {

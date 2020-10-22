@@ -18,15 +18,17 @@ public class LRUCache_WithOutLibraryStructure {
         return node.value;
     }
 
-    public boolean insert(int key, double value) {
-        if(map.containsKey(key)) return false;
-        CacheNode node = new CacheNode(key, value);
-        if(map.size() >= capacity && tail != null) {
-            remove(tail.key);
+    public void insert(int key, double value) {
+        if(map.containsKey(key)) map.get(key);
+        else {
+            CacheNode node = new CacheNode(key, value);
+            if(map.size() >= capacity && tail != null) {
+                remove(tail.key);
+            }
+            insertNodeInFrontOfList(node);
+            map.put(key, node);
         }
-        insertNodeInFrontOfList(node);
-        map.put(key, node);
-        return true;
+        //return true;
     }
 
     public CacheNode remove(int key) {

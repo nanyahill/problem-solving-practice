@@ -67,7 +67,7 @@ public class Question10_7 {
             Scanner in = new Scanner(new FileReader(filename));
             while(in.hasNextInt()) {
                 int num = in.nextInt();
-                countArray[num >> 16]++;
+                countArray[num >>> 16]++;
             }
         }
         catch(FileNotFoundException e) {}

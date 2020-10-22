@@ -76,7 +76,7 @@ public class UnionOfIntervals {
                 return Integer.compare(i1.start, i2.start);
             }});
         // Use Lambda
-        //intervals.sort((i1, i2) -> Integer.compare(i1.start, i2.start));
+        //Collections.sort((Interval i1, Interval i2) -> Integer.compare(i1.start, i2.start));
         int start = intervals.get(0).start, end = intervals.get(0).end;
         for(Interval interval : intervals) {
             // if(res.isEmpty() || interval.start > res.getLast().end)

@@ -8,7 +8,7 @@ import java.util.*;
  * 2) Create three variables to maintain three sections of the array- smaller = 0 (ranges from 0 to smaller), equal = 0 (ranges from smaller + 1 to equal), and larger = n - 1 (ranges from equal + 1 to larger)
  * 3) Scan equal from left to right; v is the pivot value.
  *      – (a[equal] < v): exchange a[smaller] with a[equal]; increment both smaller and equal
- *      – (a[i] > v): exchange a[larger] with a[equal]; decrement larger
+ *      – (a[equal] > v): exchange a[larger] with a[equal]; decrement larger
  *      – (a[equal] == v): increment equal
  * 4) Repeat until equal and larger pointers cross
  *  At the end of the algorithm-
@@ -25,8 +25,8 @@ public class DutchNationalFlag {
     public static void dutchFlagPartition_Generic(int[] nums, int index) {
         int equal = 0, smaller = 0, larger = nums.length - 1; // important!
         int pivot = nums[index];
-        while (equal <= larger) {
-            if (nums[equal] < pivot) { // <= because all elements need to be checked/compared
+        while (equal <= larger) { // <= because all elements need to be checked/compared
+            if (nums[equal] < pivot) {
                 int tmp = nums[equal];
                 nums[equal] = nums[smaller];
                 nums[smaller] = tmp;

@@ -21,8 +21,8 @@ public class Question3_3 {
             }
             else {
                 last = new Stack(capacity);
-                stacks.add(last);
                 last.push(val);
+                stacks.add(last);
             }
         }
 

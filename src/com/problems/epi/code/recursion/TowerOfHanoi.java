@@ -19,7 +19,7 @@ public class TowerOfHanoi {
     private static void solveHanoi(int remainingDisks, List<Deque<Integer>> pegs, int src, int dest, int aux, List<List<Integer>> result) {
         if (remainingDisks == 0) return;
         solveHanoi(remainingDisks - 1, pegs, src, aux, dest, result);
-        pegs.get(dest).addLast(pegs.get(src).removeLast());
+        pegs.get(dest).push(pegs.get(src).pop());
         result.add(Arrays.asList(src, dest));
         solveHanoi(remainingDisks - 1, pegs, aux, dest, src, result);
     }
@@ -32,7 +32,7 @@ public class TowerOfHanoi {
 
     private static void addDisksToSrcPeg(List<Deque<Integer>> pegs, int disks) {
         for (int i = disks; i >= 0; i--) {
-            pegs.get(0).addLast(i);
+            pegs.get(0).push(i);
         }
     }
 }

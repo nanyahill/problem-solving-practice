@@ -26,7 +26,29 @@ public class PermutationGeneration {
         }
     }
 
-    // TODO- implement perm for distinct using the insertCharAt method of strings
+    // Generates permutations for distinct elements using the insertCharAt method of strings
+    public static List<List<Integer>> generatePerms_Distinct_Iterative(int[] nums) {
+        List<List<Integer>> result = new ArrayList<>();
+        if(nums == null || nums.length == 0) return result;
+        List<Integer> tmp = new ArrayList<>();
+        tmp.add(nums[0]);
+        result.add(tmp);
+        for(int i = 1; i < nums.length; i++) {
+            int num = nums[i];
+            List<List<Integer>> tmpResult = new ArrayList<>();
+            // the below for loops can be swapped
+            for(List<Integer> list : result) { // for(int j = 0; j <= i; j++) {
+                for(int j = 0; j <= list.size(); j++) { // for(List<Integer> list : result) {
+                    List<Integer> copy = new ArrayList<>(list);
+                    copy.add(j, num);
+                    tmpResult.add(copy);
+                }
+            }
+            result = tmpResult;
+        }
+        return result;
+    }
+
     // TODO- modify perm duplicates to match that for strings in ctci
     /*** duplicate entries ***/
     public static List<List<Integer>> generatePermutations_Duplicates(List<Integer> input) {
@@ -105,7 +127,7 @@ public class PermutationGeneration {
 
     public static void main(String[] args) {
 //        List<Integer> list = new ArrayList<>(Arrays.asList(new Integer[]{1, 2, 3}));
-        List<List<Integer>> result = getPerms_Distinct(new int[] {1,2,3});
+        List<List<Integer>> result = generatePerms_Distinct_Iterative(new int[] {1,2,3});
         for (List<Integer> set : result) {
             System.out.print(Arrays.toString(set.toArray()));
             System.out.println();
