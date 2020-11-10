@@ -9,10 +9,10 @@ public class EnumerateAllPrimes {
 
     /**
      * This is the brute-force solution
-     * that uses the idea of primality check
-     * for each number ranging from 2...n
-     * If the number is a prime, it is
-     * added to the result list.
+     * that uses the idea of primality check (trial division) of a number, n
+     * i.e. check whether n is evenly divisible by any number between 2 and √n
+     * If it is divisible, it is not a prime
+     * For this solution, we assume, i, is a prime number before the primality check
      * Time Complexity: O(n^ 3/2)
      * Space Complexity: O(1)
      */
@@ -27,7 +27,7 @@ public class EnumerateAllPrimes {
                 // i != j for the case of i = 2 and i = 3
                 // if you don't add the above condition, 2 and 3 are not added
                 if (i != j && i % j == 0) {
-                    isPrime = false;
+                    isPrime = false; // not a prime
                 }
             }
             if (isPrime) result.add(i);
