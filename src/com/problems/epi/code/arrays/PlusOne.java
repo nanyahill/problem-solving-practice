@@ -32,6 +32,7 @@ public class PlusOne {
             digits[i] = 0;
         }
         int[] res = new int[digits.length + 1];
+        // All other elements are 0
         res[0] = 1;
         return res;
     }
