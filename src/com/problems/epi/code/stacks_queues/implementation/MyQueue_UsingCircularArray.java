@@ -6,7 +6,7 @@ import java.util.NoSuchElementException;
  * This implementation is useful when the queue size is less than the capacity most of the time.
  * A normal array cannot be used because:
  * 1. It has fixed size (cannot be resized)
- * 2. It wastes space if the queue size less than its capapcity most of the time
+ * 2. It wastes space if the queue size less than its capacity most of the time
  * Time Complexity: All operations are O(1)
  */
 public class MyQueue_UsingCircularArray<T> {

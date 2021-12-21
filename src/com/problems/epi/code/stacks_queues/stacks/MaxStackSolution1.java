@@ -24,6 +24,7 @@ public class MaxStackSolution1 {
 
     /**
      * Create an inner class that would store the value to be added and the current max seen so far.
+     * This uses the idea of caching the max value (at or below that entry) for each entry
      * However,this solution would result in a lot of wasted space if the number of elements to be added is large
      */
     public static Deque<NodeWithMax> elements = new ArrayDeque<>();

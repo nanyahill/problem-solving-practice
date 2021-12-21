@@ -14,9 +14,9 @@ public class TestOverLappingTest {
     @Test
     public void detectOverLapTest() {
         ListNode<Integer> L1 = new ListNode<>(1, new ListNode<>(2));
-        L1.next.next =  new ListNode<>(3, new ListNode<>(4, new ListNode<>(5, null)));
+        L1.next.next =  new ListNode<>(3, new ListNode<>(4, new ListNode<>(8, null)));
 
-        ListNode<Integer> L2 = new ListNode<>(5, new ListNode<>(3));
+        ListNode<Integer> L2 = new ListNode<>(5, new ListNode<>(7));
         L2.next.next =  new ListNode<>(11, new ListNode<>(9, L1.next.next));
 
         ListNode<Integer> expected = L1.next.next;

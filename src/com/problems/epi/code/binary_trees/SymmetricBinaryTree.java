@@ -33,7 +33,7 @@ public class SymmetricBinaryTree {
     }
 
     /**
-     * Iterative: Since this resembles a depth order travesal (BFS), then you can use a queue, to process each level one after another.
+     * Iterative: Since this resembles a breadth order traversal (BFS), then you can use a queue, to process each level one after another.
      * Always checking if the left.val == right.val for all subtrees in the tree.
      * Note that the solution is cleaner if the queue heap structure allows null insertions.
      */

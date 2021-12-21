@@ -49,6 +49,6 @@ public class IsPalindromic {
             n1 = n1.next;
             n2 = n2.next;
         }
-        return true; // this is correct even though slow may have an extra node sometimes (odd length LL)
+        return true; // this is correct even though slow may have an extra node sometimes (odd length LL) or left may have an extra node (even length LL)
     }
 }

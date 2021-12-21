@@ -14,6 +14,7 @@ public class TestOverLapping {
      * TreeTraversal_Recursive 1's Key Idea:
      * 1) If L1 has a length of a + c; then L2 must have a length of b + c.
      * Hence, if we can find the difference of the two lengths, then we can move the longer list (a - b) steps.
+     * This way the longer list and shorter list will have the same number of tail nodes that can be advanced in tandem.
      * 2) Then we advance the two lists in tandem to get the intersection node.
      * Time Complexity: O(n)
      * Space Complexity: O(1)
@@ -48,7 +49,7 @@ public class TestOverLapping {
             p1 = p1 == null ? L2 : p1.next;
             p2 = p2 == null ? L1 : p2.next;
         }
-        return p1;
+        return p1; // or p2
     }
 
     private static ListNode<Integer> moveListByDiff(int diff, ListNode<Integer> L) {

@@ -53,7 +53,7 @@ public class RemoveDuplicatesFromSortedArray {
         return writeIdx;
     }
 
-    // Variant 2: Remove duplicates such that each unique element appears at most twice
+    // Variant 2: Remove duplicates such that each unique element appears at most k times
     public static int removeDuplicatesFromSortedArray(int[] nums, int k) {
         if(nums == null || nums.length == 0) {
             return -1;

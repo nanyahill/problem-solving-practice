@@ -10,10 +10,10 @@ public class WellFormedNess {
 
     /**
      * Key Insight: For every left symbol, you need to find a matching right symbol.
-     * The order of the right symbol matters because the last left symbol seen must match the first right symbol found.
-     * This mimicks a stack of LIFO. hence, use a Stack, to store all left symbols found.
+     * Important: The order of the right symbol matters because the last left symbol seen must match the first right symbol found.
+     * This mimics a stack of LIFO. hence, use a Stack, to store all left symbols found.
      * If a right symbol is encountered, check the top of the stack and see if the left symbol there matches the right symbol found.
-     * If not there, the string is not well formed.
+     * If not there, the string is not well-formed.
      * Note that it might seem obvious to use six count variables to keep a count of left and right versions of the three symbols
      * HOWEVER, this would not work for the input case were "([)]" since the ORDERING matters in this problem.
      * Time Complexity: O(n)

@@ -10,7 +10,7 @@ public class ReverseSubList {
      * 1) Common approach to mind is  to extract the sublist, reverse it, and place it back in its original position.
      * This method requires a several pointer variables to be maintained.
      * 2) A cleaner approach is to see the reversal of the sublist as if the leftmost element (position m) in the list
-     * is being bubbled to the leftmost position (position n).
+     * is being bubbled to the rightmost position (position n).
      * NOTE: We use a dummy node here because the solution transforms the list somewhere between the beginning and the end inclusive.
      * Time Complexity: O(n) where n is the nth node in the original list
      * Space Complexity: O(1)

@@ -14,9 +14,8 @@ public class MergeSortedLists {
      * Space complexity: O(1)
      */
     public static ListNode mergeSortedLists_WithDummyNode(ListNode<Integer> l1, ListNode<Integer> l2) {
-        if (l1 == null || l2 == null) return null;
-        if (l1 == null && l2 != null) return l2;
-        else if (l1 != null && l2 == null) return l1;
+        if (l1 == null) return l2;
+        if (l2 == null) return l1;
         // Dummy node is used because the input lists are modified
         ListNode<Integer> dummy = new ListNode<>(0);
         ListNode<Integer> current = dummy;
@@ -58,5 +57,22 @@ public class MergeSortedLists {
         }
         curr.next = L1 == null ? L2 : L1;
         return res;
+    }
+
+    public static ListNode mergeTwoSortedLists_Recursion(ListNode<Integer> l1, ListNode<Integer> l2) {
+        if (l1 == null) {
+            return l2;
+        }
+        else if (l2 == null) {
+            return l1;
+        }
+        else if(l1.data <= l2.data) {
+            l1.next = mergeTwoSortedLists_Recursion(l1.next, l2);
+            return l1;
+        }
+        else {
+            l2.next = mergeTwoSortedLists_Recursion(l1, l2.next);
+            return l2;
+        }
     }
 }

@@ -26,6 +26,26 @@ public class BuyAndSellStock_I {
         return maxProfit < 0 ? 0 : maxProfit; // for cases when input is [7, 6, 4, 3, 1]
     }
 
+    // Variant
+    public static int longestSubarrayWithEqualElements(int[] nums) {
+        if(nums == null || nums.length == 0) {
+            return 0;
+        }
+        int maxLength = 1;
+        int elementCount = 1;
+        for(int i = 1; i < nums.length; i++) {
+            if(nums[i] == nums[i - 1]) {
+                elementCount++;
+            }
+            else {
+                maxLength = Math.max(elementCount, maxLength);
+                elementCount = 1;
+            }
+        }
+        maxLength = Math.max(maxLength, elementCount);
+        return maxLength;
+    }
+
     public static void main(String[] args) {
         int[] values = {7, 1, 5, 3, 6, 4, 8};
         System.out.print(computeProfit(values));
