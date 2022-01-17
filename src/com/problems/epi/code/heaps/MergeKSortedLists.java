@@ -18,10 +18,13 @@ public class MergeKSortedLists {
     public static class HeapNode implements Comparable<HeapNode> {
         public int value;
         public int id;
+        // if you don't want to use iterators
+        // public int nextIdx;
 
         HeapNode(int value, int id) {
             this.value = value;
             this.id = id;
+            // this.nextIdx = nextIdx;
         }
 
         public int compareTo(HeapNode node) {
@@ -45,14 +48,20 @@ public class MergeKSortedLists {
             if(iters.get(i).hasNext()) {
                 heap.offer(new HeapNode(iters.get(i).next(), i));
             }
+            // if you don't want to use iterators
+            //heap.offer(new HeapNode(sortedArrays.get(i).get(0), i, 1));
         }
         while(!heap.isEmpty()) {
             HeapNode node = heap.poll();
             result.add(node.value);
             int id = node.id;
+            //int nextIdx = node.nextIdx;
             if(iters.get(id).hasNext()) {
                 heap.offer(new HeapNode(iters.get(id).next(), id));
             }
+//            if (nextIdx < sortedArrays.get(id).size()) {
+//                heap.offer(new HeapNode(sortedArrays.get(id).get(nextIdx), id, nextIdx + 1));
+//            }
         }
         return result;
     }

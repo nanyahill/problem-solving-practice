@@ -12,6 +12,7 @@ public class ReverseSubList {
      * 2) A cleaner approach is to see the reversal of the sublist as if the leftmost element (position m) in the list
      * is being bubbled to the rightmost position (position n).
      * NOTE: We use a dummy node here because the solution transforms the list somewhere between the beginning and the end inclusive.
+     * NOTE: Index for s and f start at 1. Thus, first node is at index 1, second node at index 2, etc...
      * Time Complexity: O(n) where n is the nth node in the original list
      * Space Complexity: O(1)
      */

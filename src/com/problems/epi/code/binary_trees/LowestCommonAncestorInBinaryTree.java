@@ -15,6 +15,9 @@ public class LowestCommonAncestorInBinaryTree {
 
     /** LCA in Binary Tree Top-Down Approach
      * Assumes nodes exist in the tree
+     *  Note: Does not pass EPI test case where the p and q point to the same node
+     *  Result is the root but EPI expects it to be the node itself
+     *  Example case: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]	16	16	(result:16)
      * Time Complexity: O(n^2), Space Complexity: O(1)
     */
     public static TreeNode lowestCommonAncestor_TopDown(TreeNode root, TreeNode p, TreeNode q) {
@@ -36,6 +39,7 @@ public class LowestCommonAncestorInBinaryTree {
     /**
      * LCA in Binary Tree Bottom-Up Approach
      * When the nodes exist in the tree.
+     * Also works for the case when nodes may or may not exist
      * Time Complexity: O(n), Space Complexity: O(h)
      */
     public static TreeNode lowestCommonAncestor_BottomUp(TreeNode root, TreeNode p, TreeNode q) {
@@ -44,7 +48,7 @@ public class LowestCommonAncestorInBinaryTree {
         TreeNode left = lowestCommonAncestor_BottomUp(root.left, p, q);
         TreeNode right = lowestCommonAncestor_BottomUp(root.right, p, q);
         if (left != null && right != null) return root;
-        return left != null ? left : right;
+        return right != null ? right : left;
     }
 
     /**

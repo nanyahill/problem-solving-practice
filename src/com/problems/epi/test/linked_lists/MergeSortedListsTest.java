@@ -28,6 +28,7 @@ public class MergeSortedListsTest {
 
     @Test
     public void mergeSortedLists2() {
+
         ListNode l1 = new ListNode(1);
         l1.next = new ListNode(2);
         l1.next.next = new ListNode(4);
@@ -42,7 +43,7 @@ public class MergeSortedListsTest {
         expected.next.next.next.next = new ListNode(4);
         ListNode actual = MergeSortedLists.mergeSortedLists_WithoutDummyNode(l1, l2);
         while(expected != null) {
-            assert expected.data == actual.data;
+            assert expected.data.equals(actual.data);
             expected = expected.next;
             actual = actual.next;
         }

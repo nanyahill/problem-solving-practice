@@ -121,20 +121,22 @@ public class Heap<T extends Comparable<T>> {
      ***************************************/
 
     /**
+     * min-heap
      * Time Complexity: O(logn)
-     * Note: when used in heap construction, this time complexity for the construction is different
+     * Note: when used in min-heap construction, this time complexity for the construction is different
      * because of the sum for each swim up the tree
      * Space Complexity: O(1)
      */
     // Think of this method as swimming from the bottom to top (bottom-up)
     private void swim(int k) {
-        while (k > 1 && heap[k].compareTo(heap[k / 2]) < 0) {
+        while (k > 1 && heap[k].compareTo(heap[k / 2]) < 0) { // if min-heap
             swap(heap, k, k / 2);
             k /= 2;
         }
     }
 
     /**
+     * min-heap
      * Time Complexity: O(logn)
      * Note: when used in heap construction, the time complexity for the construction is different
      * because of the sum for each sink down the tree
@@ -144,7 +146,11 @@ public class Heap<T extends Comparable<T>> {
     private void sink(int k) {
         while (2 * k <= size) {
             int j = 2 * k;
-            if (j < size && heap[j].compareTo(heap[j + 1]) > 0) j++;
+            // (min-heap)looking for a small number to exchange with k
+            // (max-heap)looking for a large number to exchange with k
+            if (j < size && heap[j].compareTo(heap[j + 1]) > 0) j++; // for max-heap: heap[j].compareTo(heap[j + 1]) < 0
+            // (min-heap) k is already less than a child
+            // (max-heap) k is already greater than a child
             if (heap[k].compareTo(heap[j]) < 0) break;
             swap(heap, k, j);
             k = j;

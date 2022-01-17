@@ -34,10 +34,11 @@ public class LowestCommonAncestor_WithParentPointers {
 
     /**
      * Efficient solution: Find the depth of each node.
-     * Iterate over the deeper node until it gets to the depth of the second node, then return the parent of any  * of the nodes.
+     * Iterate over the deeper node until it gets to the depth of the second node, then return the parent of any nodes.
      */
     public static TreeNode<Integer> lowestCommonAncestor_Efficient(TreeNode<Integer> n1, TreeNode<Integer> n2) {
         if (n1 == null || n2 == null) return null;
+        // Depth is distance from the node to the root of the tree
         int depth1 = getDepth(n1);
         int depth2 = getDepth(n2);
         int diff = Math.abs(depth1 - depth2);
@@ -48,7 +49,7 @@ public class LowestCommonAncestor_WithParentPointers {
             n1 = n1.parent;
             n2 = n2.parent;
         }
-        return n1;
+        return n1; // or n2
     }
 
     private static int getDepth(TreeNode<Integer> node) {
