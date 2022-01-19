@@ -4,6 +4,7 @@ import com.util.TreeNode;
 
 /**
  * Key Insight: A height-balanced tree has the difference between any left subtree and right subtree is at most 1.
+ * Pattern: Post-order tree traversal (see find LCA without parent pointers)
  */
 public class HeightBalancedTree {
 

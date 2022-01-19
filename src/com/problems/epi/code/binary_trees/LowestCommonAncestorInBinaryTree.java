@@ -10,6 +10,7 @@ import java.util.Set;
  *      - Without Parent Pointers (top down vs bottom up)
  *      - With Parent Pointers (with extra space vs without extra space)
  * Note this class was not exactly a problem in EPI. The class consists of two problems in EPI (with/without parents)
+ * Pattern: Post-order tree traversal (see isTreeHeightBalanced)
  */
 public class LowestCommonAncestorInBinaryTree {
 
@@ -44,7 +45,7 @@ public class LowestCommonAncestorInBinaryTree {
      */
     public static TreeNode lowestCommonAncestor_BottomUp(TreeNode root, TreeNode p, TreeNode q) {
         if (root == null || p == null || q == null) return null;
-        if(root == p || root == q) return root; // don't forget this line !
+        if(root == p || root == q) return root; // don't forget this line ! // p or q could be an ancestor of itself
         TreeNode left = lowestCommonAncestor_BottomUp(root.left, p, q);
         TreeNode right = lowestCommonAncestor_BottomUp(root.right, p, q);
         if (left != null && right != null) return root;
