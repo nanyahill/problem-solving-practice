@@ -39,9 +39,12 @@ public class OrderStatistic {
         k = A.length - k;
         while(lo < hi) {
             int pvt = rand.nextInt(hi - lo + 1) + lo;
-            swap(A, hi, pvt); // swap(A, lo, pvt); //keep pvt separately and focus on the unsorted (non-pvt) elements
-            //int j = partition(A, lo, hi);
-            int j = partition_WithDNF(A, lo, hi, pvt);
+            // Keeps pvt separately and focusing on the unsorted (non-pvt) elements.
+            // Useful if using the partition(...) on ln 67
+            // swap(A, hi, pvt); // swap(A, lo, pvt);
+//            int j = partition(A, lo, hi);
+            // Note: j is the final position the pvt element would be at if the array were fully sorted
+            int j = partition_WithDNF(A, lo, hi, A[pvt]);
             if(j == k) break;
             else if(j < k) lo = j + 1;
             else hi = j - 1;
@@ -49,6 +52,7 @@ public class OrderStatistic {
         return A[k];
     }
 
+    // Easier for me to remember- pvt is the actual pvt and not its index
     private static int partition_WithDNF(int[] A, int lo, int hi, int pvt) {
         int eq = lo;
         while(eq <= hi) {
@@ -59,7 +63,9 @@ public class OrderStatistic {
         return lo;
     }
 
-    private static int partition(int[] A, int lo, int hi) {
+    // May be too difficult to remember in an interview
+    // Prefer the DNF one as the partition function
+    public static int partition(int[] A, int lo, int hi) {
         if(A == null || A.length == 0) throw new IllegalStateException();
         int i = lo - 1; // i = lo;
         int j = hi; // j = hi + 1;

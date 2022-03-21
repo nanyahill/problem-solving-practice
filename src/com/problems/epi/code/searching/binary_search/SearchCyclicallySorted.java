@@ -16,6 +16,7 @@ public class SearchCyclicallySorted {
      * - Also, if A[m] > A[last position], then the minimum value MUST be in the range (m + 1 to last position).
      * Time Complexity: O(logn)
      * Space Complexity: O(1)
+     * NOTE: If duplicates were allowed, algorithm's time complexity cannot be anything less than linear time
      */
     public static int findMinimumElementIndex_Distinct(int[] nums) {
         if (nums == null || nums.length == 0) return -1;

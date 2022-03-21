@@ -15,4 +15,14 @@ public class OrderStatisticTest {
         assert(expected == actual);
         System.out.println(1 << 16);
     }
+
+    @Test
+    public void partitionWithDnFTest() {
+        int[] in = {5, 1, 7, 3, 4, 6};
+        int expected = 1;
+        int actual = OrderStatistic.partition(in, 0, 5);
+        //Assert.assertTrue(expected == actual);
+        assert(expected == actual);
+        System.out.println(1 << 16);
+    }
 }

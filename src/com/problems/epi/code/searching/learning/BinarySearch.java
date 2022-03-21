@@ -1,7 +1,7 @@
 package com.problems.epi.code.searching.learning;
 
 /**
- * This class implements the binary search algorithm using iteratve and recursive techniques
+ * This class implements the binary search algorithm using iterative and recursive techniques
  * Time Complexity: O(logn); Space Complexity: O(1).
  */
 public class BinarySearch {

@@ -18,8 +18,8 @@ public class ComputeSquareRoot {
         if(num < 0) return -1; // Accepts only non-negative integers
         int res = 0;
         for(int i = 0; i <= Math.ceil(num*0.5); i++) { // square root of num can be at most Math.ceil(num/2)
-            long isquared = (long) i*i;
-            if(isquared <= num) res = i;
+            long isSquared = (long) i*i;
+            if(isSquared <= num) res = i;
         }
         return res;
     }

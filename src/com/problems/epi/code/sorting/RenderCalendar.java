@@ -4,7 +4,7 @@ import java.util.*;
 
 /**
  * Problem Type:  Sorting, Geometric
- * Pattern: Sweep-Line Algorithm
+ * Pattern: Sweep-Line Algorithm (https://www.youtube.com/watch?v=dePDHVovJlE)
  * Key Insight:
  * - This problem is easier to visualize in a cartesian plane where each event is a rectangle. All events have the same height wrt the y-axis.
  * Thus, the problem boils down to finding the the maximum number of overlapping rectangles.
@@ -27,7 +27,7 @@ import java.util.*;
  */
 public class RenderCalendar {
 
-    public static class Event implements Comparable <Event> {
+    public static class Event {
         public int start;
         public int end;
 
@@ -35,9 +35,7 @@ public class RenderCalendar {
             this.start = start;
             this.end = end;
         }
-        public int compareTo(Event e) {
-            return Integer.compare(this.start, e.start);
-        }
+
     }
 
     private static class TimePoint implements Comparable <TimePoint>{

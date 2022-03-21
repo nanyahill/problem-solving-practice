@@ -15,6 +15,7 @@ import java.util.List;
  - Intervals where there is a start and an end that correspond to points in a plane. (Think of Sweep Line Algo, Sorting).
  - Finding the union/merge of intervals so that result is a list of disjoint intervals. (Think sorting)
  - Sorting the intervals based on their start values forms a list of mergable intervals in a contiguous block.
+ - Overlap happens when the end of prev interval is GREATER THAN/EQUAL TO the start of the curr interval.
  Brute Force:
  - For each interval, find all overalapping intervals and then merge these intervals
  Time Complexity: O(n^2), Space Complexity: O(1) (in-place: because when you are done with these intervals, they can be removed).
@@ -69,32 +70,21 @@ public class UnionOfIntervals {
 
     /** Time Complexity: O(nlogn), Space: O(n) */
     public static List<Interval> unionOfIntervals(List<Interval> intervals) {
-        List<Interval> res = new ArrayList<>();
-        if(intervals == null || intervals.size() == 0) return res;
+        if (intervals == null || intervals.size() == 0) return Collections.emptyList();
         Collections.sort(intervals, new Comparator<Interval>() {
             public int compare(Interval i1, Interval i2) {
                 return Integer.compare(i1.start, i2.start);
-            }});
-        // Use Lambda
-        //Collections.sort((Interval i1, Interval i2) -> Integer.compare(i1.start, i2.start));
-        int start = intervals.get(0).start, end = intervals.get(0).end;
-        for(Interval interval : intervals) {
-            // if(res.isEmpty() || interval.start > res.getLast().end)
-            // res.add(interval);
-            if(interval.start <= end) { // as long as the points touch they overlap; case for the equal to
-                end = Math.max(end, interval.end);
             }
-            // else {
-            // res.getLast().end = Math.max(res.getLast().end, interval.end);
-            // }
-            else {
-                res.add(new Interval(start, end));
-                start = interval.start;
-                end = interval.end;
+        });
+        List<Interval> res = new ArrayList<>();
+        for (Interval interval : intervals) {
+            if (!res.isEmpty() && (res.get(res.size() - 1).end >= interval.start)) { // as long as the points touch they overlap; case for the equal to
+                res.get(res.size() - 1).end = Math.max(res.get(res.size() - 1).end, interval.end);
+            } else {
+                res.add(interval);
             }
         }
-        res.add(new Interval(start, end)); // not needed if res is updated in the loop
-        return res;
+        return  res;
     }
 
     /** Time: O(nlogn), Space: O(1) */
@@ -108,6 +98,7 @@ public class UnionOfIntervals {
         //intervals.sort((i1, i2) -> Integer.compare(i1.start, i2.start));
         int i = 0;
         while(i < intervals.size() - 1) {
+
             Interval a = intervals.get(i);
             Interval b = intervals.get(i + 1);
             if(b.start <= a.end) { // as long as the points touch they overlap; case for the equal to
@@ -162,5 +153,52 @@ public class UnionOfIntervals {
             }
         }
         return res;
+    }
+
+    /** Time Complexity: O(nlogn), Space: O(n)
+     * This solution is for the EPI question where closed and open intervals are taken into consideration
+     * Note: In EPIJudge, the if statemnets on line 200 and 201 could be written as >= (or <=) but that would not pass all the testcases
+     * I believe it's related to how they may have implemented the equals() and hasCode fxns for the interval object internally
+     *
+     */
+    public static class Interval_EPI implements Comparable<Interval_EPI>{
+        public Endpoint left = new Endpoint();
+        public Endpoint right = new Endpoint();
+
+        @Override
+        public int compareTo(Interval_EPI o) {
+            if(this.left.val != o.left.val) {
+                return Integer.compare(this.left.val, o.left.val);
+            }
+            if(this.left.isClosed && !o.left.isClosed) {
+                return -1;
+            }
+            return (!this.left.isClosed && o.left.isClosed) ? 1: 0;
+        }
+
+        private static class Endpoint {
+            public boolean isClosed;
+            public int val;
+        }
+    }
+
+    public static List<Interval_EPI> unionOfIntervals_EPI(List<Interval_EPI> intervals) {
+        if(intervals == null || intervals.size() == 0) {
+            return Collections.emptyList();
+        }
+        List<Interval_EPI> result = new ArrayList<>();
+        Collections.sort(intervals);
+        for(Interval_EPI interval : intervals) {
+            if(!result.isEmpty() && (result.get(result.size() - 1).right.val > interval.left.val || result.get(result.size() - 1).right.val == interval.left.val && (result.get(result.size() - 1).right.isClosed || interval.left.isClosed))) {
+                if (interval.right.val > result.get(result.size() - 1).right.val || interval.right.val == result.get(result.size() - 1).right.val &&
+                        interval.right.isClosed) {
+                    result.get(result.size() - 1).right = interval.right;
+                }
+            }
+            else {
+                result.add(interval);
+            }
+        }
+        return result;
     }
 }

@@ -14,6 +14,8 @@ import java.util.Set;
  */
 public class LowestCommonAncestorInBinaryTree {
 
+    private static boolean pFound;
+    private static boolean qFound;
     /** LCA in Binary Tree Top-Down Approach
      * Assumes nodes exist in the tree
      *  Note: Does not pass EPI test case where the p and q point to the same node
@@ -40,7 +42,6 @@ public class LowestCommonAncestorInBinaryTree {
     /**
      * LCA in Binary Tree Bottom-Up Approach
      * When the nodes exist in the tree.
-     * Also works for the case when nodes may or may not exist
      * Time Complexity: O(n), Space Complexity: O(h)
      */
     public static TreeNode lowestCommonAncestor_BottomUp(TreeNode root, TreeNode p, TreeNode q) {
@@ -78,5 +79,31 @@ public class LowestCommonAncestorInBinaryTree {
             this.count = count;
             this.ancestor = ancestor;
         }
+    }
+
+    /**
+     * When the nodes may/may not exist in the tree
+     * Does not use any extra object only two boolean variables
+     */
+    public static TreeNode lowestCommonAncestor_MayExist_BottomUp2(TreeNode root, TreeNode p, TreeNode q) {
+        if(root == null || p == null || q == null) return null;
+        TreeNode result = lowestCommonAncestor_MayExist_BottomUpUtil2(root, p, q);
+        return pFound && qFound ? result : null;
+    }
+
+    private static TreeNode lowestCommonAncestor_MayExist_BottomUpUtil2(TreeNode root, TreeNode p, TreeNode q) {
+        if(root == null) return null;
+        TreeNode leftResult = lowestCommonAncestor_MayExist_BottomUpUtil2(root.left, p, q);
+        TreeNode rightResult = lowestCommonAncestor_MayExist_BottomUpUtil2(root.right, p, q);
+        if(root == p) {
+            pFound = true;
+            return root;
+        }
+        if(root == q) {
+            qFound = true;
+            return root;
+        }
+        if(leftResult != null && rightResult != null) return root;
+        return rightResult == null ? leftResult : rightResult;
     }
 }

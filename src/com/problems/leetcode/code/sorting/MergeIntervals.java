@@ -7,6 +7,10 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+/*
+ * Leetcode #56
+ */
+
 public class MergeIntervals {
     private static class Interval {
         int start;

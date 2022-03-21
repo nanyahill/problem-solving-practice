@@ -69,7 +69,7 @@ public class ReverseSubList {
     /**
      * Note that this method does not use a dummy node
      * because we are transforming the list from the beginning to the end exactly
-     * Good example of when we do not need dummy node
+     * Good example of when we do NOT need dummy node
      */
     private static ListNode<Integer> reverseList(ListNode<Integer> head) {
         if(head == null || head.next == null) return head;

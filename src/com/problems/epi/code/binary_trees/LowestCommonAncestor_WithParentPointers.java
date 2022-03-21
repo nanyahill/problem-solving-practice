@@ -39,6 +39,7 @@ public class LowestCommonAncestor_WithParentPointers {
     public static TreeNode<Integer> lowestCommonAncestor_Efficient(TreeNode<Integer> n1, TreeNode<Integer> n2) {
         if (n1 == null || n2 == null) return null;
         // Depth is distance from the node to the root of the tree
+        // Analogy of Tree depth- you are in a well looking up
         int depth1 = getDepth(n1);
         int depth2 = getDepth(n2);
         int diff = Math.abs(depth1 - depth2);

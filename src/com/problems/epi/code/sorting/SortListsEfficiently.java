@@ -11,6 +11,7 @@ import com.util.ListNode;
  *  The middle can be found by iterating two pointers- one twice as fast as the other,
  *  When the fast reaches the end of the list, the slower pointer is at the middle.
  *  - Call merge on the sublists using the solution from the merge two sorted sublists problem
+ *  Time complexity: O(nlogn), Space Complexity: O(logn) (recursive call stack)
  */
 public class SortListsEfficiently {
 
