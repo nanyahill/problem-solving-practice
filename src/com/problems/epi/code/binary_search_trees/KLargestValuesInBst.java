@@ -18,7 +18,6 @@ public class KLargestValuesInBst {
         if (tree == null || kLargestElements.size() == k) return;
         // Perform reverse inorder traversal.
         findKLargestInBstHelper(tree.right, k, kLargestElements);
-        kLargestElements.add(tree.data);
         if (kLargestElements.size() < k) {
             kLargestElements.add(tree.data);
             findKLargestInBstHelper(tree.left, k, kLargestElements);

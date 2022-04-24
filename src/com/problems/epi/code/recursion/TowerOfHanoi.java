@@ -12,15 +12,29 @@ public class TowerOfHanoi {
         List<List<Integer>> result = new ArrayList<>();
         initPegs(pegs, NUM_PEGS);
         addDisksToSrcPeg(pegs, disks);
-        solveHanoi(disks, pegs, 0, 1, 2, result);
+        solveHanoi(disks, pegs, 0, 2,  1, result);
         return result;
     }
+
+    /**
+     * Move top n-1 disks to the auxiliary tower. (src is src, aux is dest, dest is aux)
+     * Move 1 disk from source rod to destination rod. (src is src, aux is aux, dest is dest)
+     * Move n-1 disks from auxiliary disk to the destination rod (src is aux, aux is src, dest is dest)
+     * Total number of moves = 2^n - 1
+     * Time complexity: O(2^n)
+     * @param remainingDisks
+     * @param pegs
+     * @param src
+     * @param dest
+     * @param aux
+     * @param result
+     */
 
     private static void solveHanoi(int remainingDisks, List<Deque<Integer>> pegs, int src, int dest, int aux, List<List<Integer>> result) {
         if (remainingDisks == 0) return;
         solveHanoi(remainingDisks - 1, pegs, src, aux, dest, result);
         pegs.get(dest).push(pegs.get(src).pop());
-        result.add(Arrays.asList(src, dest));
+        result.add(Arrays.asList(src + 1, dest + 1));
         solveHanoi(remainingDisks - 1, pegs, aux, dest, src, result);
     }
 

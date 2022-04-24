@@ -5,7 +5,20 @@ import java.util.HashSet;
 import java.util.Queue;
 import java.util.Set;
 
-/** This problem is similar to Word Ladder Problem in LeetCode */
+/** This problem is similar to Word Ladder Problem in LeetCode #127 */
+
+/**
+ * Understanding the problem: Find the shortest sequence of words that transform string s to a string t
+ * Example: [hot, hit, dot, hat], "hit", "dot". Result: hit -> hot -> dot
+ * Key Insights: Shortest path points to BFS
+ * The words in the dictionary are the vertices and the edge (u,v) indicates that the strings
+ * corresponding to u and v differ in exactly one character.
+ *
+ * Gotchas:
+ * Be wary of doing string concatenation here as this creates a new string with each concatenation
+ * and a copy over characters each time.
+ * Do we need an extra object- StringWithDistance? No
+ */
 public class StringTransformability {
 
     private static class StringWithDistance {
@@ -40,6 +53,35 @@ public class StringTransformability {
                     }
                 }
             }
+        }
+        return -1;
+    }
+
+    // Inspired by LeetCode Discuss-https://leetcode.com/problems/word-ladder/discuss/1764371/A-very-highly-detailed-EXPLANATION
+    public static int transformString_TimeAndSpaceEfficient(Set<String> dict, String s, String t) {
+        Set<String> visited = new HashSet<>(dict);
+        Queue<String> queue = new ArrayDeque<>();
+        queue.add(s);
+        visited.remove(s);
+        int changes = 0;
+        while(!queue.isEmpty()) {
+            int size = queue.size();
+            for (int k = 0; k < size; k++) {
+                String curr = queue.poll();
+                if (curr.equals(t)) return changes;
+                for (int i = 0; i < curr.length(); i++) {
+                    for (char c = 'a'; c <= 'z'; c++) {
+                        char[] currWordArray = curr.toCharArray();
+                        currWordArray[i] = c;
+                        String str = new String(currWordArray);
+                        if (visited.contains(str)) {
+                            queue.add(str);
+                            visited.remove(str);
+                        }
+                    }
+                }
+            }
+            ++changes;
         }
         return -1;
     }

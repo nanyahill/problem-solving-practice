@@ -6,6 +6,8 @@ import java.util.Queue;
 
 /**
  * This problem is similar to the flood fill algorithm
+ * Key Insight: What is a connected region? A region where all cells that have the same color as the starting vertex and can be reached
+ * from the starting vertex.
  */
 public class MatrixConnectedRegions {
 

@@ -1,5 +1,6 @@
 package com.problems.epi.test.dynamic_programming;
 
+import com.problems.classic_problems.dynamic_programming.CountCoinChangeCombination;
 import com.problems.epi.code.dynamic_programming.CountScoreCombinations;
 import org.junit.Test;
 
@@ -23,8 +24,8 @@ public class CountScoreCombinationsTest {
         int score = 12;
         List<Integer> plays = Arrays.asList(2, 3, 7);
         int expected = 18;
-        //int actual = CountCoinChangeCombination.countAllSequencesOfCombinations_Recursive(plays, score);
-        //assert(expected == actual);
-        System.out.print(CountScoreCombinations.countScoreCombinations_Recursive(plays, score));
+        int actual = CountScoreCombinations.countAllSequencesOfCombinations_Iterative(plays, score);
+        assert(expected == actual);
+        //System.out.print(CountScoreCombinations.countScoreCombinations_Recursive(plays, score));
     }
 }

@@ -11,6 +11,13 @@ import java.util.Set;
  *      - With Parent Pointers (with extra space vs without extra space)
  * Note this class was not exactly a problem in EPI. The class consists of two problems in EPI (with/without parents)
  * Pattern: Post-order tree traversal (see isTreeHeightBalanced)
+ *
+ * Key Ideas:
+ * In general, LCA problems boils down to finding the location of n1 and n2.
+ * There are three cases that need to be considered
+ *      - Either one of the given nodes is found- return the given node found (i.e. root == p || root == q)
+ *      - Both of the nodes are found- return the root node (i.e left != null && right != null)
+ *      - No nodes are found- return null (both left and right are null)
  */
 public class LowestCommonAncestorInBinaryTree {
 
@@ -43,7 +50,15 @@ public class LowestCommonAncestorInBinaryTree {
      * LCA in Binary Tree Bottom-Up Approach
      * When the nodes exist in the tree.
      * Time Complexity: O(n), Space Complexity: O(h)
-     */
+     * Similar to leetcode #236
+     *
+     *  * Key Ideas:
+     *  * In general, LCA problems boils down to finding the location of n1 and n2.
+     *  * There are three cases that need to be considered
+     *  *      - Either one of the given nodes is found- return the given node found (i.e. root == p || root == q)
+     *  *      - Both of the nodes are found- return the root node (i.e left != null && right != null)
+     *  *      - No nodes are found- return null (both left and right are null)
+     *  */
     public static TreeNode lowestCommonAncestor_BottomUp(TreeNode root, TreeNode p, TreeNode q) {
         if (root == null || p == null || q == null) return null;
         if(root == p || root == q) return root; // don't forget this line ! // p or q could be an ancestor of itself
@@ -55,6 +70,7 @@ public class LowestCommonAncestorInBinaryTree {
 
     /**
      * When the nodes may/may not exist in the tree
+     * Similar to Leetcode #1644 (if wither p or q is not found, return null)
      */
     public static TreeNode lowestCommonAncestor_MayExist_BottomUp(TreeNode root, TreeNode p, TreeNode q) {
         if(root == null || p == null || q == null) return null;
@@ -84,6 +100,7 @@ public class LowestCommonAncestorInBinaryTree {
     /**
      * When the nodes may/may not exist in the tree
      * Does not use any extra object only two boolean variables
+     * Similar to Leetcode #1644 (if either p or q is not found, return null)
      */
     public static TreeNode lowestCommonAncestor_MayExist_BottomUp2(TreeNode root, TreeNode p, TreeNode q) {
         if(root == null || p == null || q == null) return null;

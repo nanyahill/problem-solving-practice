@@ -21,7 +21,7 @@ public class PowerSet_Distinct {
         res.add(new ArrayList<>(tmp));
         for (int i = idx; i < n; i++) {
             tmp.add(set.get(i));
-            generatePowerSet(tmp, res, i + 1, n, set);
+            generatePowerSet(tmp, res, i + 1, n, set); // i + 1 is important! easy to make mistake: idx + 1
             tmp.remove(tmp.size() - 1);
         }
     }
@@ -97,16 +97,16 @@ public class PowerSet_Distinct {
     }
 
     public static void main(String[] args) {
-//        int[] set = new int[] {1,2,3};
-//        List<List<Integer>> result = new ArrayList<>();
-//       generatePowerSet_Iterative(set, result);
-//       //List<List<Integer>> result = subsets(new int[] {1,2,3});
-//        for (List<Integer> set2 : result) {
-//            System.out.print(Arrays.toString(set2.toArray()));
-//            System.out.println();
-//        }
-        String set = "abc";
+        Integer[] set = new Integer[] {1,2,3};
+        List<List<Integer>> result = new ArrayList<>();
+       result = generatePowerSet(Arrays.asList(set));
+       //List<List<Integer>> result = subsets(new int[] {1,2,3});
+        for (List<Integer> set2 : result) {
+            System.out.print(Arrays.toString(set2.toArray()));
+            System.out.println();
+        }
+        //String set = "abc";
         //generatePowerSet_String("", set);
-        powerSet(set, 0, "", null);
+        //powerSet(set, 0, "", null);
     }
 }

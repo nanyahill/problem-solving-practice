@@ -41,6 +41,7 @@ public class WordBreakTest1 {
         String s1 = "rawabawrawr";
         String s2 = "lxqe";
         String s3 = "ppppppp";
+        String s4 = "bedbathandbeyond.com";
         Set<String> set = new HashSet<>();
         set.add("raw");
         set.add("abr");
@@ -59,6 +60,8 @@ public class WordBreakTest1 {
 
         set.add("pppp");
         set.add("pp");
-        System.out.print(decomposeIntoDictionaryWords(s3, set));
+
+        set.add("bed");set.add("bath");set.add("hand");set.add("bat");set.add("beyond");set.add("and");
+        System.out.print(decomposeIntoDictionaryWords(s4, set));
     }
 }

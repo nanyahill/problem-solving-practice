@@ -9,10 +9,10 @@ public class TestCyclicity {
      * 1) Determine the point of intersection: Use two pointers where one pointer moves twice as fast as the other pointer.
      * This way the faster one gets one step closer to the slower at each turn of the cycle, if there is one.
      * In the end, the slow and fast will eventually meet (This shows that the loop has a cycle and gives an intersection point).
-     * 2) Determine the start of the cycle- 2(dist of tortoise) = dist of hare.
+     * 2) Determine the start of the cycle- 2(dist of tortoise (i.e dist tortoise has covered within the cycle)) = dist of hare.
      * Explanation of phase 2: When they meet tortoise would have travelled F + a distance
      * where F is the length before cycle starts and a is the length travelled within the cycle.
-     * Hence, hare would have travelled 2(F + a). If the length of the cycle is a + b.
+     * If the length of the cycle is a + b,
      * Then hare would have traveled F + a + b + a before it meets with tortoise.
      * The length b is the dist to the start of the cycle.
      * One of the pointers is moved to the head of the list, and the second pointer stays at the point of intersection.

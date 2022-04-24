@@ -4,6 +4,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Key Insight: The thief can take an item or not take an item
+ * Not taking an item means: They will move (i.e. recurse) on to the next item with the wgt of knapsack unchanged
+ * Pseudocode: recurse(nextItem, wgt knapsack)
+ * Taking an item means: They will take that item (subtract the item's wgt from knapsack's capacity)
+ * and move (i.e. recurse) on to next item. Pseudocode: item.wgt > wgt knapsack ? 0 : recurse(nextItem, wgt - item.wgt)
+ * Max Profit = Math.max(not taking an item, taking an item)
+ *
+ * In the cache array- row is usually the item (an object with fields wgt and value) and col is the knapsack weight
+ */
 public class KnapsackProblem {
 
     public static class Item {

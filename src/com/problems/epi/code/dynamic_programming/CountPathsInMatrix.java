@@ -2,6 +2,9 @@ package com.problems.epi.code.dynamic_programming;
 
 /**
  * Similar to Robot in Grid WITHOUT obstacles
+ * Key Insight: For any pos (i, j), look back and ask- how did I get here: either from above cell (i - 1 , j)
+ * or from left cell (i, j - 1). That is, either I take one path (take above cell) or I don't (take left cell).
+ * Then recurse on those cells.
  * Unique Paths I in Leetcode
  */
 public class CountPathsInMatrix {

@@ -30,6 +30,7 @@ public class LowestCommonAncestor {
             if (root.data > Math.max(p.data, q.data)) root = root.left;
             else if (root.data < Math.min(p.data, q.data)) root = root.right;
             else {
+                // root < max and root > min: max > root > min
                 lca = root;
                 break;
             }

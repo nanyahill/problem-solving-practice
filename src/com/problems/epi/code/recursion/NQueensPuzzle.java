@@ -39,18 +39,18 @@ public class NQueensPuzzle {
     // In this method check if previous solved positions along the row, 45 and 135 deg diagonals.
     // Note: No need to check along the columns because that is where you are moving along from the iteration in solve(...)
     private boolean isValid(int row, int col) {
-        // Check all rows
+        // Check all preceding rows that have been solved
         for (int i = 0; i < row; i++)
             if (board[i][col] == 1) return false;
 
-        // Check for 135 degree diagonal
+        // Check for 135 degree diagonal: \___
         // We only want to check for upper diagonals because they have been solved already
         // start form i = row - 1 and j = col - 1 because you want to check for previous solved positions,
         // if i should start from row + 1 and j starts from col + 1 it means you are checking for positions that have not been solved yet
         for (int i = row - 1, j = col - 1; i >= 0 && j >= 0; i--, j--)
             if (board[i][j] == 1) return false;
 
-        // Check for 45 degree diagonal
+        // Check for 45 degree diagonal: /___
         // We only want to check for upper diagonals because they have been solved already
         // i decreases here because row is your position and you want to check for previous solved positions,
         // if i should increase it means you are checking for positions that have not been solved yet

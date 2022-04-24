@@ -5,13 +5,14 @@ import java.util.*;
 public class PermutationGeneration {
 
     /******************************************* Integers as Input ***************************************************/
-    /*** Distinct Entries ***/
+    /*** Distinct Entries - from 2018 and looks wrong***/
 
      // Clean solution and prints in lexicographic order
-    public static List<List<Integer>> getPerms_Distinct(int[] set) {
+    public static List<List<Integer>> getPerms_Distinct(Integer[] set) {
         List<List<Integer>> res = new ArrayList<>();
         if (set == null || set.length == 0) return res;
-        getPerms_Distinct(new ArrayList<>(), res, 0, set.length, set);
+        //getPerms_Distinct(new ArrayList<>(), res, 0, set.length, set);
+        getPerms_Distinct_2(Arrays.asList(set), 0, res);
         return res;
     }
     private static void getPerms_Distinct(List<Integer> tmp, List<List<Integer>> res, int idx, int n, int[] set) {
@@ -23,6 +24,18 @@ public class PermutationGeneration {
             tmp.add(set[i]);
             getPerms_Distinct(tmp, res, idx + 1, n, set);
             tmp.remove(tmp.size() - 1);
+        }
+    }
+    // Update from Year 2022
+    private static void getPerms_Distinct_2(List<Integer> nums, int start, List<List<Integer>> result) {
+        if(start == nums.size()) {
+            result.add(new ArrayList<>(nums));
+            return;
+        }
+        for(int i = start; i < nums.size(); i++) {
+            Collections.swap(nums, start, i);
+            getPerms_Distinct_2(nums, start + 1, result);
+            Collections.swap(nums, start, i);
         }
     }
 
@@ -127,7 +140,10 @@ public class PermutationGeneration {
 
     public static void main(String[] args) {
 //        List<Integer> list = new ArrayList<>(Arrays.asList(new Integer[]{1, 2, 3}));
-        List<List<Integer>> result = generatePerms_Distinct_Iterative(new int[] {1,2,3});
+        Integer[] input = new Integer[] {1,2,3};
+//        List<List<Integer>> result = generatePerms_Distinct_Iterative(new int[] {1,2,3});
+        List<List<Integer>> result = getPerms_Distinct(input);
+
         for (List<Integer> set : result) {
             System.out.print(Arrays.toString(set.toArray()));
             System.out.println();

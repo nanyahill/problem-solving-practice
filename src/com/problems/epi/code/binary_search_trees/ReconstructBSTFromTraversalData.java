@@ -25,6 +25,9 @@ public class ReconstructBSTFromTraversalData {
     private static TreeNode<Integer> reConstructBSTFromPreOrderUtil(List<Integer> preorder, int min, int max, Index index) {
         if(index.idx == preorder.size()) return null;
         TreeNode<Integer> root = new TreeNode<>(preorder.get(index.idx));
+        // Checking to see if current root should be on the right or left subtree
+        // If root.data > max: root should be a right child of the max node
+        // If root.data < min: root should be a left child of the min node
         if(root.data > max || root.data < min) return null;
         index.idx++;
         root.left = reConstructBSTFromPreOrderUtil(preorder, min, root.data, index);

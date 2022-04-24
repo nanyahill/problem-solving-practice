@@ -9,8 +9,10 @@ import java.util.Deque;
  * Key Insight:
  - BST property is a global property, hence any binary tree can have this property, i.e. left <= curr < right
  - However, more precisely defined-
-    - All left nodes of a BST is less than the max seen so far AND greater than or equal to the min seen so far, i.e. min < left < max
-    - All right nodes of a BST is greater than the min seen so far AND less than the max seen so far, i.e. min < right < max.
+    - All left nodes of a BST is less than the max seen so far AND greater than or equal to the min seen so far,
+    - i.e. min < left < max
+    - All right nodes of a BST is greater than the min seen so far AND less than the max seen so far,
+    - i.e. min < right < max.
     - Overall, each node value in the tree is within a range of min and max that is updated as the tree is traversed.
  Good Strategy: Draw out a sample BST and try to determine the min and max values for each node.
  Note: Use a MIN_VALUE and MAX_VALUE for starting ranges. Use long datatype to accommodate for wider range of integer values.
@@ -43,7 +45,8 @@ public class TestBSTProperty {
             for (int i = 0; i < size; i++) {
                 QueueEntry entry = queue.removeFirst();
                 TreeNode<Integer> node = entry.node;
-                if (node.data >= entry.max || node.data <= entry.min) return false;
+                // Check with interviewer if equals should result in non_BST property
+                if (node.data > entry.max || node.data < entry.min) return false;
                 if (node.left != null) queue.add(new QueueEntry(node.left, entry.min, node.data));
                 if (node.right != null) queue.add(new QueueEntry(node.right, node.data, entry.max));
             }

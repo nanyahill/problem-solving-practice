@@ -2,6 +2,10 @@ package com.problems.epi.code.dynamic_programming;
 
 public class LevenshteinDistance {
     /******************* Recursion Approach (Non-DP) **************************
+     * Problem: Transform first string into the second string using min number of edits. E.g: abc -> xyz
+     * Key Insight for brute force: Perform all three operations on each character of the first string
+     * Time complexity: O(3^n) (See G4G)- https://www.geeksforgeeks.org/edit-distance-dp-5/
+     * Space complexity: O(n) depth of recursion tree
      **************************************************************************/
     public static int editDistance_Recursion(String s1, String s2) {
         if(s1 == null || s2 == null) return 0;
@@ -12,7 +16,7 @@ public class LevenshteinDistance {
         int[] cost = new int[3];
         if(i == 0)return j;
         else if(j == 0) return i;
-        cost[0] = match(s1.charAt(i-1), s2.charAt(j-1)) + editDistance_Recursion(s1, s2, i - 1, j - 1);
+        cost[0] = match(s1.charAt(i-1), s2.charAt(j-1)) + editDistance_Recursion(s1, s2, i - 1, j - 1); // substitute
         cost[1]  = 1 + editDistance_Recursion(s1, s2, i - 1, j); // delete
         cost[2]  = 1 + editDistance_Recursion(s1, s2, i, j - 1); // insert
         return Math.min(cost[0], Math.min(cost[1], cost[2]));
@@ -83,7 +87,7 @@ public class LevenshteinDistance {
 
     public static void main(String[] args) {
         //System.out.print(longestCommonSubSequence_Recursion("TG", "TGTTCAGGTATCTGCTCGACAGGTCCCGCGCGCCAACCG"));
-        System.out.print(editDistance_Recursion("AGGTAB", "GXTXAYB"));
+        System.out.print(editDistance_Recursion("Carthorse", "Orchestra"));
         //TG	TGTTCAGGTATCTGCTCGACAGGTCCCGCGCGCCAACCG // 37
     }
 }

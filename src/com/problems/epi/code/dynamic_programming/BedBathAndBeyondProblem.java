@@ -2,7 +2,12 @@ package com.problems.epi.code.dynamic_programming;
 
 import java.util.*;
 
-// It is important to understand this problem well. A common variant is that determine if the string is decomposable
+// It is important to understand this problem well.
+// The given word NEEDS to be decomposed into dictionary words- each character of the word MUST be accounted for.
+// That is, Iamace can be decomposed to I am ace. Bamace cannot because B is not accounted for here (is not part
+// of any of the matched words- am ace). At each step, the prefix and suffix of the word should be in the dictionary.
+
+// A common variant is that determine if the string is decomposable
 // which is simply return true or false. A tricky variant is that if there string is decomposable, list all results of the
 // decomposed words. Note that a dictionary word may appear more than once in the input string.
 // Note: In tis problem it is tricky to add results to an arraylist in the recursive version of list all results
@@ -69,7 +74,7 @@ public class BedBathAndBeyondProblem {
                 String suffix = s.substring(i + 1, len);
                 String subRes = wordBreak_Recursive_ListResultsUtil(suffix, dict);
                 if (subRes != null) {
-                    return prefix + " " + suffix; // concatenate because the current word is a composition of the prefix and suffix
+                    return prefix + " " + subRes; // concatenate because the current word is a composition of the prefix and suffix
                 }
             }
         }
@@ -95,7 +100,7 @@ public class BedBathAndBeyondProblem {
             if (dict.contains(prefix)) {
                 String suffix = s.substring(i + 1, len);
                 boolean isPresent = wordBreak_TopDownDp(dict, suffix, map);
-                if (isPresent == true) {
+                if (isPresent) {
                     map.put(s, true);
                     return true;
                 }
@@ -138,22 +143,27 @@ public class BedBathAndBeyondProblem {
     // BottomUp Approach
     public static boolean wordBreak_BottomUp(String s, Set<String> dict) {
         if (s == null || dict == null || dict.size() == 0) return false;
-        if (dict.contains(s)) return true;
+        if (dict.contains(s)) return true; // optimization- return early
         int len = s.length();
         boolean[] table = new boolean[len];
+        //table[0] = true;
+        // This outer loop is considering each possible length of chars that can be considered
+        // i = 0: considers length of 1
+        // i = 1: considers length of 2, etc..
         for (int i = 0; i < len; i++) {
             String prefix = s.substring(0, i + 1);
             if (dict.contains(prefix)) table[i] = true;
             else {
                 for (int j = 0; j < i; j++) {
-                    if (table[j] == true && dict.contains(s.substring(j + 1, i + 1))) {
+                    String suffix = s.substring(j, i);
+                    if (table[j] == true && dict.contains(suffix)) {
                         table[i] = true;
                         break;
                     }
                 }
             }
         }
-        return table[len - 1];
+        return table[len-1];
     }
 
     // List all words in the string that are decomposable into dictionary words
@@ -202,13 +212,16 @@ public class BedBathAndBeyondProblem {
     public static void main(String[] args) {
         String s1 = "rawabawrawr";
         String s2 = "ja";
-        String s5 = "e";
+        String s5 = "bamace";
         String s6 = "amanaplanacanal";
+        String s7 = "bedbathandbeyond.com";
+        String s8 = "leetcode";
         Set<String> set = new HashSet<>();
         set.add("raw");set.add("abr");set.add("bara");set.add("rawa");
         set.add("wr");set.add("a");set.add("man");set.add("plan");
         set.add("canal");set.add("wr");set.add("a");set.add("j");set.add("qe");
-        set.add("I");set.add("am");set.add("ace");set.add("e");set.add("leet");set.add("code");
-        System.out.print(wordBreak_TopDownDp_ListResults(s6, set));
+        set.add("I");set.add("am");set.add("ace");set.add("e");set.add("leetcode");set.add("rocks");
+        set.add("bed");set.add("bath");set.add("hand");set.add("bat");set.add("beyond");set.add("and");
+        System.out.print(wordBreak_BottomUp(s8, set));
     }
 }

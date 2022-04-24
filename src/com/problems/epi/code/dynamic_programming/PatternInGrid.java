@@ -2,6 +2,14 @@ package com.problems.epi.code.dynamic_programming;
 
 public class PatternInGrid {
 
+    /**
+     * This solution is a backtracking one.
+     * I think EPI added this problem under DP because their solution cached intermediate results to avoid repeated calls
+     *
+     * @param grid
+     * @param pattern
+     * @return
+     */
     public static boolean isPatternInGrid(int[][] grid, int[]pattern) {
         if(grid == null || pattern == null) return false;
         for(int i = 0; i < grid.length; i++) {

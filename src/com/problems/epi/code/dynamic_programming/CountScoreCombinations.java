@@ -9,6 +9,12 @@ class Result {
 
 }
 
+    /**
+     * Counting score combinations- order does not matter. That is, a score combination of 2,3,7 and 7,3,2 are the same
+     * and shouldn't be counted as different score combinations.
+     * Unlike counting the number of sequences, order matters. That is, a score combination of 2,3,7 and 7,3,2 are
+     * different and should be counted as different score combinations
+     */
 public class CountScoreCombinations {
 
     // Time Complexity: O(sn) where s = size of plays list and n = score
@@ -41,6 +47,7 @@ public class CountScoreCombinations {
         return countScoreCombinations_TopDown(plays, plays.size() - 1, score, table); // moving from right to left in plays list
     }
 
+    // j is the score, i is the playIdx
     private static int countScoreCombinations_TopDown(List<Integer> plays, int i, int j, int[][] table) {
         if(i < 0) return 0;
         if(j == 0) return 1;
@@ -75,7 +82,14 @@ public class CountScoreCombinations {
             + countScoreCombinations_Recursive(plays, score, playIndex - 1); // without play
     }
 
-    /******************************* Counts all sequences, order matters (permutations) *******************************/
+    /******************************* Counts all sequences, order matters  *******************************/
+    /**
+     * Sequence here means order matters- combination of plays for a score of 12 could be 2,2,2,3,3 OR 2,3,3,2,2
+     * The two sequences are different
+     * @param plays
+     * @param score
+     * @return
+     */
     public static int countAllSequencesOfCombinations_Iterative(List<Integer> plays, int score) {
         if (plays == null || plays.size() == 0) return 1;
         int[] scoreBoard = new int[score + 1];

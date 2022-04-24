@@ -5,6 +5,23 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Key Insight:
+ *
+ * [LeetCode #229]For an array of length n:
+ * There can be at most one majority element which is more than ⌊n/2⌋ times.
+ * There can be at most two majority elements which are more than ⌊n/3⌋ times.
+ * There can be at most three majority elements which are more than ⌊n/4⌋ times.
+ * and so on.
+ * Knowing this can help us understand how we can keep track of majority elements which satisfies O(1)O(1) space requirement.
+ *
+ * Algorithm:
+ * if count == 0: set the curr element to the candidate element and reset count to 1
+ * if curr elt is same as candidate: increment count
+ * if curr elt is diff from candidate: decrement count
+ * Correctness of the algo is that if a majority element truly exists there will be more increases than decreases
+ * and the count will be +ve.
+ */
 public class MajorityElement {
 
     public static String findMajorityElement_BruteForce(List<String> input) {

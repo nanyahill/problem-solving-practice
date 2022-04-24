@@ -2,7 +2,7 @@ package com.problems.epi.code.dynamic_programming;
 
 import java.util.*;
 
-public class BedBathAndBeyond {
+public class BedBathAndBeyond_Old {
     public static List<String> decomposeIntoDictionaryWords(String name, Set<String> set) {
         List<String> res = new ArrayList<>();
         if (set == null || set.size() == 0) return res;
