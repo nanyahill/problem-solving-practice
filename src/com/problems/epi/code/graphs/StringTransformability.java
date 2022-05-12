@@ -17,7 +17,7 @@ import java.util.Set;
  * Gotchas:
  * Be wary of doing string concatenation here as this creates a new string with each concatenation
  * and a copy over characters each time.
- * Do we need an extra object- StringWithDistance? No
+ * Do we need an extra object- StringWithDistance? No, see approach transformString_TimeAndSpaceEfficient
  */
 public class StringTransformability {
 
@@ -66,6 +66,7 @@ public class StringTransformability {
         int changes = 0;
         while(!queue.isEmpty()) {
             int size = queue.size();
+            // This is important so that we process the sequence level by level
             for (int k = 0; k < size; k++) {
                 String curr = queue.poll();
                 if (curr.equals(t)) return changes;
@@ -81,6 +82,8 @@ public class StringTransformability {
                     }
                 }
             }
+            // We do this here because after processing a level (i.e. end of outer for loop)
+            // at most one change (or word) is added to the sequence
             ++changes;
         }
         return -1;

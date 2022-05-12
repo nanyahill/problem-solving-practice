@@ -37,6 +37,9 @@ public class SearchMaze {
         return false;
     }
 
+    // FYI- This solution does not pass any test case in EPI- fails with error: contains invalid segments
+    // Reason- In the end, the result contains all coordinates for each level order traversal so we need a solution
+    // that can trace the path in a BFS (level order) traversal
     private static boolean searchMazeHelper_BFS(List<List<Color>> maze, Cell start, Cell end, List<Cell> result, int[][] directions) {
         Deque<Cell> queue = new ArrayDeque<>();
         queue.offerLast(start);
@@ -56,8 +59,33 @@ public class SearchMaze {
         return false;
     }
 
+    // Another approach would be maintaining a mapping from each node to its parent, and when inspecting the adjacent
+    // node, record its parent. When the search is done, simply backtrace according the parent mapping.
+    // https://stackoverflow.com/questions/8922060/how-to-trace-the-path-in-a-breadth-first-search
+    private static List<Cell> searchMazeBFS_ReturnPath(List<List<Color>> maze, Cell start, Cell end, List<Cell> result, int[][] directions) {
+        Deque<List<Cell>> queue = new ArrayDeque<>();
+        queue.offerLast(new ArrayList<>(Arrays.asList(start)));
+        while (!queue.isEmpty()) {
+            List<Cell> path = queue.removeFirst();
+            Cell cell = path.get(path.size() - 1);
+            maze.get(cell.i).set(cell.j, Color.BLACK);
+            if (cell.i == end.i && cell.j == end.j) {
+                return path;
+            }
+            for (int[] direction : directions) {
+                int next_x = cell.i + direction[0];
+                int next_y = cell.j + direction[1];
+                Cell nextCell = new Cell(next_x, next_y);
+                if (!isFeasible(nextCell,maze)) continue;
+                List<Cell> newPath = new ArrayList<>(path);
+                newPath.add(nextCell);
+                queue.push(newPath);
+            }
+        }
+        return Collections.emptyList();
+    }
+
     private static boolean isFeasible(Cell curr, List<List<Color>> maze) {
         return curr.i >= 0 && curr.i < maze.size() && curr.j >= 0 && curr.j < maze.get(curr.i).size() && maze.get(curr.i).get(curr.j) == Color.WHITE;
     }
-
 }

@@ -34,6 +34,10 @@ public class Queue_WithCircularArray_WithResizing<T> {
 
     public void enqueue(Integer val) {
         if (size == capacity) { // full
+            // Makes queue elements appear consecutively
+            // This will make the front point to the first element
+            // -ve number rotate array to the left by a distance = front
+            // Ref: https://laasyasettyblog.hashnode.dev/juggling-algorithm-for-array-rotation
             Collections.rotate(Arrays.asList(data), -front);
             front = 0;
             rear = size;
