@@ -22,6 +22,7 @@ public class TowerOfHanoi {
      * Move n-1 disks from auxiliary disk to the destination rod (src is aux, aux is src, dest is dest)
      * Total number of moves = 2^n - 1
      * Time complexity: O(2^n)
+     * Good explanation: https://leetcode.com/discuss/interview-question/1392284/solving-tower-of-hanoi-using-the-magic-of-recursion
      * @param remainingDisks
      * @param pegs
      * @param src

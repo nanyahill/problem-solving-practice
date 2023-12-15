@@ -78,7 +78,7 @@ public class IntersectionOfTwoSortedArrays {
         if(shorter_array == null || longer_array == null) return null;
         List<Integer> result = new ArrayList<>();
         for(int i = 0; i < shorter_array.length; i++) {
-            if(i == 0 || shorter_array[i] != shorter_array[i - 1]) {
+            if(i == 0 || shorter_array[i] != shorter_array[i - 1]) { //check for duplicates
                 // Arrays.binarySearch() returns the position index
                 if(Arrays.binarySearch(longer_array, shorter_array[i]) >= 0) {
                     result.add(shorter_array[i]);

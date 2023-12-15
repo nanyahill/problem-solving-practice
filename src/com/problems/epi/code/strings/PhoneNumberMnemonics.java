@@ -54,20 +54,22 @@ public class PhoneNumberMnemonics {
         }
     }
 
+    private static final String[] MAPPINGS = {"0", "1", "ABC", "DEF", "GHI", "JKL", "MNO", "PQRS", "TUV", "WXYZ"};
     public static List<String> phoneMnemonicIterative(String digits) {
-        LinkedList<String> ans = new LinkedList<>();
-        if(digits.isEmpty()) return ans;
-        String[] mapping = new String[] {"0", "1", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
-        ans.add("");
-        for(int i =0; i<digits.length();i++){
-            int x = Character.getNumericValue(digits.charAt(i));
-            while(ans.peek().length()==i){
-                String t = ans.remove().toUpperCase();
-                for(char s : mapping[x].toCharArray())
-                    ans.add(t+s);
+        LinkedList<String> queue = new LinkedList<>();
+        if(digits == null || digits.length() == 0) return queue;
+        queue.add("");
+        for(int i = 0; i < digits.length(); i++) {
+            while(queue.peek().length() == i) {
+                String s = queue.remove();
+                String strs = MAPPINGS[digits.charAt(i) - '0'];
+                for(int j = 0; j < strs.length(); j++) {
+                    queue.add(s + strs.charAt(j));
+                }
             }
         }
-        return ans;
+
+        return queue;
     }
 
     public static void main(String[] args) {

@@ -9,13 +9,13 @@ package com.problems.epi.code.dynamic_programming;
  */
 public class CountPathsInMatrix {
 
-    public static int countPaths(int n, int m) {
-        if (n == 0 || m == 0) return 0;
-        int[][] grid = new int[n][m];
+    public static int countPaths(int m, int n) {
+        if (m == 0 || n == 0) return 0;
+        int[][] grid = new int[m][n];
         //int m = grid.length - 1;
         //int n = grid[0].length - 1;
         return countPaths_TopDownDP(grid, m - 1, n - 1);
-        //return countPaths_Recursive(m - 1, n - 1);
+        //return countPaths_Recursive(m - 1, n - 1); // m - 1 and n - 1 are important.
         //return countPaths_BottomUpDP(grid, m - 1, n - 1);
     }
 
@@ -25,6 +25,7 @@ public class CountPathsInMatrix {
         return countPaths_Recursive(m, n - 1) + countPaths_Recursive(m - 1, n);
     }
 
+    // Note: No need to worry about check if outside of grid since it will not happen because of the base case
     private static int countPaths_TopDownDP(int[][] grid, int i, int j) {
         if (i == 0 || j == 0) return 1;
         if (grid[i][j] == 0)

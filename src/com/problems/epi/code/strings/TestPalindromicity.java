@@ -38,7 +38,7 @@ public class TestPalindromicity {
     }
 
     public static void main(String[] args) {
-        String s = "Ray a Ray";
+        String s = "     ";
         System.out.print(isPlaindrome(s));
 
 

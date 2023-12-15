@@ -5,28 +5,31 @@ import java.util.*;
 public class PermutationGeneration {
 
     /******************************************* Integers as Input ***************************************************/
-    /*** Distinct Entries - from 2018 and looks wrong***/
+    /*** Distinct Entries ***/
 
      // Clean solution and prints in lexicographic order
-    public static List<List<Integer>> getPerms_Distinct(Integer[] set) {
+    public static List<List<Integer>> getPerms_Distinct(int[] set) {
         List<List<Integer>> res = new ArrayList<>();
         if (set == null || set.length == 0) return res;
-        //getPerms_Distinct(new ArrayList<>(), res, 0, set.length, set);
-        getPerms_Distinct_2(Arrays.asList(set), 0, res);
+        getPerms_Distinct(new ArrayList<>(), res, 0, set.length, set);
+        //getPerms_Distinct_2(Arrays.asList(set), 0, res);
         return res;
     }
+    // Source: https://leetcode.com/problems/permutations/solutions/18239/A-general-approach-to-backtracking-questions-in-Java-(Subsets-Permutations-Combination-Sum-Palindrome-Partioning)/
+    // Youtube video: https://www.youtube.com/watch?v=YK78FU5Ffjw
     private static void getPerms_Distinct(List<Integer> tmp, List<List<Integer>> res, int idx, int n, int[] set) {
         if(idx == n){
             res.add(new ArrayList<>(tmp));
             return;
         }
-        for (int i = idx; i < n; i++) {
+        for (int i = 0; i < n; i++) {
+            if(tmp.contains(set[i])) continue; // this line will take O(n) better off using a hashset
             tmp.add(set[i]);
             getPerms_Distinct(tmp, res, idx + 1, n, set);
             tmp.remove(tmp.size() - 1);
         }
     }
-    // Update from Year 2022
+    // Update from Year 2022 (from EPI solution)
     private static void getPerms_Distinct_2(List<Integer> nums, int start, List<List<Integer>> result) {
         if(start == nums.size()) {
             result.add(new ArrayList<>(nums));
@@ -119,7 +122,7 @@ public class PermutationGeneration {
         return start + c + end;
     }
 
-    // Lexicographic order
+    // Lexicographic order-- another approach for distinct permutations
     public static List<String> getPerms_BuildByPushingPrefixDownStack(String input) {
         List<String> result = new ArrayList<>();
         if (input == null || input.length() == 0) return result;
@@ -130,25 +133,28 @@ public class PermutationGeneration {
     private static void getPerms_BuildByPushingPrefixDownStack(String perm, String input, List<String> result) {
         if (input.isEmpty()) {
             result.add(perm);
+            System.out.println(perm);
             return;
         }
         for (int i = 0; i < input.length(); i++) {
             String remaining = input.substring(0, i) + input.substring(i + 1);
+            System.out.println("*** " + remaining + " ***");
             getPerms_BuildByPushingPrefixDownStack(perm + input.charAt(i), remaining, result);
         }
     }
 
     public static void main(String[] args) {
 //        List<Integer> list = new ArrayList<>(Arrays.asList(new Integer[]{1, 2, 3}));
-        Integer[] input = new Integer[] {1,2,3};
+        int[] input = new int[] {1,2,3};
 //        List<List<Integer>> result = generatePerms_Distinct_Iterative(new int[] {1,2,3});
-        List<List<Integer>> result = getPerms_Distinct(input);
-
-        for (List<Integer> set : result) {
-            System.out.print(Arrays.toString(set.toArray()));
-            System.out.println();
-        }
+//        List<List<Integer>> result = getPerms_Distinct(input);
+//
+//        for (List<Integer> set : result) {
+//            System.out.print(Arrays.toString(set.toArray()));
+//            System.out.println();
+//        }
         String s = "abc";
+        getPerms_BuildByPushingPrefixDownStack(s);
         //generatePermutations_Strings_Distinct("", s, new ArrayList<>());
         //System.out.println(s.substring(2,2));
 //        for(int i = 0; i < s.length(); i++) {

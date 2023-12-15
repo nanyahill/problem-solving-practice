@@ -41,6 +41,7 @@ public class ComputeSquareRoot {
         return res;
     }
 
+    // Note: This solution does not pass EPIJudge test cases.
     public static long computeSquareRoot_Optimization(long num) {
         if(num < 0) return -1; // Accepts only non-negative integers
         long lo = 0, hi = num / 2;

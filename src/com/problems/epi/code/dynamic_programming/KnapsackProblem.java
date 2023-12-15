@@ -34,6 +34,7 @@ public class KnapsackProblem {
     private static int findMaximumProfit_Recursive(List<Item> items, int i, int w) {
         if(i == 0) return 0;
         if(w == 0) return 0;
+        // Maximum (not taking item, taking item)
         return Math.max(findMaximumProfit_Recursive(items, i - 1, w), items.get(i).weight > w ? 0 : items.get(i).value + findMaximumProfit_Recursive(items, i - 1, w - items.get(i).weight));
     }
 
@@ -61,7 +62,7 @@ public class KnapsackProblem {
             int itemWeight = items.get(i-1).weight;
             int itemValue = items.get(i-1).value;
             // this order of inner for loop iteration is important,
-            // because you start with an almost full knapsack that has a
+            // because you start with an almost full knapsack (its capacity remaining) that has a
             // remaining weight of j and you try to see what item can fill up that remaining weight
             for(int j = 0; j <= weight; j++) {
                 if(itemWeight > j) table[i][j] = table[i-1][j];

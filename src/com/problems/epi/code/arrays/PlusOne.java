@@ -7,12 +7,9 @@ public class PlusOne {
     public static List<Integer> plusOneNonElegant(List<Integer> digits) {
         int n = digits.size() - 1;
         digits.set(n, digits.get(n) + 1);
-        for (int i = n; i > 0; --i) {
-            int num = digits.get(i);
-            if (num == 10) {
-                digits.set(i, 0);
-                digits.set(i - 1, digits.get(i - 1) + 1);
-            }
+        for (int i = n; i > 0 && digits.get(i) == 10; --i) {
+            digits.set(i, 0);
+            digits.set(i - 1, digits.get(i - 1) + 1);
         }
 
         if (digits.get(0) == 10) {

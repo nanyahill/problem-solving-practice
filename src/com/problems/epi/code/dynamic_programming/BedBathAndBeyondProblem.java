@@ -209,6 +209,75 @@ public class BedBathAndBeyondProblem {
         return result;
     }
 
+    public static List<String>
+    decomposeIntoDictionaryWords(String domain, Set<String> dictionary) {
+
+        int[] lastLength = new int[domain.length()];
+        Arrays.fill(lastLength, -1);
+        // When the algorithm finishes, lastLength[i] != -1 indicates
+        // domain.substring(0, i + 1) has a valid decomposition, and the length of
+        // the last string in the decomposition will be lastLength[i].
+
+        for (int i = 0; i < domain.length(); ++i) {
+            // If domain.substring(0, i + 1) is a dictionary word, set lastLength[i]
+            // to the length of that word.
+            if (dictionary.contains(domain.substring(0, i + 1))) {
+                lastLength[i] = i + 1;
+                continue;
+            }
+
+            // If domain.substring(0, i + 1) is not a dictionary word, we look for j <
+            // i such that domain.substring(0, j + 1) has a valid decomposition and
+            // domain.substring(j + 1, i + 1) is a dictionary word. If so, record the
+            // length of that word in lastLength[i].
+            for (int j = 0; j < i; ++j) {
+                if (lastLength[j] != -1 &&
+                        dictionary.contains(domain.substring(j + 1, i + 1))) {
+                    lastLength[i] = i - j;
+                    break;
+                }
+            }
+        }
+
+        List<String> decompositions = new ArrayList<>();
+        if (lastLength[lastLength.length - 1] != -1) {
+            // domain can be assembled by valid words.
+            int idx = domain.length() - 1;
+            while (idx >= 0) {
+                decompositions.add(
+                        domain.substring(idx + 1 - lastLength[idx], idx + 1));
+                idx -= lastLength[idx];
+            }
+            Collections.reverse(decompositions);
+        }
+        return decompositions;
+    }
+
+    public static List<String> wordBreak(String s, Set<String> wordDict) {
+        return DFS(s, wordDict, new HashMap<String, LinkedList<String>>());
+    }
+
+    // DFS function returns an array including all substrings derived from s.
+    static List<String> DFS(String s, Set<String> wordDict, HashMap<String, LinkedList<String>>map) {
+        if (map.containsKey(s))
+            return map.get(s);
+
+        LinkedList<String>res = new LinkedList<String>();
+        if (s.length() == 0) {
+            res.add("");
+            return res;
+        }
+        for (String word : wordDict) {
+            if (s.startsWith(word)) {
+                List<String>sublist = DFS(s.substring(word.length()), wordDict, map);
+                for (String sub : sublist)
+                    res.add(word + (sub.isEmpty() ? "" : " ") + sub);
+            }
+        }
+        map.put(s, res);
+        return res;
+    }
+
     public static void main(String[] args) {
         String s1 = "rawabawrawr";
         String s2 = "ja";
@@ -216,12 +285,16 @@ public class BedBathAndBeyondProblem {
         String s6 = "amanaplanacanal";
         String s7 = "bedbathandbeyond.com";
         String s8 = "leetcode";
+        String s9 = "catsanddogs";
         Set<String> set = new HashSet<>();
-        set.add("raw");set.add("abr");set.add("bara");set.add("rawa");
-        set.add("wr");set.add("a");set.add("man");set.add("plan");
-        set.add("canal");set.add("wr");set.add("a");set.add("j");set.add("qe");
-        set.add("I");set.add("am");set.add("ace");set.add("e");set.add("leetcode");set.add("rocks");
-        set.add("bed");set.add("bath");set.add("hand");set.add("bat");set.add("beyond");set.add("and");
-        System.out.print(wordBreak_BottomUp(s8, set));
+        //set.add("raw");set.add("abr");set.add("bara");set.add("rawa");
+        //set.add("wr");set.add("a");set.add("man");set.add("plan");
+        //set.add("canal");set.add("wr");set.add("a");set.add("j");set.add("qe");
+        //set.add("I");set.add("am");set.add("ace");set.add("e");set.add("leetcode");set.add("rocks");
+        //set.add("bed");set.add("bath");set.add("hand");set.add("bat");set.add("beyond");set.add("and");
+        set.add("cat");set.add("cats");set.add("and");set.add("dog");set.add("sand");set.add("dogs");
+        //System.out.print(wordBreak_BottomUp(s8, set));
+
+        System.out.println(wordBreak(s9, set));
     }
 }

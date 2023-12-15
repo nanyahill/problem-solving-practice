@@ -19,6 +19,7 @@ public class PowerSet_Distinct {
     }
     private static void generatePowerSet(List<Integer> tmp, List<List<Integer>> res, int idx, int n, List<Integer> set) {
         res.add(new ArrayList<>(tmp));
+        System.out.println(tmp);
         for (int i = idx; i < n; i++) {
             tmp.add(set.get(i));
             generatePowerSet(tmp, res, i + 1, n, set); // i + 1 is important! easy to make mistake: idx + 1
@@ -33,13 +34,15 @@ public class PowerSet_Distinct {
     public static List<List<Integer>> generatePowerSet_Integers(List<Integer> set) {
         List<List<Integer>> res = new ArrayList<>();
         if (set == null || set.size() == 0) return res;
-        generatePowerSet_Integers(new ArrayList<>(), res, 0, set);
+       generatePowerSet_Integers(new ArrayList<>(), res, 0, set);
+       // generatePowerSet_Iterative(set, res);
         return res;
     }
 
     private static void generatePowerSet_Integers(List<Integer> tmp, List<List<Integer>> res, int idx, List<Integer> set) {
         if(idx == set.size()) {
             res.add(new ArrayList<>(tmp));
+            System.out.println(tmp);
         }
         else {
             tmp.add(set.get(idx));
@@ -49,18 +52,37 @@ public class PowerSet_Distinct {
         }
     }
 
-    private static List<List<Integer>>  generatePowerSet_Iterative(int[] set, List<List<Integer>> res) {
+    private static List<List<Integer>>  generatePowerSet_Iterative(List<Integer> set, List<List<Integer>> res) {
         List<List<Integer>> result = new ArrayList<>();
-        if(set == null || set.length == 0) return result;
-        for(int i = 0; i < (1 << set.length); i++) {
+        if(set == null || set.size() == 0) return result;
+        for(int i = 0; i < (1 << set.size()); i++) {
             List<Integer> tmp = new ArrayList<>();
-            for(int j = 0; j < set.length; j++) {
+            for(int j = 0; j < set.size(); j++) {
                 // to print in squashed order: in which any subset involving aj can be listed only after all the subsets involving a1, . . . , aj−1
                 // use index n - j - 1 instead of j
-                if((i & (1 << j)) > 0) tmp.add(set[j]);
+                if((i & (1 << j)) > 0) tmp.add(set.get(j));
             }
 
             res.add(tmp);
+        }
+        return result;
+    }
+
+    private static List<List<Integer>>  generatePowerSet_Iterative(List<Integer> set) {
+        List<List<Integer>> result = new ArrayList<>();
+        if(set == null || set.size() == 0) return result;
+        for(int i = 0; i < (1 << set.size()); i++) {
+            List<Integer> tmp = new ArrayList<>();
+            for(int j = 0; j < set.size(); j++) {
+                // to print in squashed order: in which any subset involving aj can be listed only after all the subsets involving a1, . . . , aj−1
+                // use index n - j - 1 instead of j
+                if((i & (1 << j)) > 0) {
+                    System.out.println(1 << j);
+                    tmp.add(set.get(j));
+                }
+            }
+            System.out.println("Subset: " + tmp);
+            result.add(tmp);
         }
         return result;
     }
@@ -99,11 +121,12 @@ public class PowerSet_Distinct {
     public static void main(String[] args) {
         Integer[] set = new Integer[] {1,2,3};
         List<List<Integer>> result = new ArrayList<>();
-       result = generatePowerSet(Arrays.asList(set));
+       //result = generatePowerSet_Integers(Arrays.asList(set));
+       result = generatePowerSet_Integers(Arrays.asList(set));
        //List<List<Integer>> result = subsets(new int[] {1,2,3});
         for (List<Integer> set2 : result) {
-            System.out.print(Arrays.toString(set2.toArray()));
-            System.out.println();
+            //System.out.print(Arrays.toString(set2.toArray()));
+            //System.out.println();
         }
         //String set = "abc";
         //generatePowerSet_String("", set);

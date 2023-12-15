@@ -41,7 +41,7 @@ public class HeightBalancedTree {
     }
 
     private static int depth(TreeNode root) {
-        if (root == null) return 0;
+        if (root == null) return 0; // this should be -1 because depth of an empty tree is -1 but using -1 makes some test cases fail!
         int leftHeight = depth(root.left);
         if (leftHeight == -1) {
             return -1;
@@ -52,5 +52,45 @@ public class HeightBalancedTree {
         }
         if (Math.abs(leftHeight - rightHeight) > 1) return -1;
         return Math.max(leftHeight, rightHeight) + 1;
+    }
+
+    /**
+     * MUCH BETTER APPROACH
+     * DUE TO ISSUE ON LINE #44 ABOVE
+     * Similar as the efficient approach above but using an object to persist the result where the height
+     * and balanced status are stored.
+     * This is EPI book implementation
+     * @param root
+     * @return
+     */
+    public static boolean isBalanced(TreeNode<Integer> root) {
+
+        if(root == null) return true;
+        return isTreeBalanced(root).isBalanced;
+    }
+
+    private static BalanceStatusWithHeight isTreeBalanced(TreeNode root) {
+        if(root == null) return new BalanceStatusWithHeight(true, -1);
+        BalanceStatusWithHeight leftResult = isTreeBalanced(root.left);
+        if(!leftResult.isBalanced) {
+            return leftResult;
+        }
+        BalanceStatusWithHeight rightResult = isTreeBalanced(root.right);
+        if(!rightResult.isBalanced) {
+            return rightResult;
+        }
+        boolean isBalanced = Math.abs(leftResult.height - rightResult.height) <= 1;
+        int height = Math.max(leftResult.height, rightResult.height) + 1;
+        return new BalanceStatusWithHeight(isBalanced, height);
+    }
+
+    private static class BalanceStatusWithHeight {
+        int height;
+        boolean isBalanced;
+
+        public BalanceStatusWithHeight(boolean isBalanced, int height) {
+            this.isBalanced = isBalanced;
+            this.height = height;
+        }
     }
 }

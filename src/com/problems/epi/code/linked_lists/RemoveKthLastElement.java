@@ -17,7 +17,7 @@ public class RemoveKthLastElement {
      * Be careful about null pointer errors and off-by-one errors.
      * Also since you are transforming the input (deleting) use a dummy node to take care of corner cases-
      * Corner cases: 1) Removing the last node from list with one node (4->null, 1)
-     * 2) Removing the head node from a list with two nodes (4->9->null, 2)
+     * 2) Removing the head node from a list wi~th two nodes (4->9->null, 2)
      * Time complexity: O(n)
      * Space Complexity: O(1)
      */

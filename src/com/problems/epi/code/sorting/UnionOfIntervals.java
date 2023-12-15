@@ -1,9 +1,6 @@
 package com.problems.epi.code.sorting;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 /**
  * Pattern: Sweep Line Algo & Sorting
@@ -157,8 +154,8 @@ public class UnionOfIntervals {
 
     /** Time Complexity: O(nlogn), Space: O(n)
      * This solution is for the EPI question where closed and open intervals are taken into consideration
-     * Note: In EPIJudge, the if statemnets on line 200 and 201 could be written as >= (or <=) but that would not pass all the testcases
-     * I believe it's related to how they may have implemented the equals() and hasCode fxns for the interval object internally
+     * Note: In EPIJudge, the if statemnets on line 192 and 193 could be written as >= (or <=) but that would not pass all the testcases
+     * I believe it's related to how they may have implemented the equals() and hashCode fxns for the interval object internally
      *
      */
     public static class Interval_EPI implements Comparable<Interval_EPI>{
@@ -200,5 +197,26 @@ public class UnionOfIntervals {
             }
         }
         return result;
+    }
+
+    // Leetcode 56 solution
+    public int[][] merge(int[][] intervals) {
+        List<int[]> res = new ArrayList<>();
+        if (intervals == null || intervals.length == 0) return res.toArray(new int[res.size()][]);
+        Arrays.sort(intervals, Comparator.comparingInt(a -> a[0]));
+
+        int start = intervals[0][0], end = intervals[0][1];
+        for (int[] interval : intervals) {
+
+            if (interval[0] <= end) { // as long as the points touch they overlap; case for the equal to
+                end = Math.max(end, interval[1]);
+            } else {
+                res.add(new int[]{start, end});
+                start = interval[0];
+                end = interval[1];
+            }
+        }
+        res.add(new int[]{start, end}); // not needed if res is updated in the loop
+        return res.toArray(new int[res.size()][]);
     }
 }

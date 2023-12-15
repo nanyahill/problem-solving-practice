@@ -13,7 +13,7 @@ public class MatrixEnclosedRegions {
         int[][] directions = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
         // Mark first and last row and surrounding regions
         for(int i = 0; i < board.get(0).size(); i++) {
-            // First Row
+            // First row``
             if(board.get(0).get(i) == 'W')
                 markRegions_DFS(board, 0, i, directions);
             // Last Row
@@ -54,6 +54,7 @@ public class MatrixEnclosedRegions {
         while(!queue.isEmpty()) {
             Cell curr = queue.poll();
             if(curr.i >= 0 && curr.i < board.size() && curr.j >= 0 && curr.j < board.get(curr.i).size() && board.get(curr.i).get(curr.j) == 'W') {
+                // Note: the below line can also appear after removing from queue.
                 board.get(curr.i).set(curr.j, 'T');
                 // Below for loop can be changed to four cell additions to the queue
                 for(int[] direction : directions) {

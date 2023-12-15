@@ -6,7 +6,7 @@ package com.problems.epi.code.searching.binary_search;
  - Square roots of some floating point numbers are greater than the number but less than 1.0, for example, when x = 0.25.
     However, for floating point numbers greater than 1.0, the square root is less than the number.
  - Thus, use the above condition to determine your left and right boundaries
- - Note than when comparing the square of the mid to the number, it wold be a comparison of two floating point numbers.
+ - Note that when comparing the square of the mid to the number, it wold be a comparison of two floating point numbers.
    Hence , you can use normalization for precision problem (see the EPI book).
  - Changes to typical binary search algorithm:
  - Also, when if the square of the mid is larger than the input number, move to the left side of the range 	by making hi = mid rather than mid - 1. Same applies to lo.

@@ -2,6 +2,9 @@ package com.problems.epi.code.binary_trees;
 
 import com.util.TreeNode;
 
+/**
+ * See PathSum_RootToLeaf.java in this repo for other variants- find all paths, etc.
+ */
 public class HasPathSum {
 
     public static boolean pathSum_Exists(TreeNode<Integer> root, int target) {

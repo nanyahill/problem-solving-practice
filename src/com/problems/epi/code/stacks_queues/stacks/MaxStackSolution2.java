@@ -22,11 +22,9 @@ public class MaxStackSolution2 {
     static Deque<Integer> maxElements = new ArrayDeque<>();
 
     public static void push(int value) {
-        if (elements.isEmpty()) {
-            elements.push(value);
+        if (elements.isEmpty() || value >= max()) {
             maxElements.push(value);
-            return;
-        } else if (value >= max()) maxElements.push(value);
+        }
         elements.push(value);
     }
 

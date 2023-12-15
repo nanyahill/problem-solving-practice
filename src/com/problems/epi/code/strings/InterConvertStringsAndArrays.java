@@ -31,7 +31,7 @@ public class InterConvertStringsAndArrays {
 
     public static int stringToInt(String s) {
         int res = 0;
-        for (int i = Character.isDigit(s.charAt(0)) ? 1 : 0; i < s.length(); i++) {
+        for (int i = Character.isDigit(s.charAt(0)) ? 0 : 1; i < s.length(); i++) {
             int digit = s.charAt(i) - '0';
             res = res * 10 + digit;
         }

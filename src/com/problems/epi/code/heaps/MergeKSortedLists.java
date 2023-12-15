@@ -7,7 +7,7 @@ import java.util.PriorityQueue;
 
 /**
  * Key Insights: Merging already sorted arrays into a single sorted array requires to select the minimum element seen so far and add it to the result set.
- * How do we get the minimum at all times? Use a Heap_Old (in Java this is implemented as a Priority Queue).
+ * How do we get the minimum at all times? Use a Heap (in Java this is implemented as a Priority Queue).
  * This problem has pratical implications especially when the memory size is insufficient to take all the arrays at once.
  * How the Algo works: Create a PQ, add the first elements from each array to the queue.
  * While the queue is not empty, dequeue from the front of the queue and enqueue the next element from the array where the dequeued element comes from.

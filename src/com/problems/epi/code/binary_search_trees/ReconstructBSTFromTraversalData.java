@@ -29,7 +29,7 @@ public class ReconstructBSTFromTraversalData {
         // If root.data > max: root should be a right child of the max node
         // If root.data < min: root should be a left child of the min node
         if(root.data > max || root.data < min) return null;
-        index.idx++;
+        index.idx++; //!important- MUST happen after the two bases cases
         root.left = reConstructBSTFromPreOrderUtil(preorder, min, root.data, index);
         root.right = reConstructBSTFromPreOrderUtil(preorder, root.data, max, index);
         return root;
@@ -46,7 +46,7 @@ public class ReconstructBSTFromTraversalData {
         if(index.idx < 0) return null;
         TreeNode<Integer> root = new TreeNode<>(postorder.get(index.idx));
         if(root.data > max || root.data < min) return null;
-        index.idx--;
+        index.idx--; //!important- MUST happen after the two bases cases
         root.right = reConstructBSTFromPostOrderUtil(postorder, root.data, max, index);
         root.left = reConstructBSTFromPostOrderUtil(postorder, min, root.data, index);
         return root;

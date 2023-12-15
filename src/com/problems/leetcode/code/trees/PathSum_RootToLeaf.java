@@ -33,6 +33,8 @@ public class PathSum_RootToLeaf {
         tmp.remove(tmp.size() - 1);
     }
 
+    // Note: This solution will not work for Leetcode variant because this solution
+    // assumes that the only path to look for is root to leaf while LC assumes any path going downwards
     public static int pathSum_CountPaths(TreeNode<Integer> root, int target) {
         if(root == null) return 0;
         if(root.left == null && root.right == null && target == root.data) return 1;

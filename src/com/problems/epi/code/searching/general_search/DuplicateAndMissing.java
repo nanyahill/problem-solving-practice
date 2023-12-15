@@ -30,6 +30,7 @@ public class DuplicateAndMissing {
             if ((mask & i) != 0) missOrDup ^= i;
         }
         for (int i = 0; i < A.size(); i++) {
+            // check if it is the duplicate
             if (A.get(i) == missOrDup) return new int[] {missOrDup, xorResult ^ missOrDup};
         }
         return new int[] {xorResult ^ missOrDup, missOrDup};

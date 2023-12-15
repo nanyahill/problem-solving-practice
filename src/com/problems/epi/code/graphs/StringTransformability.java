@@ -83,7 +83,7 @@ public class StringTransformability {
                 }
             }
             // We do this here because after processing a level (i.e. end of outer for loop)
-            // at most one change (or word) is added to the sequence
+            // at most one change (or word) is added to the sequence/path
             ++changes;
         }
         return -1;

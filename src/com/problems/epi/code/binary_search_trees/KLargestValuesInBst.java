@@ -33,7 +33,7 @@ public class KLargestValuesInBst {
     private static void findKSmallestInBstHelper(TreeNode<Integer> tree, int k,
                                                  List<Integer> kSmallestElements) {
         if (tree == null) return;
-        // Perform reverse inorder traversal.
+        // Perform normal inorder traversal.
         if (tree != null && kSmallestElements.size() < k) {
             findKSmallestInBstHelper(tree.left, k, kSmallestElements);
             if (kSmallestElements.size() < k) {
