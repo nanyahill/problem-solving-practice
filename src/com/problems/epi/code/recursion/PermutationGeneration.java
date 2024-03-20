@@ -8,37 +8,27 @@ public class PermutationGeneration {
     /*** Distinct Entries ***/
 
      // Clean solution and prints in lexicographic order
-    public static List<List<Integer>> getPerms_Distinct(int[] set) {
-        List<List<Integer>> res = new ArrayList<>();
-        if (set == null || set.length == 0) return res;
-        getPerms_Distinct(new ArrayList<>(), res, 0, set.length, set);
-        //getPerms_Distinct_2(Arrays.asList(set), 0, res);
-        return res;
-    }
     // Source: https://leetcode.com/problems/permutations/solutions/18239/A-general-approach-to-backtracking-questions-in-Java-(Subsets-Permutations-Combination-Sum-Palindrome-Partioning)/
     // Youtube video: https://www.youtube.com/watch?v=YK78FU5Ffjw
-    private static void getPerms_Distinct(List<Integer> tmp, List<List<Integer>> res, int idx, int n, int[] set) {
-        if(idx == n){
-            res.add(new ArrayList<>(tmp));
-            return;
-        }
-        for (int i = 0; i < n; i++) {
-            if(tmp.contains(set[i])) continue; // this line will take O(n) better off using a hashset
-            tmp.add(set[i]);
-            getPerms_Distinct(tmp, res, idx + 1, n, set);
-            tmp.remove(tmp.size() - 1);
-        }
+    public static List<List<Integer>> getPerms_Distinct(List<Integer> nums) {
+        if(nums == null) return Collections.emptyList();
+        List<List<Integer>> result = new ArrayList<>();
+        helper(nums, 0, result, new ArrayList<>(), new boolean[nums.size()]);
+        return result;
     }
-    // Update from Year 2022 (from EPI solution)
-    private static void getPerms_Distinct_2(List<Integer> nums, int start, List<List<Integer>> result) {
-        if(start == nums.size()) {
-            result.add(new ArrayList<>(nums));
+
+    private static void helper(List<Integer> nums, int idx, List<List<Integer>> result, List<Integer> tmp, boolean[] used) {
+        if(tmp.size() == nums.size()) {
+            result.add(new ArrayList<>(tmp));
             return;
         }
-        for(int i = start; i < nums.size(); i++) {
-            Collections.swap(nums, start, i);
-            getPerms_Distinct_2(nums, start + 1, result);
-            Collections.swap(nums, start, i);
+        for(int i = 0; i < nums.size(); i++){
+            if(used[i])continue;
+            tmp.add(nums.get(i));
+            used[i] = true;
+            helper(nums, idx + 1, result, tmp, used);
+            tmp.remove(tmp.size() - 1);
+            used[i] = false;
         }
     }
 

@@ -26,62 +26,63 @@ public class KnapsackProblem {
         }
     }
 
-    public static int findMaximumProfit_Recursive(List<Item> items, int weight) {
-        if(items == null || items.size() == 0) return 0;
-        return findMaximumProfit_Recursive(items, items.size() - 1, weight);
-    }
-
-    private static int findMaximumProfit_Recursive(List<Item> items, int i, int w) {
-        if(i == 0) return 0;
-        if(w == 0) return 0;
-        // Maximum (not taking item, taking item)
-        return Math.max(findMaximumProfit_Recursive(items, i - 1, w), items.get(i).weight > w ? 0 : items.get(i).value + findMaximumProfit_Recursive(items, i - 1, w - items.get(i).weight));
-    }
-
-    public static int findMaximumProfit_TopDownDP(List<Item> items, int weight) {
-        if (items == null || items.size() == 0) return 0;
+    public static int optimumSubjectToCapacity(List<Item> items, int weight) {
+        if(items == null || items.isEmpty()) return -1;
         int[][] table = new int[items.size() + 1][weight + 1];
-        for(int[] row : table)Arrays.fill(row, -1);
-        return findMaximumProfit_TopDownDP(items, items.size(), weight, table);
+        for(int[] row : table) Arrays.fill(row, - 1);
+        //return recursive(items, items.size(), weight);
+        return topDown(items, items.size(), weight, table);
     }
 
-    private static int findMaximumProfit_TopDownDP(List<Item> items, int i, int j, int[][] table) {
-        if (i == 0 || j == 0) return 0;
-        //if (j == 0) return 0;
-        if (table[i][j] == -1) {
-            table[i][j] = Math.max(findMaximumProfit_TopDownDP(items, i - 1, j, table), items.get(i-1).weight > j ? 0 : items.get(i-1).value + findMaximumProfit_TopDownDP(items, i - 1, j - items.get(i-1).weight, table));
+    private static int recursive(List<Item> items, int i, int j) {
+        if(i == 0) return 0;
+        if(j == 0) return 0;
+        Item item = items.get(i - 1);
+        int withItem = item.weight <= j ? recursive(items, i - 1, j - item.weight) + item.value : 0;
+        int withoutItem = recursive(items, i - 1, j);
+        return Math.max(withItem, withoutItem);
+    }
+
+    private static int topDown(List<Item> items, int i, int j, int[][] table){
+        if(i == 0) return 0;
+        if(j == 0) return 0;
+        if(table[i][j] == -1) {
+            Item item = items.get(i - 1);
+            int withItem = item.weight <= j ? topDown(items, i - 1, j - item.weight, table) + item.value : 0;
+            int withoutItem = topDown(items, i - 1, j, table);
+            table[i][j] = Math.max(withItem, withoutItem);
         }
         return table[i][j];
     }
 
-    public static int findMaximumProfit_BottomUpDP(List<Item> items, int weight) {
-        if(items == null || items.size() == 0) return 0;
+    public static int bootomUp2D(List<Item> items, int weight) {
+        if(items == null || items.isEmpty()) return -1;
         int[][] table = new int[items.size() + 1][weight + 1];
-        //Arrays.fill(table[0], 0);
-        for(int i = 1; i <=items.size(); i++) {
-            int itemWeight = items.get(i-1).weight;
-            int itemValue = items.get(i-1).value;
-            // this order of inner for loop iteration is important,
-            // because you start with an almost full knapsack (its capacity remaining) that has a
-            // remaining weight of j and you try to see what item can fill up that remaining weight
-            for(int j = 0; j <= weight; j++) {
-                if(itemWeight > j) table[i][j] = table[i-1][j];
-                else table[i][j] = Math.max(table[i-1][j], itemValue + table[i-1][j - itemWeight]);
+        for(int i = 1; i <= items.size(); i++) {
+            Item item = items.get(i - 1);
+            for(int j = 1; j <= weight; j++) {
+                int withItem = item.weight <= j ? table[i - 1][j - item.weight] + item.value : 0;
+                int withoutItem = table[i - 1][j];
+                table[i][j] = Math.max(withItem, withoutItem);
             }
         }
         return table[items.size()][weight];
     }
 
     public static int findMaximumProfit_BottomUpDP_WithMinSpace(List<Item> items, int weight) {
-        if(items == null || items.size() == 0) return 0;
+        if(items == null || items.isEmpty()) return -1;
         int[] table = new int [weight + 1];
         for(int i = 1; i <= items.size(); i++) {
-            int itemWeight = items.get(i-1).weight;
-            int itemValue = items.get(i-1).value;
-            // this order of inner for loop iteration is important,
-            // because an empty knapsack has a capacity of wgt and you try to fill it up.
-            for(int j = weight; j >= itemWeight; j--) {
-                table[j] = Math.max(table[j], itemValue + table[j - itemWeight]);
+            Item item = items.get(i - 1);
+            /**
+             * why does going from 0 to w fails?
+             * It is because if we go from 0 to w we lose the [j-w[i]] value of the previous row.
+             * Going from 0 to w prematurely modifies that value.
+             */
+            for(int j = weight; j >= item.weight; j--) {
+                int withItem = table[j - item.weight] + item.value;
+                int withoutItem = table[j];
+                table[j] = Math.max(withItem, withoutItem);
             }
         }
         return table[weight];
