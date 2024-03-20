@@ -48,6 +48,8 @@ public class BuyAndSellStock_I {
 
     public static void main(String[] args) {
         int[] values = {7, 1, 5, 3, 6, 4, 8};
-        System.out.print(computeProfit(values));
+        //System.out.print(computeProfit(values));
+        String s = "apple";
+        System.out.println("Test:" + s.substring(s.length()));
     }
 }

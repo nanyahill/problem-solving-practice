@@ -6,7 +6,15 @@ import java.util.Queue;
 
 /**
  * Similar to Leetcode 130: Surrounded Regions
- */
+ *   /**
+ *    * Key Insights:
+ *    * Focus on the inverse of the problem- identify all Ws that can reach the boundary by starting with the
+ *    * initial set of Ws AT the boundary.
+ *    * This way we find Ws neighbouring the boundary Ws and iteratively grow the set.
+ *    * Time complexity: O(mn) where m and n are the number of rows and cols in grid
+ *    * @param board
+ *    */
+
 public class MatrixEnclosedRegions {
 
     public static void fillSurroundedRegions(List<List<Character>> board) {

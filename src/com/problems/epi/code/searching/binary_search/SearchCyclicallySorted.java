@@ -1,5 +1,9 @@
 package com.problems.epi.code.searching.binary_search;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 /**
  * Overall Key Insight:
  * - A cyclically sorted array is an array where shifting its front elements a number of times to the back of the array
@@ -18,16 +22,15 @@ public class SearchCyclicallySorted {
      * Space Complexity: O(1)
      * NOTE: If duplicates were allowed, algorithm's time complexity cannot be anything less than linear time
      */
-    public static int findMinimumElementIndex_Distinct(int[] nums) {
-        if (nums == null || nums.length == 0) return -1;
-        int lo = 0, hi = nums.length - 1;
-        while (lo <= hi) {
+    public static int findMinimumElementIndex_Distinct(List<Integer> nums) {
+        if (nums == null || nums.isEmpty()) return -1;
+        int lo = 0, hi = nums.size() - 1;
+        while (lo < hi) {
             int mid = (lo + hi) >>> 1;
-            if (nums[mid] < nums[hi]) hi = mid;
-            else if (nums[mid] > nums[hi]) lo = mid + 1;
-            else return mid; // return nums[mid] if asked to return element
+            if (nums.get(mid) < nums.get(hi)) hi = mid;
+            else if (nums.get(mid) > nums.get(hi)) lo = mid + 1;
         }
-        return -1;
+        return lo;
     }
 
     /** VARIANT
@@ -37,7 +40,7 @@ public class SearchCyclicallySorted {
      */
     public static int findElementIndex_Distinct(int[] nums, int target) {
         if (nums == null || nums.length == 0) return -1;
-        int minIdx = findMinimumElementIndex_Distinct(nums);
+        int minIdx = findMinimumElementIndex_Distinct(Arrays.stream(nums).boxed().collect(Collectors.toList()));
         int lo = 0, hi = nums.length - 1;
         while (lo <= hi) {
             int mid = lo + ((hi - lo) / 2);

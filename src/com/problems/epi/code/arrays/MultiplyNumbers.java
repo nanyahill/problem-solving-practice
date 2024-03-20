@@ -1,6 +1,8 @@
 package com.problems.epi.code.arrays;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class MultiplyNumbers {
 
@@ -21,31 +23,36 @@ public class MultiplyNumbers {
         return res;
     }
 
-    public static int[] multiplyTwoNumbers(int[] A, int[] B) {
-        int sign = A[0] < 0 || B[0] < 0 ? -1 : 1;
-        int lenA = A.length, lenB = B.length;
-        int[] result = new int[lenA + lenB];
-
-        for (int i = lenA - 1; i >= 0; i--) {
-            for (int j = lenB - 1; j >= 0; j--) {
-                result[i + j + 1] = result[i + j + 1] + (A[i] * B[j]);
-                result[i + j] = result[i + j] + (result[i + j + 1] / 10);
-                result[i + j + 1] = result[i + j + 1] % 10;
+        public static List<Integer> multiplyTwoNumbers(List<Integer> nums1, List<Integer> nums2) {
+            int sign = nums1.get(0) < 0 ^ nums2.get(0) < 0 ? -1 : 1;
+            nums1.set(0, Math.abs(nums1.get(0)));
+            nums2.set(0, Math.abs(nums2.get(0)));
+            int m = nums1.size();
+            int n = nums2.size();
+            int[] result = new int[m + n];
+            int sum = 0;
+            for(int i = m - 1; i >= 0; i--) {
+                for(int j = n - 1; j >= 0; j--) {
+                    int multiply = nums1.get(i) * nums2.get(j);
+                    int p1 = i + j;
+                    int p2 = i + j + 1;
+                    sum = result[p2] + multiply;
+                    result[p1] += sum / 10;
+                    result[p2] = (sum) % 10;
+                }
             }
+            List<Integer> resultList = Arrays.stream(result).boxed().collect(Collectors.toList());
+            int firstNonZero = 0;
+            while(firstNonZero < resultList.size() && resultList.get(firstNonZero) == 0) firstNonZero++;
+            resultList = resultList.subList(firstNonZero, resultList.size());
+            if(resultList.isEmpty()) return List.of(0);
+            resultList.set(0, resultList.get(0) * sign);
+            return resultList;
         }
 
-        // Remove trailing zeroes
-        int first_non_zero = 0;
-        while (first_non_zero < result.length && result[first_non_zero] == 0) {
-            ++first_non_zero;
+        public static void main(String[] args) {
+            List<Integer> num1 = Arrays.asList(2);
+            List<Integer> num2 = Arrays.asList(3);
+            System.out.println(multiplyTwoNumbers(num1, num2));
         }
-
-        //Get the subArray
-        result = Arrays.copyOfRange(result, first_non_zero, result.length);
-
-        // Add the sign
-        result[0] *= sign;
-
-        return result.length == 0 ? new int[1] : result;
-    }
 }

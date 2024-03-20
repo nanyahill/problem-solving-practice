@@ -2,6 +2,13 @@ package com.problems.epi.code.arrays;
 
 public class PermuteElementsOfArray {
 
+    /**
+     * This problem still takes me a while to undertsand.
+     * An elegant solution can be found here
+     * https://leetcode.com/problems/build-array-from-permutation/solutions/1316500/java-solution-using-o-1-space-with-explanation/
+     * Video: https://www.youtube.com/watch?v=1svjL7Docuo
+     * I will skip for now because it is tagged as easy. I will be on the look out if I see a problem that uses it as a basis for its solution.
+     */
     public static char[] applyPermutation(char[] A, int[] P) {
         if (A == null || P == null || A.length == 0 || P.length == 0)
             return null;

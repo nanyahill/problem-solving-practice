@@ -16,7 +16,7 @@ public class MergeSortedLists {
     public static ListNode mergeSortedLists_WithDummyNode(ListNode<Integer> l1, ListNode<Integer> l2) {
         if (l1 == null) return l2;
         if (l2 == null) return l1;
-        // Dummy node is used because the input lists are modified
+        // Dummy node is used because we need to build a new LL
         ListNode<Integer> dummy = new ListNode<>(0);
         ListNode<Integer> current = dummy;
         while (l1 != null && l2 != null) {

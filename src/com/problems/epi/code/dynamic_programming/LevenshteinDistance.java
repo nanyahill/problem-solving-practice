@@ -39,7 +39,7 @@ public class LevenshteinDistance {
         if(table[i][j] == -1) {
             //if(match(s1.charAt(i - 1), s2.charAt(j - 1)) == 0) return editDistance_TopDownDP(s1, s2, i - 1, j - 1, table);
             //else {
-            int subLast = 1 + editDistance_TopDownDP(s1, s2, i - 1, j - 1, table);
+            int subLast = match(s1.charAt(i-1),s2.charAt(j-1)) + editDistance_TopDownDP(s1, s2, i - 1, j - 1, table);
             int delLast = 1 + editDistance_TopDownDP(s1, s2, i - 1, j, table);
             int addLast = 1 + editDistance_TopDownDP(s1, s2, i, j - 1, table);
             table[i][j] = Math.min(subLast, Math.min(addLast, delLast));

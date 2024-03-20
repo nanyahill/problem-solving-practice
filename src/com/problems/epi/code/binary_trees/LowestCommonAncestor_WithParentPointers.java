@@ -62,4 +62,19 @@ public class LowestCommonAncestor_WithParentPointers {
         }
         return depth;
     }
+
+    /**
+     * More optimal solution with fewer lines. Similar to the problem:
+     * Compute intersection of two linked lists
+     */
+    public static TreeNode<Integer> lca(TreeNode<Integer> n1, TreeNode<Integer> n2) {
+        if(n1 == null && n2 == null) return null;
+        TreeNode<Integer> p1 = n1;
+        TreeNode<Integer> p2 = n2;
+        while(p1 != p2) {
+            p1 = p1 == null ? n2 : p1.parent;
+            p2 = p2 == null ? n1 : p2.parent;
+        }
+        return p1;
+    }
 }

@@ -28,8 +28,10 @@ public class AnonymousLetter {
             if(countMap.isEmpty()) return true;
             char c_mag = magazine.charAt(j);
             if(countMap.containsKey(c_mag)) {
-                if(countMap.get(c_mag) - 1 == 0) countMap.remove(c_mag);
-                else countMap.put(c_mag, countMap.get(c_mag) - 1);
+                // IMPORTANT: Decrement count as soon as you spot it in the map
+                int decrementedCount = countMap.get(c_mag) - 1;
+                if(decrementedCount == 0) countMap.remove(c_mag);
+                else countMap.put(c_mag, decrementedCount);
             }
         }
         return countMap.isEmpty();

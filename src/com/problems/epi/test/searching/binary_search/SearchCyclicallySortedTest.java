@@ -3,13 +3,16 @@ package com.problems.epi.test.searching.binary_search;
 import com.problems.epi.code.searching.binary_search.SearchCyclicallySorted;
 import org.junit.Test;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 public class SearchCyclicallySortedTest {
 
     @Test
     public void findMinTest() {
         int[] in = {378, 478, 550, 678, 102, 112, 234};
         int expected = 4;
-        int actual = SearchCyclicallySorted.findMinimumElementIndex_Distinct(in);
+        int actual = SearchCyclicallySorted.findMinimumElementIndex_Distinct(Arrays.stream(in).boxed().collect(Collectors.toList()));
         assert(expected == actual);
         System.out.println(actual);
     }
