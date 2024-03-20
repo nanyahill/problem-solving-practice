@@ -57,18 +57,18 @@ public class PhoneNumberMnemonics {
     private static final String[] MAPPINGS = {"0", "1", "ABC", "DEF", "GHI", "JKL", "MNO", "PQRS", "TUV", "WXYZ"};
     public static List<String> phoneMnemonicIterative(String digits) {
         LinkedList<String> queue = new LinkedList<>();
-        if(digits == null || digits.length() == 0) return queue;
+        if(digits == null) return queue;
         queue.add("");
         for(int i = 0; i < digits.length(); i++) {
-            while(queue.peek().length() == i) {
+            String chars = MAPPINGS[digits.charAt(i) - '0'];
+            while(!queue.isEmpty() && queue.peek().length() == i) {
                 String s = queue.remove();
-                String strs = MAPPINGS[digits.charAt(i) - '0'];
-                for(int j = 0; j < strs.length(); j++) {
-                    queue.add(s + strs.charAt(j));
+                for (char c : chars.toCharArray()) {
+                    queue.add(s + Character.toUpperCase(c));
                 }
+
             }
         }
-
         return queue;
     }
 
