@@ -13,6 +13,22 @@ import java.util.Set;
  * Leetcode #1650
  */
 public class LowestCommonAncestor_WithParentPointers {
+
+    /**
+     * More optimal solution with fewer lines. Similar to the problem:
+     * Compute intersection of two linked lists
+     */
+    public static TreeNode<Integer> lca(TreeNode<Integer> n1, TreeNode<Integer> n2) {
+        if(n1 == null && n2 == null) return null;
+        TreeNode<Integer> p1 = n1;
+        TreeNode<Integer> p2 = n2;
+        while(p1 != p2) {
+            p1 = p1 == null ? n2 : p1.parent;
+            p2 = p2 == null ? n1 : p2.parent;
+        }
+        return p1;
+    }
+
     /**
      * Brute-Force: Iterate over any one of the nodes and store the nodes in its search path in a hash table.
      * Then iterate over the second node and return the first parent node that appears in the hash table.
@@ -61,20 +77,5 @@ public class LowestCommonAncestor_WithParentPointers {
             node = node.parent;
         }
         return depth;
-    }
-
-    /**
-     * More optimal solution with fewer lines. Similar to the problem:
-     * Compute intersection of two linked lists
-     */
-    public static TreeNode<Integer> lca(TreeNode<Integer> n1, TreeNode<Integer> n2) {
-        if(n1 == null && n2 == null) return null;
-        TreeNode<Integer> p1 = n1;
-        TreeNode<Integer> p2 = n2;
-        while(p1 != p2) {
-            p1 = p1 == null ? n2 : p1.parent;
-            p2 = p2 == null ? n1 : p2.parent;
-        }
-        return p1;
     }
 }

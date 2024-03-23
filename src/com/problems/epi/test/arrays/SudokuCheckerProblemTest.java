@@ -4,6 +4,10 @@ import com.problems.epi.code.arrays.SudokuCheckerProblem;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 /**
  * Created by Nanya on 12/20/17.
  */
@@ -20,7 +24,8 @@ public class SudokuCheckerProblemTest {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0, 0} };
 
         boolean expected = true;
-        boolean actual = SudokuCheckerProblem.isValidSudoku(input2);
+        List<List<Integer>> inputAsList = Arrays.stream(input2).map(innerArray -> Arrays.stream(innerArray).boxed().collect(Collectors.toList())).collect(Collectors.toList());
+        boolean actual = SudokuCheckerProblem.isValidSudoku(inputAsList);
         Assert.assertEquals(expected, actual);
     }
 }

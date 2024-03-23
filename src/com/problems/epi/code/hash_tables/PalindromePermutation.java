@@ -15,14 +15,12 @@ import java.util.Set;
  */
 public class PalindromePermutation {
 
-    public static boolean isPalindromePermutation(String word) {
-        if(word == null || word.length() == 0) return true;
-        Set<Character> charSet = new HashSet<>();
-        for(int i = 0; i < word.length(); i++) {
-            char c = word.charAt(i);
-            if(charSet.contains(c)) charSet.remove(c);
-            else charSet.add(c);
+    public static boolean isPalindromePermutation(String str) {
+        if(str == null || str.isEmpty()) return true;
+        Set<Character> set = new HashSet<>();
+        for(char c : str.toCharArray()) {
+            if(!set.add(c)) set.remove(c);
         }
-        return charSet.size() > 1 ? false : true;
+        return set.size() <= 1;
     }
 }

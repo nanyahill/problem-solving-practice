@@ -33,42 +33,4 @@ public class ReConstructBinaryTreeFromTraversalData {
         root.right = buildBinaryTreeHelper(preStart + leftSubTreeSize + 1, inIndex + 1, inEnd, preorder, inorder, inMap);
         return root;
     }
-
-    /**
-     * Alternative Solution: Bypasses the arithmetic in line 33 above
-     * for the first argument to the right recursive call
-     */
-
-    // Wrapper class for the preorder index used in recursive calls
-    static class PreIndex {
-        int idx;
-        PreIndex(int idx) {
-            this.idx = idx;
-        }
-    }
-
-    static Map<Integer, Integer> map = new HashMap<>();
-
-    // preprocessing
-    private static void buildMap(int[] inorder) {
-        for (int i = 0; i < inorder.length; i++) {
-            map.put(inorder[i], i);
-        }
-    }
-
-    public static TreeNode buildTree(int[] preorder, int[] inorder) {
-        if (preorder == null || inorder == null) return null;
-        buildMap(inorder);
-        return buildTree(new PreIndex(0), 0, preorder.length - 1, preorder, inorder);
-    }
-
-    private static TreeNode buildTree(PreIndex preIdx, int inStart, int inEnd, int[] preorder, int[] inorder) {
-        if (preIdx.idx == preorder.length || inStart > inEnd) return null;
-        TreeNode root = new TreeNode(preorder[preIdx.idx]);
-        int idx = map.get(root.data);
-        preIdx.idx++;
-        root.left = buildTree(preIdx, inStart, idx - 1, preorder, inorder);
-        root.right = buildTree(preIdx, idx + 1, inEnd, preorder, inorder);
-        return root;
-    }
 }

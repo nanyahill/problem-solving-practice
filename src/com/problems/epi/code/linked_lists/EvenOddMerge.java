@@ -27,13 +27,4 @@ public class EvenOddMerge {
         even.next = oddHead;
         return head;
     }
-
-    /**
-     *
-     * @param n
-     * @return
-     */
-    public static int foo(int n) {
-        return -1;
-    }
 }
