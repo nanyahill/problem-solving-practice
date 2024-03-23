@@ -15,26 +15,33 @@ public class InterConvertStringsAndArrays {
      * Space Complexity: O(1)
      */
     public static String intToString(int num) {
-        StringBuilder res = new StringBuilder("");
+        StringBuilder res = new StringBuilder();
         boolean isNegative = false;
         if (num < 0) isNegative = true;
         // This is a case where do..while is important
         // If we just use while here then what if num = 0
         do {
             int digit = Math.abs(num % 10); // Math.abs(..) is important here because if num is -ve, the digit would always be a negative number.
+            // May want to convert to char
+            char c = (char) (digit + '0');
             num /= 10;
-            res.append(digit); //possible because StringBuilder has an append(int i) and digit ranges from 0-9
+            res.append(c);
         } while (num != 0);
         if (isNegative) res.append("-"); // make sure to append the -ve sign before reversing
         return res.reverse().toString();
     }
 
     public static int stringToInt(String s) {
-        int res = 0;
-        for (int i = Character.isDigit(s.charAt(0)) ? 0 : 1; i < s.length(); i++) {
-            int digit = s.charAt(i) - '0';
-            res = res * 10 + digit;
+        if(s == null || s.isEmpty()) return -1;
+        boolean isNegative = s.charAt(0) == '-';
+        int result = 0;
+        for(int i = isNegative ? 1 : 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if(Character.isDigit(c)) {
+                int digit = c - '0';
+                result = result * 10 + digit;
+            }
         }
-        return s.charAt(0) == '-' ? -res : res;
+        return isNegative ? -result : result;
     }
 }
