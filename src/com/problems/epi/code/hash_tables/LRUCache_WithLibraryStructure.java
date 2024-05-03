@@ -17,8 +17,7 @@ public class LRUCache_WithLibraryStructure {
     };
 
     public double get(int key) {
-        if(!map.containsKey(key)) return -1;
-        return map.get(key);
+        return map.getOrDefault(key, -1.0);
     }
 
     public void put(int k, double v) {

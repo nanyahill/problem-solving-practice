@@ -15,8 +15,8 @@ public class DirectoryPathNormalization {
             //if (token.isEmpty() || token.equals(".")) continue;
             if (token.equals("..")) {
                 if (stack.isEmpty() || stack.peek().equals("..")) {
-                    stack.offerFirst(token);
-                } else stack.pollFirst();
+                    stack.push(token); //push
+                } else stack.pop(); //pop
             } else if (!token.isEmpty() || !token.equals(".")){
                 stack.offerFirst(token);
             }

@@ -7,33 +7,31 @@ public class LongestNonDecreasingSubSequence {
 
     public static int longestNonDecreasingSubsequenceLength(List<Integer> nums) {
         if (nums == null || nums.size() == 0) return -1;
-        int[][] table = new int[nums.size() + 1][nums.size()];
-        for (int[] row : table) {
-            Arrays.fill(row, -1);
-        }
-        return longestNonDecreasingSubsequenceLength_TopDown(nums, nums.size(), nums.size() - 1, table);
-        // return longestNonDecreasingSubsequenceLength_Recursive(nums, nums.size(), nums.size() - 1);
+        int[][] table = new int[nums.size()][nums.size() + 1];
+        for(int[] row : table) Arrays.fill(row, -1);
+        return longestNonDecreasingSubsequenceLength_TopDown(nums, nums.size() - 1, nums.size(), table);
+        // return longestNonDecreasingSubsequenceLength_Recursive(nums, nums.size() - 1, nums.size());
     }
 
     private static int longestNonDecreasingSubsequenceLength_Recursive(List<Integer> nums, int i, int j) {
-        if (j < 0) return 0;
+        if(i < 0) return 0;
         int taken = 0;
-        if (i == nums.size() || nums.get(i) >= nums.get(j)) {
-            taken = 1 + longestNonDecreasingSubsequenceLength_Recursive(nums, j, j - 1);
+        if(j == nums.size() || nums.get(j) >= nums.get(i)) {
+            taken = 1 + longestNonDecreasingSubsequenceLength_Recursive(nums, i - 1, i);
         }
-        int notTaken = longestNonDecreasingSubsequenceLength_Recursive(nums, i, j - 1);
-        return Math.max(taken, notTaken);
+        int nottaken = longestNonDecreasingSubsequenceLength_Recursive(nums, i - 1, j);
+        return Math.max(taken, nottaken);
     }
 
     private static int longestNonDecreasingSubsequenceLength_TopDown(List<Integer> nums, int i, int j, int[][] table) {
-        if (j < 0) return 0;
-        if (table[i][j] == -1) {
+        if(i < 0) return 0;
+        if(table[i][j] == -1) {
             int taken = 0;
-            if (i == nums.size() || nums.get(i) >= nums.get(j)) {
-                taken = 1 + longestNonDecreasingSubsequenceLength_TopDown(nums, j, j - 1, table);
+            if(j == nums.size() || nums.get(j) >= nums.get(i)) {
+                taken = 1 + longestNonDecreasingSubsequenceLength_TopDown(nums, i - 1, i, table);
             }
-            int notTaken = longestNonDecreasingSubsequenceLength_TopDown(nums, i, j - 1, table);
-            table[i][j] = Math.max(taken, notTaken);
+            int nottaken = longestNonDecreasingSubsequenceLength_TopDown(nums, i - 1, j, table);
+            table[i][j] = Math.max(taken, nottaken);
         }
         return table[i][j];
     }

@@ -65,13 +65,14 @@ public class SearchMaze {
     // Another approach would be maintaining a mapping from each node to its parent, and when inspecting the adjacent
     // node, record its parent. When the search is done, simply backtrace according the parent mapping.
     // https://stackoverflow.com/questions/8922060/how-to-trace-the-path-in-a-breadth-first-search
+    // BEWARE OF HOW YOU MARKED VISITED NODES: You should ALWAYS mark node as visited when you ADD to queue.
     private static List<Cell> searchMazeBFS_ReturnPath(List<List<Color>> maze, Cell start, Cell end, List<Cell> result, int[][] directions) {
         Deque<List<Cell>> queue = new ArrayDeque<>();
         queue.offerLast(new ArrayList<>(Arrays.asList(start)));
+        maze.get(start.i).set(start.j, Color.BLACK);
         while (!queue.isEmpty()) {
             List<Cell> path = queue.removeFirst();
             Cell cell = path.get(path.size() - 1);
-            maze.get(cell.i).set(cell.j, Color.BLACK);
             if (cell.i == end.i && cell.j == end.j) {
                 return path;
             }
@@ -83,6 +84,7 @@ public class SearchMaze {
                 List<Cell> newPath = new ArrayList<>(path);
                 newPath.add(nextCell);
                 queue.push(newPath);
+                maze.get(nextCell.i).set(nextCell.j, Color.BLACK);
             }
         }
         return Collections.emptyList();

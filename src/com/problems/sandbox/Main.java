@@ -1,6 +1,7 @@
 package com.problems.sandbox;
 
 import java.util.Arrays;
+import java.util.Stack;
 
 public class Main {
         // Function to find maximum overlapping interval
@@ -38,8 +39,14 @@ public class Main {
 //            int[] departure = {2, 7, 6, 8, 5};
             int[] arrival = {0, 3};//, 4, 7, 1};
             int[] departure = {2, 7};//, 6, 8, 5};
+            Stack<String> stack = new Stack<>();
+            stack.push("abc");
+            stack.push("xyz");
+            for(String s : stack) {
+                System.out.println(s);
+            }
 
-            maximumOverlappingIntervals(arrival, departure);
+            //maximumOverlappingIntervals(arrival, departure);
         }
 
 }

@@ -10,6 +10,15 @@ import java.util.List;
  * https://leetcode.com/problems/largest-rectangle-in-histogram/editorial/
  * There is an nlogn solution which I do not yet understand. That is OK because the O(n) solutions below
  * is more optimal that the nlogn solution.
+ * Key Insights for stack solution:
+ * Push -1 into the stack after creation.
+ * Push current array index to stack if element is greater than what is in top of stack
+ * Pop from stack if element is less than what is in top of stack
+ * leftlimit = curr array idx; right limit = top of the stack AFTER popping
+ * Inside the for loop, we use a a while loop to check that the stack is not empty,
+ * the stack top elt is not -1 and the stack top elt is >= curr element
+ * Outside the for loop (that is done processing input), it is possible that the stack is not empty
+ * Repeat the while loop inside the for loop as long as stack top elt is not -1, with rightlimit = input.size()
  */
 public class LargestRectangleUnderSkyline {
 

@@ -19,7 +19,7 @@ public class GrayCode {
         if (result.size() == (1 << n)) {
             return true;
         }
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < n; i++) { // !! Important that it is from 0 to n -1 instead of 0 to (1 << n)
             int previous = result.get(result.size() - 1);
             int next = previous ^ (1 << i);
             if (!visited.contains(next)) {

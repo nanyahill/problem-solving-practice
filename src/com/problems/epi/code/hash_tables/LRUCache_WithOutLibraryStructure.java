@@ -1,68 +1,80 @@
 package com.problems.epi.code.hash_tables;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.NoSuchElementException;
 
 public class LRUCache_WithOutLibraryStructure {
-    HashMap<Integer, CacheNode> map = new HashMap<>();
-    CacheNode head, tail;
-    int capacity;
+        static class CacheNode {
+            Integer key;
+            Integer value;
+            CacheNode prev;
+            CacheNode next;
 
-    public LRUCache_WithOutLibraryStructure(int maxSize) { this.capacity = maxSize; }
-
-    public Double get(int key) {
-        if(!map.containsKey(key)) return null; //throw new NoSuchElementException();
-        CacheNode node = map.get(key);
-        removeNodeFromList(node);
-        insertNodeInFrontOfList(node);
-        return node.value;
-    }
-
-    public void insert(int key, double value) {
-        if(map.containsKey(key)) map.get(key);
-        else {
-            CacheNode node = new CacheNode(key, value);
-            if(map.size() >= capacity && tail != null) {
-                remove(tail.key);
+            public CacheNode(int key, int value) {
+                this.key = key;
+                this.value = value;
             }
-            insertNodeInFrontOfList(node);
+
+        }
+        Map<Integer, CacheNode> map;
+        int size;
+        int capacity;
+        CacheNode head;
+        CacheNode tail;
+    public LRUCache_WithOutLibraryStructure(final int capacity) {
+            this.map = new HashMap<>(capacity);
+            size = 0;
+            this.capacity = capacity;
+            head = new CacheNode(0, 0);
+            tail = new CacheNode(0, 0);
+            head.next = tail;
+            tail.prev = head;
+        }
+        public Integer get(Integer key) {
+            if(!map.containsKey(key)) {
+                return -1;
+            }
+            CacheNode node = map.get(key);
+            removeNode(node);
+            addNode(node);
+            return node.value;
+        }
+        public void insert(Integer key, Integer value) {
+            if(map.containsKey(key)) {
+                CacheNode node = map.get(key);
+                removeNode(node);
+                addNode(node);
+                return;
+            }
+            CacheNode node = new CacheNode(key, value);
             map.put(key, node);
+            addNode(node);
+            if(map.size() > capacity) {
+                CacheNode nodeToDelete = head.next;
+                removeNode(nodeToDelete);
+                map.remove(nodeToDelete.key);
+            }
         }
-        //return true;
-    }
-
-    public CacheNode remove(int key) {
-        if(!map.containsKey(key)) throw new NoSuchElementException();
-        CacheNode node = map.get(key);
-        removeNodeFromList(node);
-        map.remove(key);
-        return node;
-    }
-
-    private void removeNodeFromList(CacheNode node) {
-        if(node == null) return;
-        if(node == head) { head = node.next; }
-        if(node == tail) { tail = node.prev; }
-        if(node.prev != null) node.prev.next = node.next;
-        if(node.next != null) node.next.prev = node.prev;
-    }
-
-    private void insertNodeInFrontOfList(CacheNode node) {
-        if(node == null) return;
-        if(head == null) { head = node; tail = node; }
-        else {
-            node.next = head;
-            head.prev = node;
-            head = node;
+        public Boolean erase(Object key) {
+            removeNode(map.get(key));
+            return map.remove(key) != null;
         }
-    }
 
-    static class CacheNode {
-        public int key;
-        public double value;
-        private CacheNode next; // private because it is only used for internal list maintenance
-        private CacheNode prev;
+        private Integer removeNode(CacheNode node) {
+            if(node == null || node.next == null) return null;
+            node.next.prev = node.prev;
+            node.prev.next = node.next;
+            size--;
+            return node.key;
+        }
 
-        public CacheNode(int key, double value) { this.key = key; this.value = value; }
-    }
+        private void addNode(CacheNode node) {
+            CacheNode currTail = tail.prev;
+            tail.prev = node;
+            node.prev = currTail;
+            node.next = tail;
+            currTail.next = node;
+            size++;
+        }
 }
