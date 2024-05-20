@@ -40,16 +40,14 @@ public class LongestNonDecreasingSubSequence {
         if (nums == null || nums.isEmpty()) return -1;
         int[] table = new int[nums.size()];
         Arrays.fill(table, 1);
+        int result = Integer.MIN_VALUE;
         for(int i = 1; i < nums.size(); i++) {
             for(int j = 0; j < i; j++) {
                 if(nums.get(j) <= nums.get(i)) {
                     table[i] = Math.max(table[i], table[j] + 1);
+                    result = Math.max(result, table[i]);
                 }
             }
-        }
-        int result = Integer.MIN_VALUE;
-        for(int num : table) {
-            result = Math.max(result, num);
         }
         return result;
     }
