@@ -1,5 +1,5 @@
 package com.problems.epi.code.dynamic_programming;
-
+// AKA 79. Word Search variant
 public class PatternInGrid {
 
     /**
