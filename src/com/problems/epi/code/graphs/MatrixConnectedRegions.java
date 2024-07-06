@@ -9,6 +9,9 @@ import java.util.Queue;
  * This problem is similar to the flood fill algorithm
  * Key Insight: What is a connected region? A region where all cells that have the same color as the starting vertex and can be reached
  * from the starting vertex.
+ * https://leetcode.com/problems/flood-fill/description/
+ * In Leetcode, there is an input pixel as well as an input color. There is an optimisation where
+ * if the inputColor != pixelColor that is when you solve; otherwise return the image
  */
 public class MatrixConnectedRegions {
 

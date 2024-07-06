@@ -76,30 +76,24 @@ public class RenderCalendar {
         return maxNumberOfEvents;
     }
 
-    public static int findMaxOverlapingEvents_TwoPointer2(Event[] events) {
-        if (events == null || events.length == 0) return -1;
-        int countSeenSoFar = 0, maxCountSeenSoFar = 0;
+    public static int findMaxOverLappingEventsTwoArrays(List<Event> events) {
+        if(events == null || events.isEmpty()) return -1;
         List<Integer> startPoints = new ArrayList<>();
         List<Integer> endPoints = new ArrayList<>();
-        for(Event e : events) {
+        for(Event e : events){
             startPoints.add(e.start);
             endPoints.add(e.end);
         }
         Collections.sort(startPoints);
         Collections.sort(endPoints);
-        int i = 0, j = 0; // because i is the fast pointer while j is the slow pointer
-        //for(int i = 1; i < events.length && j < events.length; i++) {
-        while (i < events.length && j < events.length) {
-            if (startPoints.get(i) <= endPoints.get(j)) {
-                countSeenSoFar++;
-                maxCountSeenSoFar = Math.max(maxCountSeenSoFar, countSeenSoFar);
-                i++;
-            } else {
-                countSeenSoFar--;
-                j++;
+        int maxOverLapping = 0;
+        for(int i = 0, j = 0; i < events.size(); i++) {
+            if(startPoints.get(i) <= endPoints.get(j)) {
+                maxOverLapping++;
             }
+            else j++;
         }
-        return maxCountSeenSoFar;
+        return maxOverLapping == Integer.MIN_VALUE ? -1 : maxOverLapping;
     }
 
     public static int findMaxOverlapingEvents_TwoPointer(Event[] events) {

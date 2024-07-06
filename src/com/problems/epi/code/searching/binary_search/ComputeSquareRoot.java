@@ -15,46 +15,44 @@ package com.problems.epi.code.searching.binary_search;
 public class ComputeSquareRoot {
 
     public static int computeSquareRoot_BrutForce(int num) {
-        if(num < 0) return -1; // Accepts only non-negative integers
+        if (num < 0) return -1; // Accepts only non-negative integers
         int res = 0;
-        for(int i = 0; i <= Math.ceil(num*0.5); i++) { // square root of num can be at most Math.ceil(num/2)
-            long isSquared = (long) i*i;
-            if(isSquared <= num) res = i;
+        for (int i = 0; i <= Math.ceil(num * 0.5); i++) { // square root of num can be at most Math.ceil(num/2)
+            long isSquared = (long) i * i;
+            if (isSquared <= num) res = i;
         }
         return res;
     }
 
     public static int computeSquareRoot(int num) {
-        if(num < 0) return -1; // Accepts only non-negative integers
+        if (num < 0) return -1; // Accepts only non-negative integers
         int lo = 0, hi = num;
         int res = 0;
-        while(lo <= hi) {
+        while (lo <= hi) {
             int mid = lo + ((hi - lo) / 2);
-            long midsquared = (long) mid*mid;
-            if(midsquared == num) return mid;
-            else if(midsquared < num) {
+            long midsquared = (long) mid * mid;
+            if (midsquared == num) return mid;
+            else if (midsquared < num) {
                 res = mid;
                 lo = mid + 1;
-            }
-            else hi = mid - 1;
+            } else hi = mid - 1;
         }
         return res;
     }
 
-    // Note: This solution does not pass EPIJudge test cases.
-    public static long computeSquareRoot_Optimization(long num) {
-        if(num < 0) return -1; // Accepts only non-negative integers
-        long lo = 0, hi = num / 2;
-        long res = 0;
-        while(lo <= hi) {
-            long mid = lo + ((hi - lo) / 2);
-            if(mid*mid == num) return mid;
-            else if(mid*mid < num) {
-                res = mid;
+    // Uses advanced binary search template
+    public static int computeSquareRootAdvancedBinarySearchTemplate(int num) {
+        if (num < 0) return -1;
+        long lo = 0, hi = (long) num + 1;
+        while (lo < hi) {
+            long mid = lo + (hi - lo) / 2;
+            long midSquared = mid * mid;
+            if (midSquared > num) {
+                hi = mid;
+            } else {
                 lo = mid + 1;
             }
-            else hi = mid - 1;
         }
-        return res;
+        return (int) lo - 1;
     }
 }
