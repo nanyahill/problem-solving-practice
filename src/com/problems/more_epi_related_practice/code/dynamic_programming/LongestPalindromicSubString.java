@@ -57,8 +57,8 @@ public class LongestPalindromicSubString {
             k++;
         }
         if (maxLen < k - j - 1) {
-            lo = j + 1;
-            maxLen = k - j - 1;
+            lo = j + 1; // +1 because j is now at an index that is not included in the palindrome
+            maxLen = k - j - 1; // k and j are at indices that are not part of a plaindrome.
         }
     }
 }
