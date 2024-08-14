@@ -3,7 +3,7 @@ package com.problems.more_epi_related_practice.code.sliding_window;
 public class LongestRepeatingCharacterReplacement {
 
     public int characterReplacement(String s, int k) {
-        if(s == null || s.length() == 0) return 0;
+        if(s == null || s.isEmpty()) return 0;
         int left = 0, right = 0;
         int maxFrequency = 0, result = 0;
         int[] array = new int[26];
