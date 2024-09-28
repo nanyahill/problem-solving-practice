@@ -19,20 +19,24 @@ public class BalancedParensGeneration {
     public static List<String> generateBalancedParentheses(int n) {
         List<String> result = new ArrayList<>();
         if(n < 0) return result;
-        helper(n, n, "", result);
+        findAllValidParens(n, n, new StringBuilder(), result);
         return result;
     }
 
-    private static void helper(int left, int right, String prefix, List<String> result) {
-        if(left == 0 && right == 0) {
-            result.add(prefix);
+    private static void findAllValidParens(int leftCnt, int rightCnt, StringBuilder prefix, List<String> result) {
+        if (leftCnt == 0 && rightCnt == 0) {
+            result.add(prefix.toString());
             return;
         }
-        if(left > 0) {
-            helper(left - 1, right, prefix + "(", result);
+        if (leftCnt > 0) {
+            prefix.append("(");
+            findAllValidParens(leftCnt - 1, rightCnt, prefix, result);
+            prefix.deleteCharAt(prefix.length() - 1);
         }
-        if(right > left) {
-            helper(left, right - 1, prefix + ")", result);
+        if (rightCnt > leftCnt) {
+            prefix.append(")");
+            findAllValidParens(leftCnt, rightCnt - 1, prefix, result);
+            prefix.deleteCharAt(prefix.length() - 1);
         }
     }
 }
