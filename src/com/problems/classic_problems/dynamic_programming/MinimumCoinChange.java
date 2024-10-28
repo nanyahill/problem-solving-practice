@@ -53,4 +53,47 @@ public class MinimumCoinChange {
         }
         return cache[amount] == Integer.MAX_VALUE ? -1 : cache[amount];
     }
+
+
+
+    /**** 10/11/2024: Trying to understand how coin change works without the need for a loop *******/
+    public static int coinChange(int[] coins, int amount) {
+        if (coins == null || coins.length == 0)
+            return -1;
+        int[] table = new int[amount + 1];
+        Arrays.fill(table, -1);
+        table[0] = 0;
+        int result = recursive(coins, coins.length, amount, table);
+        return result == Integer.MAX_VALUE ? -1 : result;
+    }
+
+    private static int recursive(int[] coins, int i, int amount, int[] table) {
+        if (amount == 0)
+            return 0;
+        if (i == 0 || amount < 0)
+            return Integer.MAX_VALUE;
+        if (table[amount] != -1)
+            return table[amount];
+        //int notTake = recursive(coins, i - 1, amount, table);
+        int coin = coins[i - 1];
+        int take = Integer.MAX_VALUE;
+        if (amount >= coin) {
+            int result = recursive(coins, i, amount - coin, table);
+            if (result != Integer.MAX_VALUE) {
+                take = result + 1;
+            }
+        }
+        int notTake = recursive(coins, i - 1, amount, table);
+        System.out.println("i :" + i + " Take: " + take + " NotTake: " + notTake + " Amount: " + amount);
+        table[amount] = Math.min(take, notTake);
+        return table[amount];
+    }
+
+    public static void main(String args[]) {
+        int[] coins = {1, 2, 5};
+        int amount = 11;
+        int result = coinChange(coins, amount);
+        System.out.println(result);
+
+    }
 }
